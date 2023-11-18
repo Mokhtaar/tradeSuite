@@ -63,7 +63,7 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               <a
-                href="../Login" 
+                href="../Signup" 
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Log in <span aria-hidden="true">&rarr;</span>
