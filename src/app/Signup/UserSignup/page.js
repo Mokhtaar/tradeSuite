@@ -57,7 +57,7 @@ export default function RegistrationForm() {
   const passwordsMatch = password === confirmPassword;
 
   return (
-    <section className="container">
+    <section className="container" style={ { background:'linear-gradient(to bottom right, #cffafe, #707fce)'}}>
       <Image
         className="float-left"
         src="/logo.png"
