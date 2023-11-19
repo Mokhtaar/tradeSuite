@@ -6,7 +6,7 @@
 
 export default function HeroSection() {
   return (
-    <div className="w-screen bg-gradient-radial from-[#d8c8fd]">
+    <div className="w-screen bg-gradient-radial from-[#97def3]">
       <div className="relative isolate pt-14 ">
         {/* <svg
           className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
