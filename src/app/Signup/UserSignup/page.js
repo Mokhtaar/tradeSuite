@@ -1,16 +1,15 @@
 // @react-server-runtime react
-"use client"
-import React, { useState } from 'react';
-import '../../styles/style.css';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-
+"use client";
+import React, { useState } from "react";
+import "../../styles/style.css";
+import Image from "next/image";
+import Link from 'next/link';
 
 
 export default function RegistrationForm() {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleBack = () => {
     window.history.back();
@@ -18,12 +17,12 @@ export default function RegistrationForm() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-  
+
     if (error) {
-      console.log('There are errors in the form. Submission prevented.');
+      console.log("There are errors in the form. Submission prevented.");
       return;
     }
-  
+
     // Continue with form submission logic
     // ...
   };
@@ -31,52 +30,49 @@ export default function RegistrationForm() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
   };
- 
 
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
 
-const handleConfirmPasswordChange = (e) => {
-  setConfirmPassword(e.target.value);
-};
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    const pass = e.target.value;
 
-const handlePasswordChange = (e) => {
-  setPassword(e.target.value);
-  const pass = e.target.value;
+    var errorMessage = "";
 
-  var errorMessage = '';
+    if (pass.length < 8) {
+      errorMessage = "Password must be at least 8 characters.";
+    } else if (!/\d/.test(pass)) {
+      errorMessage = "Password must have at least one number.";
+    } else if (!/[A-Z]/.test(pass) || !/[a-z]/.test(pass)) {
+      errorMessage =
+        "Password must have at least one uppercase and one lowercase letter.";
+    } else {
+      errorMessage = "";
+    }
 
-  if (pass.length < 8) {
-    errorMessage = 'Password must be at least 8 characters.';
-  } else if (!/\d/.test(pass)) {
-    errorMessage = 'Password must have at least one number.';
-  } else if (!/[A-Z]/.test(pass) || !/[a-z]/.test(pass)) {
-    errorMessage = 'Password must have at least one uppercase and one lowercase letter.';
-  } else {
-    errorMessage = '';
-  }
-
-  setError(errorMessage);
-};
-const passwordsMatch = password === confirmPassword;
-
+    setError(errorMessage);
+  };
+  const passwordsMatch = password === confirmPassword;
 
   return (
     <section className="container">
-        <Image
-          className="float-left"
-          src="/logo.png"
-          alt="Your Company"
-          width={120}
-          height={40}
-        />
-        <header className="mt-9 mr-9 text-center text-gray-900">
-  Create User Account 
-</header>
+      <Image
+        className="float-left"
+        src="/logo.png"
+        alt="Your Company"
+        width={120}
+        height={40}
+      />
+      <header className="mt-9 mr-9 text-center text-gray-900">
+        Create User Account
+      </header>
 
-<br/>
-      <br/>
-      
+      <br />
+      <br />
+
       <form action="" className="form" method="" onSubmit={handleFormSubmit}>
-        
         <div className="mt-9 input-box">
           <label>Full Name</label>
           <input type="text" placeholder="Enter full name" required />
@@ -96,27 +92,34 @@ const passwordsMatch = password === confirmPassword;
             <label>Birth Date</label>
             <input type="date" placeholder="Enter birth date" required />
           </div>
-          
         </div>
 
         <div className="column">
-        <div className="input-box">
-        <label for="file-upload" className="upload-btn">Proof Of Identity</label>
-      <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} required/>
-    </div>
-
-    <div className="input-box">
-        <label for="file-upload" className="upload-btn">Proof Of Address</label> 
-      <input type="file" accept=".pdf,.doc,.docx"  required/>
-    </div>
+          <div className="input-box">
+            <label for="file-upload" className="upload-btn">
+              Proof Of Identity
+            </label>
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx"
+              onChange={handleFileChange}
+              required
+            />
           </div>
-      
+
+          <div className="input-box">
+            <label for="file-upload" className="upload-btn">
+              Proof Of Address
+            </label>
+            <input type="file" accept=".pdf,.doc,.docx" required />
+          </div>
+        </div>
+
         <div className="input-box address">
           <label>Address</label>
           <input type="text" placeholder="Enter street address" required />
-          
+
           <div className="column">
-            
             <input type="text" placeholder="Enter your city" required />
           </div>
           <div className="column">
@@ -128,38 +131,37 @@ const passwordsMatch = password === confirmPassword;
         <div className="mt-9 input-box">
           <label>Password</label>
           <input
-          type="password"
-          placeholder="Password"
-          onChange={handlePasswordChange}
-          required
-        />    
-         {error && <p style={{ color: 'red' }}>{error}</p>}
-         </div>
+            type="password"
+            placeholder="Password"
+            onChange={handlePasswordChange}
+            required
+          />
+          {error && <p style={{ color: "red" }}>{error}</p>}
+        </div>
 
-         
-         <div className="input-box w-full mt-[20px]">
-      <label>Confirm Password</label>
-      <input
-        type="password"
-        placeholder="Confirm password"
-        value={confirmPassword}
-        onChange={handleConfirmPasswordChange}
-        required
-      />
-     {confirmPassword.length > 0 && !passwordsMatch && (
-        <p style={{ color: 'red' }}>Passwords do not match.</p>
-      )}
-    </div>
+        <div className="input-box w-full mt-[20px]">
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+            required
+          />
+          {confirmPassword.length > 0 && !passwordsMatch && (
+            <p style={{ color: "red" }}>Passwords do not match.</p>
+          )}
+        </div>
 
-
-    <button  type="back" onClick={handleBack} className="back-btn">Back</button> 
-  
-    <button  className="submit-btn" type="submit">Submit</button>
-       
-        
+        <Link href="/Signup">
+        <button type="back" className="back-btn">
+          Back
+        </button>
+        </Link>
+        <button className="submit-btn" type="submit">
+          Submit
+        </button>
       </form>
-     
     </section>
   );
 }
-
