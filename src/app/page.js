@@ -3,6 +3,7 @@ import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import OurServices from "./components/OurServices";
 import Testmonials from "./components/Testmonials";
+import CountrySelector from "./components/county";
 
 export default function Home() {
   return (

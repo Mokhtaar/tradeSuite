@@ -11,7 +11,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+<<<<<<< HEAD
     "formik": "^2.4.5",
+=======
+    "@prisma/client": "^5.6.0",
+>>>>>>> ba05dd52ee2cbe84b815f6d243d67f9d425611bc
     "next": "14.0.2",
     "react": "^18",
     "react-dom": "^18",
