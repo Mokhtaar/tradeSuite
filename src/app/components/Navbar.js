@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from 'next/link';
+
 
 const navigation = [
   { name: "TradeSuite", href: "#" },
@@ -29,7 +31,7 @@ const Navbar = () => {
             aria-label="Global"
           >
             <div className="flex lg:flex-1">
-              <a href="#" className="-m-1.5 p-1.5">
+              <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
                 <img
                   className="h-28 w-auto mix-blend-color-burn"
@@ -60,13 +62,15 @@ const Navbar = () => {
               ))}
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-              <a
-                href="#"
+              <Link
+                href="../Signup" 
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Log in <span aria-hidden="true">&rarr;</span>
-              </a>
+              </Link>
             </div>
+
+
           </nav>
           <Dialog
             as="div"
