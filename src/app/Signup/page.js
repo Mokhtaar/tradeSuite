@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState, useMemo } from "react";
 import Link from 'next/link';
@@ -151,7 +153,7 @@ export default function RegistrationForm() {
           </div>
         <div className="column">
           <div className="input-box">
-            <label>Company's Website</label>
+            <label>Company&apos;s Website</label>
             <input
               type="url"
               name="companyWebsite"
