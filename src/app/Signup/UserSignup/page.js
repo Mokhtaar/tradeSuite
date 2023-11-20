@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from 'next/link';
 
 
-export default function RegistrationForm() {
+export default function userRegistrationForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -108,7 +108,7 @@ export default function RegistrationForm() {
           </div>
 
           <div className="input-box">
-            <label for="file-upload" className="upload-btn">
+            <label htmlFor="file-upload" className="upload-btn">
               Proof Of Address
             </label>
             <input type="file" accept=".pdf,.doc,.docx" required />
