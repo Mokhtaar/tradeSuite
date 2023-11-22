@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from 'next/link';
 //import CountrySelector from './CountrySelector';  // Adjust the path based on your actual directory structure
 import countryList from "react-select-country-list";
 import "../globals.css";
 import "../styles/style.css";
 export default function RegistrationForm() {
-  const [value, setValue] = useState("");
+
   const options = useMemo(() => countryList().getData(), []);
   const [formData, setFormData] = useState({
     companyName: "",
@@ -20,6 +20,23 @@ export default function RegistrationForm() {
     file: null, // Store the file object
     consentChecked: false,   
   });
+
+  
+  const isDis=
+  formData.companyName.length!=0 
+  // formData.emailAddress &&
+  // formData.phoneNumber &&
+  // formData.streetAddress &&
+  // formData.selectedCountry &&
+  // formData.city &&
+  // formData.postalCode &&
+  // formData.companyWebsite;
+  // formData.file  // Store the file object
+  // formData.consentChecked  ;
+
+  useEffect(()=>{
+    console.log(isDis)
+  },[isDis])
 
   
 
@@ -187,11 +204,13 @@ export default function RegistrationForm() {
           provide explicit consent for them to store and manage this data on
           behalf of your company.
         </label>
+
         <Link href="/Signup/UserSignup">
-        <button className="submit-btn" type="submit" >Next</button>
+        <button className="submit-btn" type="submit" disabled={!isDis}>Next</button>
         </Link>
       </form>
     </section>
     </body>
   );
 }
+
