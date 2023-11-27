@@ -1,100 +1,72 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import React, { useState, useMemo ,useEffect} from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
 import countryList from "react-select-country-list";
+import prisma from "../../../lib/prisma";
 import "../globals.css";
 import "../styles/style.css";
-import { useRouter } from 'next/navigation';
 export default function RegistrationForm() {
-  const router = useRouter();
   const options = useMemo(() => countryList().getData(), []);
-  const [formData, setFormData] = useState({
-    companyName: "",
-    emailAddress: "",
-    phoneNumber: "",
-    streetAddress: "",
-    selectedCountry: "",
-    city: "",
-    postalCode: "",
-    companyWebsite: "",
-    file: null,
-    consentChecked: false,
-  });
+  // const [formData, setFormData] = useState({
+  //   companyName: "",
+  //   emailAddress: "",
+  //   phoneNumber: "",
+  //   streetAddress: "",
+  //   selectedCountry: "",
+  //   city: "",
+  //   postalCode: "",
+  //   companyWebsite: "",
+  //   file: null,
+  //   consentChecked: false,
+  // });
 
-    // const isDis=
-    // formData.companyName.length!=0 
-    // formData.emailAddress &&
-    // formData.phoneNumber &&
-    // formData.streetAddress &&
-    // formData.selectedCountry &&
-    // formData.city &&
-    // formData.postalCode &&
-    // formData.companyWebsite;
-    // formData.file  // Store the file object
-    // formData.consentChecked  ;
-    
-    // useEffect(()=>{
-    //   console.log(isDis)
-    // },[isDis]);
+  // const [formErrors, setFormErrors] = useState({
+  //   companyName: "",
+  //   emailAddress: "",
+  //   phoneNumber: "",
+  //   streetAddress: "",
+  //   selectedCountry: "",
+  //   city: "",
+  //   postalCode: "",
+  //   companyWebsite: "",
+  //   consentChecked: "",
+  // });
 
-  const [formErrors, setFormErrors] = useState({
-    companyName: "",
-    emailAddress: "",
-    phoneNumber: "",
-    streetAddress: "",
-    selectedCountry: "",
-    city: "",
-    postalCode: "",
-    companyWebsite: "",
-    consentChecked: "",
-  });
+  // const handleFileUpload = (event) => {
+  //   const uploadedFile = event.target.files[0];
+  //   setFormData({
+  //     ...formData,
+  //     file: uploadedFile,
+  //   });
+  // };
 
-  const changeHandler = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-    setFormErrors({
-      ...formErrors,
-      [event.target.name]: "",
-    });
-  };
+  const addCompany = async (formData) => {
+    "use server";
+    const companyName = formData.get("companyName");
+    const emailAddress = formData.get("emailAddress");
+    const phoneNumber = formData.get("phoneNumber");
+    const streetAddress = formData.get("streetAddress");
+    const selectedCountry = formData.get("selectedCountry");
+    const companyWebsite = formData.get("companyWebsite");
+    const city = formData.get("city");
 
-  const handleFileUpload = (event) => {
-    const uploadedFile = event.target.files[0];
-    setFormData({
-      ...formData,
-      file: uploadedFile,
-    });
-  };
-
-  const handleCheckboxChange = () => {
-    setFormData({
-      ...formData,
-      consentChecked: !formData.consentChecked,
-    });
-  };
-
-  // 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Simplified validation logic for testing
-    if (!formData.companyName) {
-      setFormErrors({
-        ...formErrors,
-        companyName: "Company Name is required",
+    try {
+      await prisma.company.create({
+        data: {
+          name: companyName,
+          email: emailAddress,
+          phoneNumber: parseInt(phoneNumber),
+          address: streetAddress,
+          country: selectedCountry,
+          city,
+          website: companyWebsite,
+        },
       });
-      return;
+    } catch (error) {
+      console.log(error.message);
     }
-
-    // If validation passes, log the form data and navigate to the next page
-    console.log(formData);
-    router.push("/Signup/UserSignup");
   };
-
   return (
     <body
       style={{
@@ -108,7 +80,7 @@ export default function RegistrationForm() {
           <header>Company Registration Form</header>
           <br />
         </div>
-        <form onSubmit={handleSubmit} className="form">
+        <form action={addCompany} className="form">
           <div className="input-box">
             <br />
             <br /> <label>Company Name</label>
@@ -116,11 +88,11 @@ export default function RegistrationForm() {
               type="text"
               name="companyName"
               placeholder="Company name"
-              value={formData.companyName}
-              onChange={changeHandler}
+              // value={formData.companyName}
+              // onChange={changeHandler}
             />
             {/* Display error message for companyName */}
-            <span style={{ color: "red" }}>{formErrors.companyName}</span>
+            {/* <span style={{ color: "red" }}>{formErrors.companyName}</span> */}
           </div>
 
           <div className="input-box">
@@ -129,10 +101,10 @@ export default function RegistrationForm() {
               type="email"
               name="emailAddress"
               placeholder="Enter email address"
-              value={formData.emailAddress}
-              onChange={changeHandler}
+              // value={formData.emailAddress}
+              // onChange={changeHandler}
             />
-            <span style={{ color: "red" }}>{formErrors.emailAddress}</span>
+            {/* <span style={{ color: "red" }}>{formErrors.emailAddress}</span> */}
           </div>
 
           <div className="column">
@@ -142,10 +114,10 @@ export default function RegistrationForm() {
                 type="number"
                 name="phoneNumber"
                 placeholder="Enter phone number"
-                value={formData.phoneNumber}
-                onChange={changeHandler}
+                // value={formData.phoneNumber}
+                // onChange={changeHandler}
               />
-              <span style={{ color: "red" }}>{formErrors.phoneNumber}</span>
+              {/* <span style={{ color: "red" }}>{formErrors.phoneNumber}</span> */}
             </div>
           </div>
           <div className="input-box address">
@@ -154,17 +126,17 @@ export default function RegistrationForm() {
               type="text"
               name="streetAddress"
               placeholder="Enter street address"
-              value={formData.streetAddress}
-              onChange={changeHandler}
+              // value={formData.streetAddress}
+              // onChange={changeHandler}
             />
-            <span style={{ color: "red" }}>{formErrors.streetAddress}</span>
+            {/* <span style={{ color: "red" }}>{formErrors.streetAddress}</span> */}
           </div>
           <div className="column">
             <div className="input-box select-box">
               <select
                 name="selectedCountry"
-                value={formData.selectedCountry}
-                onChange={changeHandler}
+                // value={formData.selectedCountry}
+                // onChange={changeHandler}
                 required
               >
                 <option value="" disabled>
@@ -184,20 +156,20 @@ export default function RegistrationForm() {
                 type="text"
                 name="city"
                 placeholder="Enter your city"
-                value={formData.city}
-                onChange={changeHandler}
+                // value={formData.city}
+                // onChange={changeHandler}
               />
-              <span style={{ color: "red" }}>{formErrors.city}</span>
+              {/* <span style={{ color: "red" }}>{formErrors.city}</span> */}
             </div>
             <div className="input-box">
               <input
                 type="number"
                 name="postalCode"
                 placeholder="Enter postal code"
-                value={formData.postalCode}
-                onChange={changeHandler}
+                // value={formData.postalCode}
+                // onChange={changeHandler}
               />
-              <span style={{ color: "red" }}>{formErrors.postalCode}</span>
+              {/* <span style={{ color: "red" }}>{formErrors.postalCode}</span> */}
             </div>
           </div>
           <div className="column">
@@ -207,12 +179,12 @@ export default function RegistrationForm() {
                 type="url"
                 name="companyWebsite"
                 placeholder="Enter Company website URL"
-                value={formData.companyWebsite}
-                onChange={changeHandler}
+                // value={formData.companyWebsite}
+                // onChange={changeHandler}
                 required
               />
               <br />
-              <span style={{ color: "red" }}>{formErrors.companyWebsite}</span>
+              {/* <span style={{ color: "red" }}>{formErrors.companyWebsite}</span> */}
             </div>
           </div>
           <div>
@@ -224,8 +196,7 @@ export default function RegistrationForm() {
                   className="custom-file-upload"
                   multiple={false}
                   accept=".pdf, .doc, .docx"
-                  onChange={handleFileUpload}
-                  required
+                  // onChange={handleFileUpload}
                 />
               </label>
             </div>
@@ -243,10 +214,16 @@ export default function RegistrationForm() {
 
           {/* Use Link component for navigation */}
           {/* <Link href="/Signup/UserSignup"> */}
-          
-            {/* <button className="submit-btn" type="submit"  >Next</button> */}
-            <button className="submit-btn" type="button" onClick={() => router.push('/Signup/UserSignup')}>Next </button>
-            {/* <button className="submit-btn" type="button">    
+
+          {/* <button className="submit-btn" type="submit"  >Next</button> */}
+          <button
+            className="submit-btn"
+            type="submit"
+            // onClick={() => router.push('/Signup/UserSignup')}
+          >
+            Next{" "}
+          </button>
+          {/* <button className="submit-btn" type="button">    
       Next
     </button> 
           {/* </Link> */}
@@ -503,5 +480,3 @@ export default function RegistrationForm() {
 //     </body>
 //   );
 // };
-
-

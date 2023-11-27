@@ -10,21 +10,59 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        String     @default(cuid()) @id
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+model Company {
+  id          Int    @id @default(autoincrement())
+  name        String
+  email       String
+  phoneNumber Int
+  country     String
+  city        String
+  website     String
+
+  address    String?
+  fileUpload String?
+  users      User?
+  projects   Project?
 }
 
 model User {
-  id            String       @default(cuid()) @id
-  name          String?
-  email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Post[]
-  @@map(name: "users")
+  id              Int      @id @default(autoincrement())
+  password        String
+  firstName       String
+  lastName        String
+  email           String
+  phoneNumber     String
+  dob             DateTime
+  proofOfIdentity String
+  proofOfAddress  String
+  company         Company  @relation(fields: [companyID], references: [id])
+  companyID       Int      @unique
 }
+
+model Project {
+  id                  Int     @id @default(autoincrement())
+  projectName         String
+  projectDescription  String?
+  otherProjectDetails String?
+  company             Company @relation(fields: [companyID], references: [id])
+  companyID           Int     @unique
+}
+
+// model Post {
+//   id        String     @default(cuid()) @id
+//   title     String
+//   content   String?
+//   published Boolean @default(false)
+//   author    User?   @relation(fields: [authorId], references: [id])
+//   authorId  String?
+// }
+
+// model User {
+//   id            String       @default(cuid()) @id
+//   name          String?
+//   email         String?   @unique
+//   createdAt     DateTime  @default(now()) @map(name: "created_at")
+//   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+//   posts         Post[]
+//   @@map(name: "users")
+// }
