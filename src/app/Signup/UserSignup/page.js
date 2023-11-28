@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from 'next/link';
 
 
-export default function userRegistrationForm() {
+export default function UserRegistrationForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
