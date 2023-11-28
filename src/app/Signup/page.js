@@ -43,25 +43,18 @@ export default function RegistrationForm() {
 
   const addCompany = async (formData) => {
     "use server";
-    const companyName = formData.get("companyName");
-    const emailAddress = formData.get("emailAddress");
-    const phoneNumber = formData.get("phoneNumber");
-    const streetAddress = formData.get("streetAddress");
-    const selectedCountry = formData.get("selectedCountry");
-    const companyWebsite = formData.get("companyWebsite");
-    const city = formData.get("city");
-
+    const body = {
+      name: formData.get("companyName"),
+      email: formData.get("emailAddress"),
+      phoneNumber: parseInt(formData.get("phoneNumber")),
+      address: formData.get("streetAddress"),
+      country: formData.get("selectedCountry"),
+      city: formData.get("companyWebsite"),
+      website: formData.get("city"),
+    };
     try {
       await prisma.company.create({
-        data: {
-          name: companyName,
-          email: emailAddress,
-          phoneNumber: parseInt(phoneNumber),
-          address: streetAddress,
-          country: selectedCountry,
-          city,
-          website: companyWebsite,
-        },
+        data: body,
       });
     } catch (error) {
       console.log(error.message);
