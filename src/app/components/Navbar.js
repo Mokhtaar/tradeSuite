@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from 'next/link';
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";//G
 
 
 const navigation = [
@@ -15,6 +16,7 @@ const navigation = [
   { name: "Active Trades", href: "#" },
 ];
 const Navbar = () => {
+  const isUserLoggedIn=false;//G
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
@@ -84,7 +86,7 @@ const Navbar = () => {
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">Your Company</span>
                   <img
-                    className="h-8 w-auto"
+                    className="sm:h-8 w-auto"
                     src="./logo.png"
                     alt=""
                   />
@@ -119,6 +121,7 @@ const Navbar = () => {
                       Log in
                     </a>
                   </div>
+
                 </div>
               </div>
             </Dialog.Panel>

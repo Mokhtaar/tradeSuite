@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from 'next/link';
 
 
-export default function RegistrationForm() {
+export default function userRegistrationForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -57,7 +57,7 @@ export default function RegistrationForm() {
   const passwordsMatch = password === confirmPassword;
 
   return (
-    <section className="container">
+    <section className="container" style={ { background:'linear-gradient(to bottom right, #cffafe, #707fce)'}}>
       <Image
         className="float-left"
         src="/logo.png"
@@ -108,7 +108,7 @@ export default function RegistrationForm() {
           </div>
 
           <div className="input-box">
-            <label for="file-upload" className="upload-btn">
+            <label htmlFor="file-upload" className="upload-btn">
               Proof Of Address
             </label>
             <input type="file" accept=".pdf,.doc,.docx" required />

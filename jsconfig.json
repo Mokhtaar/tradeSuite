@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"] //law masahna / ya3ni khdoha mel main 3alatol
     }
   }
 }
