@@ -5,7 +5,6 @@ import "../styles/style.css";
 import Image from "next/image";
 import Link from 'next/link';
 
-
 const UserForm = () => {
 
     const [password, setPassword] = useState("");
@@ -163,7 +162,7 @@ const UserForm = () => {
           Back
         </button>
         </Link>
-        <button className="submit-btn" type="submit">
+        <button className="submit-btn" type="submit" >
           Submit
         </button>
       </form>

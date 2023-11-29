@@ -5,24 +5,22 @@ import countryList from "react-select-country-list";
 import prisma from "../../../lib/prisma";
 import "../globals.css";
 import "../styles/style.css";
+import { useRouter } from 'next/navigation'
+
 import RegistrationForm from '../Signup/page';
 
 const CompanyForm = ({ onSubmit }) => {
   const options = useMemo(() => countryList().getData(), []);
-
+  const router = useRouter()
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     onSubmit(formData);
+    router.push('/Signup/UserSignup')
   };
 
   return (
-    <body
-    style={{
-      backgroundImage: "url('/6254046.jpg')",
-      backgroundSize: "cover",
-    }}
-  >
+  
     <section className="container">
       <img className="float-left" src="/logo.png" width={120} height={40} />
       <div className="center-content">
@@ -169,7 +167,7 @@ const CompanyForm = ({ onSubmit }) => {
         <button
           className="submit-btn"
           type="submit"
-          // onClick={() => router.push('/Signup/UserSignup')}
+          //  onClick={handleSubmit}
         >
           Next{" "}
         </button>
@@ -179,7 +177,7 @@ const CompanyForm = ({ onSubmit }) => {
         {/* </Link> */}
       </form>
     </section>
-  </body>
+
   );
 };
 

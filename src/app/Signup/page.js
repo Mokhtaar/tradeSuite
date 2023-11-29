@@ -11,7 +11,8 @@ import CompanyForm from '../components/CompanyForm';
 
   
 const RegistrationForm = () => {
-  return <CompanyForm onSubmit={addCompany} />;
+  return <CompanyForm onSubmit={addCompany}
+   />;
 };
 
 export default RegistrationForm;
