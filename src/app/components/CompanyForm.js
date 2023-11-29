@@ -37,6 +37,7 @@ const CompanyForm = ({ onSubmit }) => {
             placeholder="Company name"
             // value={formData.companyName}
             // onChange={changeHandler}
+            required
           />
           {/* Display error message for companyName */}
           {/* <span style={{ color: "red" }}>{formErrors.companyName}</span> */}
@@ -50,6 +51,7 @@ const CompanyForm = ({ onSubmit }) => {
             placeholder="Enter email address"
             // value={formData.emailAddress}
             // onChange={changeHandler}
+            required
           />
           {/* <span style={{ color: "red" }}>{formErrors.emailAddress}</span> */}
         </div>
@@ -63,6 +65,7 @@ const CompanyForm = ({ onSubmit }) => {
               placeholder="Enter phone number"
               // value={formData.phoneNumber}
               // onChange={changeHandler}
+              required
             />
             {/* <span style={{ color: "red" }}>{formErrors.phoneNumber}</span> */}
           </div>
@@ -75,6 +78,7 @@ const CompanyForm = ({ onSubmit }) => {
             placeholder="Enter street address"
             // value={formData.streetAddress}
             // onChange={changeHandler}
+            required
           />
           {/* <span style={{ color: "red" }}>{formErrors.streetAddress}</span> */}
         </div>

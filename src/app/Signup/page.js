@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use server";
-import { addCompany } from '../companyActions';
+import { addCompany } from '../Actions/companyActions';
 import React, { useMemo } from "react";
 import Link from "next/link";
 import prisma from "../../../lib/prisma";
