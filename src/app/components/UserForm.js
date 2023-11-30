@@ -1,11 +1,10 @@
-
 "use client";
 import React, { useState } from "react";
 import "../styles/style.css";
 import Image from "next/image";
 import Link from 'next/link';
 
-const UserForm = () => {
+const UserForm = ({ onSubmit }) => {
 
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
@@ -15,9 +14,12 @@ const UserForm = () => {
       window.history.back();
     };
   
+   
     const handleFormSubmit = (event) => {
       event.preventDefault();
-  
+      const userData = new FormData(event.target);
+      onSubmit(userData);
+
       if (error) {
         console.log("There are errors in the form. Submission prevented.");
         return;
@@ -73,28 +75,28 @@ const UserForm = () => {
       <div className="column">
         <div className="mt-9 input-box">
           <label>First Name</label>
-          <input type="text" placeholder="Enter first name" required />
+          <input type="text" placeholder="Enter first name"name="firstName" required />
         </div>
 
         <div className="mt-9 input-box">
           <label>Last Name</label>
-          <input type="text" placeholder="Enter last name" required />
+          <input type="text" placeholder="Enter last name" name="lastName" required />
         </div>
         </div>
 
         <div className="input-box w-full mt-[20px]">
           <label>Email Address</label>
-          <input type="email" placeholder="Enter email address" required />
+          <input type="email" placeholder="Enter email address" name="email" required />
         </div>
 
         <div className="column">
           <div className="input-box">
             <label>Phone Number</label>
-            <input type="number" placeholder="Enter phone number" required />
+            <input type="number" placeholder="Enter phone number" name="phoneNumber" required />
           </div>
           <div className="input-box">
             <label>Birth Date</label>
-            <input type="date" placeholder="Enter birth date" required />
+            <input type="date" placeholder="Enter birth date" name="dob" required />
           </div>
         </div>
 
@@ -119,18 +121,7 @@ const UserForm = () => {
           </div>
         </div>
 
-        <div className="input-box address">
-          <label>Address</label>
-          <input type="text" placeholder="Enter street address" required />
-
-          <div className="column">
-            <input type="text" placeholder="Enter your city" required />
-          </div>
-          <div className="column">
-            <input type="text" placeholder="Enter your region" required />
-            <input type="number" placeholder="Enter postal code" required />
-          </div>
-        </div>
+     
 
         <div className="mt-9 input-box">
           <label>Password</label>
@@ -138,6 +129,7 @@ const UserForm = () => {
             type="password"
             placeholder="Password"
             onChange={handlePasswordChange}
+          
             required
           />
           {error && <p style={{ color: "red" }}>{error}</p>}

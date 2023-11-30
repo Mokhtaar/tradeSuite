@@ -2,14 +2,16 @@
 
 
 import UserForm from '../../components/UserForm';
+import { addUser } from '../../Actions/userActions';
 
 
 
-export default function UserRegistrationForm() {
+const UserRegistrationForm = ()=> {
 
 
   return (
-    <UserForm/>
+    <UserForm onSubmit={addUser}/>
    
   );
 }
+export default UserRegistrationForm;

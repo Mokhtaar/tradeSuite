@@ -18,8 +18,7 @@ model Company {
   country     String
   city        String
   website     String
-
-  address    String?
+  address    String
   fileUpload String?
   users      User?
   projects   Project?
@@ -31,10 +30,10 @@ model User {
   firstName       String
   lastName        String
   email           String
-  phoneNumber     String
+  phoneNumber     Int
   dob             DateTime
-  proofOfIdentity String
-  proofOfAddress  String
+  proofOfIdentity String?
+  proofOfAddress  String?
   company         Company  @relation(fields: [companyID], references: [id])
   companyID       Int      @unique
 }

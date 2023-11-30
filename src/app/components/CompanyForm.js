@@ -1,17 +1,16 @@
 "use client";
 import React, { useMemo } from "react";
-import Link from "next/link";
 import countryList from "react-select-country-list";
-import prisma from "../../../lib/prisma";
 import "../globals.css";
 import "../styles/style.css";
 import { useRouter } from 'next/navigation'
 
-import RegistrationForm from '../Signup/page';
 
 const CompanyForm = ({ onSubmit }) => {
   const options = useMemo(() => countryList().getData(), []);
   const router = useRouter()
+
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -109,6 +108,7 @@ const CompanyForm = ({ onSubmit }) => {
               placeholder="Enter your city"
               // value={formData.city}
               // onChange={changeHandler}
+              required
             />
             {/* <span style={{ color: "red" }}>{formErrors.city}</span> */}
           </div>
@@ -119,6 +119,7 @@ const CompanyForm = ({ onSubmit }) => {
               placeholder="Enter postal code"
               // value={formData.postalCode}
               // onChange={changeHandler}
+              required
             />
             {/* <span style={{ color: "red" }}>{formErrors.postalCode}</span> */}
           </div>

@@ -11,8 +11,8 @@ const addCompany = async (formData) => {
     phoneNumber: parseInt(formData.get("phoneNumber")),
     address: formData.get("streetAddress"),
     country: formData.get("selectedCountry"),
-    city: formData.get("companyWebsite"),
-    website: formData.get("city"),
+    city: formData.get("city"),
+    website: formData.get("companyWebsite"),
   };
 
   try {
