@@ -129,7 +129,7 @@ const UserForm = ({ onSubmit }) => {
             type="password"
             placeholder="Password"
             onChange={handlePasswordChange}
-          
+            name="password"
             required
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
