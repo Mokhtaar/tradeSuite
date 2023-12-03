@@ -1,5 +1,3 @@
-// companyActions.js
-
 "use server";
 
 import prisma from "../../../lib/prisma";
@@ -17,11 +15,12 @@ const addCompany = async (formData) => {
   };
 
   try {
-    await prisma.company.create({
+    const response = await prisma.company.create({
       data: body,
     });
+    return { id: response.id, status: 200 };
   } catch (error) {
-    console.log(error.message);
+    return { error: error.message, status: 404 };
   }
 };
 

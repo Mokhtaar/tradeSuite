@@ -3,23 +3,24 @@ import React, { useMemo } from "react";
 import countryList from "react-select-country-list";
 import "../globals.css";
 import "../styles/style.css";
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from "next/navigation";
 
 const CompanyForm = ({ onSubmit }) => {
   const options = useMemo(() => countryList().getData(), []);
-  const router = useRouter()
+  const router = useRouter();
 
-  
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    onSubmit(formData);
-    router.push('/Signup/UserSignup')
+    const response = await onSubmit(formData);
+    console.log(response);
+    if (response.status === 200) {
+      localStorage.setItem("companyID", response.id);
+      router.push("/Signup/UserSignup");
+    }
   };
 
   return (
-  
     <section className="container">
       <img className="float-left" src="/logo.png" width={120} height={40} />
       <div className="center-content">
@@ -154,21 +155,21 @@ const CompanyForm = ({ onSubmit }) => {
           </div>
         </div>
 
-      <br />
-      <input type="checkbox" required />
-      <span ></span>
-      <label>
-        {" "}
-        You are permitted to share your employee data with Trade Suite and
-        provide explicit consent for them to store and manage this data on
-        behalf of your company.
-      </label>
+        <br />
+        <input type="checkbox" required />
+        <span></span>
+        <label>
+          {" "}
+          You are permitted to share your employee data with Trade Suite and
+          provide explicit consent for them to store and manage this data on
+          behalf of your company.
+        </label>
 
         {/* Use Link component for navigation */}
         {/* <Link href="/Signup/UserSignup"> */}
 
         {/* <button className="submit-btn" type="submit"  >Next</button> */}
-        
+
         <button
           className="submit-btn"
           type="submit"
@@ -182,7 +183,6 @@ const CompanyForm = ({ onSubmit }) => {
         {/* </Link> */}
       </form>
     </section>
-
   );
 };
 
