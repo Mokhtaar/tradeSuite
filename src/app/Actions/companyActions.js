@@ -13,6 +13,7 @@ const addCompany = async (formData) => {
     country: formData.get("selectedCountry"),
     city: formData.get("city"),
     website: formData.get("companyWebsite"),
+    postalCode: +formData.get("postalCode"),
   };
 
   try {
@@ -22,7 +23,6 @@ const addCompany = async (formData) => {
   } catch (error) {
     console.log(error.message);
   }
-}
-
+};
 
 export { addCompany };

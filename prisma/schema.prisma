@@ -7,35 +7,37 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") 
+  url      = env("DATABASE_URL")
 }
 
 model Company {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   email       String
   phoneNumber Int
   country     String
   city        String
   website     String
-  address    String
-  fileUpload String?
-  users      User?
-  projects   Project?
+  address     String
+  fileUpload  String?
+  postalCode  Int
+  users       User?
+  projects    Project?
 }
 
 model User {
-  id              Int      @id @default(autoincrement())
-  password        String
-  firstName       String
-  lastName        String
-  email           String
-  phoneNumber     Int
-  dob             DateTime
+  id          Int      @id @default(autoincrement())
+  password    String
+  firstName   String
+  lastName    String
+  email       String
+  phoneNumber Int
+  dob         DateTime
+  company     Company  @relation(fields: [companyID], references: [id])
+  companyID   Int      @unique
+
   proofOfIdentity String?
   proofOfAddress  String?
-  company         Company  @relation(fields: [companyID], references: [id])
-  companyID       Int      @unique
 }
 
 model Project {
