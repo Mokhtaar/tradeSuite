@@ -9,10 +9,6 @@ const UserForm = ({ onSubmit }) => {
   const [error, setError] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [companyID, setCompanyID] = useState();
-
-  const handleBack = () => {
-    window.history.back();
-  };
   
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
@@ -22,7 +18,6 @@ const UserForm = ({ onSubmit }) => {
     event.preventDefault();
     const userData = new FormData(event.target);
     onSubmit(userData, +companyID);
-
     if (error) {
       console.log("There are errors in the form. Submission prevented.");
       return;

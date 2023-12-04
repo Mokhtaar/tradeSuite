@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // Create a new React component in your Next.js project, for example, LoginForm.js
 
 import React from 'react';
@@ -11,7 +12,7 @@ const LoginForm = () => {
           <img src="/1.jpg" alt="" />
           <div className="text">
             <span className="text-1">Every new friend is a new adventure</span>
-            <span className="text-2">Let's get connected</span>
+            <span className="text-2">Let&apos;s get connected</span>
           </div>
         </div>
       
@@ -34,7 +35,7 @@ const LoginForm = () => {
                 <div className="button input-box">
                   <input type="submit" value="Submit" />
                 </div>
-                <div className="text sign-up-text">Don't have an account? <label htmlFor="flip">Signup now</label></div>
+                <div className="text sign-up-text">Don&apos;t have an account? <label htmlFor="flip">Signup now</label></div>
               </div>
             </form>
           </div>
