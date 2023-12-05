@@ -4,12 +4,12 @@ import "../styles/style.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const UserForm = ({ onSubmit }) => {
+const UserForm = ({ userAction }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [companyID, setCompanyID] = useState();
-  
+
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
   }, []);
@@ -17,7 +17,7 @@ const UserForm = ({ onSubmit }) => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     const userData = new FormData(event.target);
-    onSubmit(userData, +companyID);
+    userAction(userData, +companyID);
     if (error) {
       console.log("There are errors in the form. Submission prevented.");
       return;

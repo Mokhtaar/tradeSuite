@@ -19,6 +19,8 @@ model Company {
   city        String
   website     String
   address     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
   fileUpload  String?
   postalCode  Int
   users       User?
@@ -33,6 +35,8 @@ model User {
   email       String
   phoneNumber Int
   dob         DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
   company     Company  @relation(fields: [companyID], references: [id])
   companyID   Int      @unique
 
@@ -41,12 +45,14 @@ model User {
 }
 
 model Project {
-  id                  Int     @id @default(autoincrement())
+  id                  Int      @id @default(autoincrement())
   projectName         String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @default(now())
   projectDescription  String?
   otherProjectDetails String?
-  company             Company @relation(fields: [companyID], references: [id])
-  companyID           Int     @unique
+  company             Company  @relation(fields: [companyID], references: [id])
+  companyID           Int      @unique
 }
 
 // model Post {

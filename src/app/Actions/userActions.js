@@ -1,10 +1,14 @@
 "use server";
 
 import prisma from "../../../lib/prisma";
+import bcrypt from "bcrypt";
 
 const addUser = async (userData, companyID) => {
+  const intialPassword = userData.get("password");
+  const hashedPassword = await bcrypt.hash(intialPassword, 10);
+
   const body = {
-    password: userData.get("password"),
+    password: hashedPassword,
     firstName: userData.get("firstName"),
     lastName: userData.get("lastName"),
     email: userData.get("email"),
