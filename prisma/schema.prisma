@@ -11,42 +11,45 @@ model Company {
   id          Int      @id @default(autoincrement())
   name        String
   email       String
-  address     String
-  fileUpload  String?
-  city        String
-  country     String
   phoneNumber Int
+  country     String
+  city        String
   website     String
-  projects    Project?
+  address     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  fileUpload  String?
+  postalCode  Int
   users       User?
+  projects    Project?
 }
+
 
 model User {
-  id              Int      @id @default(autoincrement())
-  companyID       Int      @unique
-  firstName       String
-  lastName        String
-  email           String
-  dob             DateTime
-  password        String
-  phoneNumber     Int
-  proofOfAddress  String?
+  id          Int      @id @default(autoincrement())
+  password    String
+  firstName   String
+  lastName    String
+  email       String   @unique
+  phoneNumber Int
+  dob         DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  company     Company  @relation(fields: [companyID], references: [id])
+  companyID   Int      @unique
+
   proofOfIdentity String?
-  company         Company  @relation(fields: [companyID], references: [id])
+  proofOfAddress  String?
 }
 
+
 model Project {
-  id                  Int     @id @default(autoincrement())
-  companyID           Int     @unique
+  id                  Int      @id @default(autoincrement())
   projectName         String
   createdAt           DateTime @default(now())
   updatedAt           DateTime @default(now())
   projectDescription  String?
   otherProjectDetails String?
-<<<<<<< HEAD
-  company             Company @relation(fields: [companyID], references: [id])
-=======
   company             Company  @relation(fields: [companyID], references: [id])
   companyID           Int      @unique
->>>>>>> 395018d38fd078f430a6a8d776751d105184bc95
 }

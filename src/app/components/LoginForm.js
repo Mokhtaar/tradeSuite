@@ -17,8 +17,9 @@ const LoginForm = ({ LoginAction }) => {
         .min(8, "Min 9 chars")
         .max(10, "Max 9 chars"),
     }),
-    onSubmit: (values) => {
-      LoginAction(values);
+    onSubmit: async (values) => {
+      const response = await LoginAction(values);
+      console.log(response);
     },
   });
   return (
