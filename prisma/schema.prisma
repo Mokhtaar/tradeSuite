@@ -17,7 +17,6 @@ model Company {
   country     String
   phoneNumber Int
   website     String
-<<<<<<< HEAD
   projects    Project?
   users       User?
 }
@@ -39,36 +38,6 @@ model User {
 model Project {
   id                  Int     @id @default(autoincrement())
   companyID           Int     @unique
-=======
-  address     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  fileUpload  String?
-  postalCode  Int
-  users       User?
-  projects    Project?
-}
-
-model User {
-  id          Int      @id @default(autoincrement())
-  password    String
-  firstName   String
-  lastName    String
-  email       String
-  phoneNumber Int
-  dob         DateTime
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  company     Company  @relation(fields: [companyID], references: [id])
-  companyID   Int      @unique
-
-  proofOfIdentity String?
-  proofOfAddress  String?
-}
-
-model Project {
-  id                  Int      @id @default(autoincrement())
->>>>>>> 395018d38fd078f430a6a8d776751d105184bc95
   projectName         String
   createdAt           DateTime @default(now())
   updatedAt           DateTime @default(now())
