@@ -1,15 +1,20 @@
 "use server";
 
 import prisma from "../../../lib/prisma";
+import bcrypt from "bcrypt";
 
-const addUser = async (userData) => {
+const addUser = async (userData, companyID) => {
+  const intialPassword = userData.get("password");
+  const hashedPassword = await bcrypt.hash(intialPassword, 10);
+
   const body = {
-    password: userData.get("password"),
+    password: hashedPassword,
     firstName: userData.get("firstName"),
     lastName: userData.get("lastName"),
     email: userData.get("email"),
     phoneNumber: parseInt(userData.get("phoneNumber")),
-    dob: userData.get("dob"),
+    dob: new Date(userData.get("dob")).toISOString(),
+    companyID,
   };
 
   try {
@@ -19,7 +24,6 @@ const addUser = async (userData) => {
   } catch (error) {
     console.log(error.message);
   }
-}
-
+};
 
 export { addUser };
