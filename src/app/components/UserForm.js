@@ -82,18 +82,16 @@ const UserForm = ({ userAction }) => {
    
     >
       <Image
-        className="float-left"
         src="/logo.png"
         alt="Your Company"
-        width={200}
-        height={450}
+        width={150}
+        height={150}
       />
       <header className="mt-9 mr-9 text-center text-gray-900">
         Create User Account
       </header>
 
-      <br />
-      <br />
+     
 
       <form action="" className="form" onSubmit={handleFormSubmit}>
       <div className="ellipse" />

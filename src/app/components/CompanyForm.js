@@ -13,6 +13,14 @@ const CompanyForm = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues: {
       companyName: "",
+      emailAddress:"",
+      streetAddress:"",
+      phoneNumber:"",
+      selectedCountry:"",
+      city:"",
+      postalCode:"",
+      companyWebsite:"",
+
     },
     validationSchema: Yup.object({
       companyName: Yup.string().required("Company Name is Required"),
@@ -45,18 +53,18 @@ const CompanyForm = ({ onSubmit }) => {
 
   return (
     <section className="container">
-      <img className="float-left" src="/logo.png" width={120} height={40} />
-      <div className="center-content">
-        <header >Company Registration Form</header>
-        <br />
-      </div>
+      <img src="/logo.png" width={150} height={150} />
+    
+        <header className="mt-9 mr-9 text-center text-gray-900">Company Registration Form</header>
+     
+   
       <div className="overlap">
       <div className="ellipse" />
 
       <form onSubmit={handleSubmit} className="form">
         <div className="input-box">
-          <br />
-          <br /> <label >Company Name</label>
+        
+         <label >Company Name</label>
           <input
             type="text"
             name="companyName"
@@ -67,7 +75,7 @@ const CompanyForm = ({ onSubmit }) => {
             required
           />
           {formik.touched.companyName && formik.errors.companyName ? (
-            <div className="text-red-600">{formik.errors.companyName}</div>
+            <div className="text-pink-600">{formik.errors.companyName}</div>
           ) : null}
         </div>
 
@@ -83,7 +91,7 @@ const CompanyForm = ({ onSubmit }) => {
             onBlur={formik.handleBlur}
           />
           {formik.touched.emailAddress && formik.errors.emailAddress ? (
-            <div className="text-red-600">{formik.errors.emailAddress}</div>
+            <div className="text-pink-600">{formik.errors.emailAddress}</div>
           ) : null}
         </div>
 
