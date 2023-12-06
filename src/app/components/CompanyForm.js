@@ -13,21 +13,24 @@ const CompanyForm = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues: {
       companyName: "",
-
-    
     },
     validationSchema: Yup.object({
       companyName: Yup.string().required("Company Name is Required"),
-      emailAddress: Yup.string().email("Invalid email address").required("Required"),
+      emailAddress: Yup.string()
+        .email("Invalid email address")
+        .required("Required"),
       streetAddress: Yup.string().required("Street Address is Required"),
-      phoneNumber: Yup.string().matches(/^[0-9]{11}$/, 'Invalid phone number').required("Phone Number is Required"),
+      phoneNumber: Yup.string()
+        .matches(/^[0-9]{11}$/, "Invalid phone number")
+        .required("Phone Number is Required"),
 
       selectedCountry: Yup.string().required("Please select a country"),
       city: Yup.string().required("City is Required"),
       postalCode: Yup.number().required("Postal Code is Required"),
-      companyWebsite: Yup.string().url("Invalid URL").required("Company Website is Required"),
+      companyWebsite: Yup.string()
+        .url("Invalid URL")
+        .required("Company Website is Required"),
     }),
-    
   });
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,90 +47,86 @@ const CompanyForm = ({ onSubmit }) => {
     <section className="container">
       <img className="float-left" src="/logo.png" width={120} height={40} />
       <div className="center-content">
-        <header>Company Registration Form</header>
+        <header >Company Registration Form</header>
         <br />
       </div>
+      <div className="overlap">
+      <div className="ellipse" />
+
       <form onSubmit={handleSubmit} className="form">
         <div className="input-box">
           <br />
-          <br /> <label>Company Name</label>
+          <br /> <label >Company Name</label>
           <input
             type="text"
             name="companyName"
             placeholder="Company name"
-          
             onChange={formik.handleChange}
             value={formik.values.companyName}
             onBlur={formik.handleBlur}
             required
           />
-       
           {formik.touched.companyName && formik.errors.companyName ? (
-                      <div className="text-red-600">{formik.errors.companyName}</div>
-                    ) : null}
+            <div className="text-red-600">{formik.errors.companyName}</div>
+          ) : null}
         </div>
 
         <div className="input-box">
-          <label>Email Address</label>
+          <label className="">Email Address</label>
           <input
             type="email"
             name="emailAddress"
             placeholder="Enter email address"
-        
             required
             onChange={formik.handleChange}
             value={formik.values.emailAddress}
             onBlur={formik.handleBlur}
           />
           {formik.touched.emailAddress && formik.errors.emailAddress ? (
-                      <div className="text-red-600">{formik.errors.emailAddress}</div>
-                    ) : null}
+            <div className="text-red-600">{formik.errors.emailAddress}</div>
+          ) : null}
         </div>
 
         <div className="column">
           <div className="input-box">
-            <label>Phone Number</label>
+            <label className="">Phone Number</label>
             <input
               type="tel"
               name="phoneNumber"
               placeholder="Enter phone number"
-         
               onChange={formik.handleChange}
-            value={formik.values.phoneNumber}
-            onBlur={formik.handleBlur}
+              value={formik.values.phoneNumber}
+              onBlur={formik.handleBlur}
             />
-         {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-                      <div className="text-red-600">{formik.errors.phoneNumber}</div>
-                    ) : null}
+            {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+              <div className="text-red-600">{formik.errors.phoneNumber}</div>
+            ) : null}
           </div>
         </div>
         <div className="input-box address">
-          <label>Address</label>
+          <label className="">Address</label>
           <input
             type="text"
             name="streetAddress"
             placeholder="Enter street address"
-       
             required
             onChange={formik.handleChange}
             value={formik.values.streetAddress}
             onBlur={formik.handleBlur}
           />
           {formik.touched.streetAddress && formik.errors.streetAddress ? (
-                      <div className="text-red-600">{formik.errors.streetAddress}</div>
-                    ) : null}
+            <div className="text-red-600">{formik.errors.streetAddress}</div>
+          ) : null}
         </div>
         <div className="column">
-          <div className="input-box select-box">
+          <div className="inputbox2 select-box">
             <select
               name="selectedCountry"
-                    onChange={formik.handleChange}
+              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.selectedCountry}
             >
-              <option value="" >
-                Select a country
-              </option>
+              <option value="">Select a country</option>
               {options.map((country) => (
                 <option key={country.value} value={country.value}>
                   {country.label}
@@ -135,11 +134,12 @@ const CompanyForm = ({ onSubmit }) => {
               ))}
             </select>
             {formik.touched.selectedCountry && formik.errors.selectedCountry ? (
-              <div className="text-red-600">{formik.errors.selectedCountry}</div>
+              <div className="text-red-600">
+                {formik.errors.selectedCountry}
+              </div>
             ) : null}
           </div>
-        </div>
-        <div className="column">
+        {/* <div className="column"> */}
           <div className="input-box">
             <input
               type="text"
@@ -148,12 +148,11 @@ const CompanyForm = ({ onSubmit }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.city}
-             
               required
-            />
-             {formik.touched.city && formik.errors.city ? (
+              />
+            {formik.touched.city && formik.errors.city ? (
               <div className="text-red-600">{formik.errors.city}</div>
-            ) : null}
+              ) : null}
           </div>
           <div className="input-box">
             <input
@@ -164,15 +163,16 @@ const CompanyForm = ({ onSubmit }) => {
               onBlur={formik.handleBlur}
               value={formik.values.postalCode}
               required
-            />
-                  {formik.touched.postalCode && formik.errors.postalCode ? (
+              />
+            {formik.touched.postalCode && formik.errors.postalCode ? (
               <div className="text-red-600">{formik.errors.postalCode}</div>
-            ) : null}
+              ) : null}
+              </div>
           </div>
-        </div>
+       
         <div className="column">
           <div className="input-box">
-            <label>Company&apos;s Website</label>
+            <label className="">Company&apos;s Website</label>
             <input
               type="url"
               name="companyWebsite"
@@ -190,39 +190,34 @@ const CompanyForm = ({ onSubmit }) => {
         </div>
         <div>
           <div className="input-box file-upload">
-            <label className="buttonUpload">
-              Choose File
+            <label className="">
+              upload File
               <input
                 type="file"
                 className="custom-file-upload"
                 multiple={false}
                 accept=".pdf, .doc, .docx"
-                
               />
             </label>
           </div>
         </div>
 
+     
         <br />
         <input type="checkbox" required />
         <span></span>
-        <label>
+        <label className="">
           {" "}
           You are permitted to share your employee data with Trade Suite and
           provide explicit consent for them to store and manage this data on
           behalf of your company.
         </label>
 
-
-        <button
-          className="submit-btn"
-          type="submit"
-         
-        >
+        <button className="submit-btn" type="submit">
           Next{" "}
         </button>
- 
       </form>
+      </div>
     </section>
   );
 };

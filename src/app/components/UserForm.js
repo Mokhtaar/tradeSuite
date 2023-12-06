@@ -79,16 +79,14 @@ const UserForm = ({ userAction }) => {
   return (
     <section
       className="container"
-      style={{
-        background: "linear-gradient(to bottom right, #cffafe, #707fce)",
-      }}
+   
     >
       <Image
         className="float-left"
         src="/logo.png"
         alt="Your Company"
-        width={120}
-        height={40}
+        width={200}
+        height={450}
       />
       <header className="mt-9 mr-9 text-center text-gray-900">
         Create User Account
@@ -98,6 +96,7 @@ const UserForm = ({ userAction }) => {
       <br />
 
       <form action="" className="form" onSubmit={handleFormSubmit}>
+      <div className="ellipse" />
         <div className="column">
           <div className="mt-9 input-box">
             <label>First Name</label>
