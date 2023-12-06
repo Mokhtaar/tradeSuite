@@ -3,12 +3,36 @@ import React, { useEffect, useState } from "react";
 import "../styles/style.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const UserForm = ({ userAction }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [companyID, setCompanyID] = useState();
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      dob:"",
+      phoneNumber:"",
+
+    
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required("This field is required!"),
+      lastName: Yup.string().required("This field is required!"),
+      email:  Yup.string().email("Invalid email address").required("Required"),
+      phoneNumber: Yup.string().matches(/^[0-9]{11}$/, 'Invalid phone number').required("This field is required!"),
+      dob: Yup.date().required("This field is required!").max(new Date(), 'Birthdate cannot be in the future'),
+
+   
+    }),
+    
+  });
 
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
@@ -25,7 +49,7 @@ const UserForm = ({ userAction }) => {
   };
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
+    event.target.files[0];
   };
 
   const handleConfirmPasswordChange = (e) => {
@@ -81,8 +105,14 @@ const UserForm = ({ userAction }) => {
               type="text"
               placeholder="Enter first name"
               name="firstName"
+              onChange={formik.handleChange}
+            value={formik.values.firstName}
+            onBlur={formik.handleBlur}
               required
             />
+             {formik.touched.firstName && formik.errors.firstName ? (
+                      <div className="text-red-600">{formik.errors.firstName}</div>
+                    ) : null}
           </div>
 
           <div className="mt-9 input-box">
@@ -91,8 +121,14 @@ const UserForm = ({ userAction }) => {
               type="text"
               placeholder="Enter last name"
               name="lastName"
+              onChange={formik.handleChange}
+              value={formik.values.lastName}
+              onBlur={formik.handleBlur}
               required
             />
+              {formik.touched.lastName && formik.errors.lastName ? (
+                      <div className="text-red-600">{formik.errors.lastName}</div>
+                    ) : null}
           </div>
         </div>
 
@@ -102,19 +138,31 @@ const UserForm = ({ userAction }) => {
             type="email"
             placeholder="Enter email address"
             name="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            onBlur={formik.handleBlur}
             required
           />
+           {formik.touched.email && formik.errors.email ? (
+                      <div className="text-red-600">{formik.errors.email}</div>
+                    ) : null}
         </div>
 
         <div className="column">
           <div className="input-box">
             <label>Phone Number</label>
             <input
-              type="number"
+              type="tel"
               placeholder="Enter phone number"
               name="phoneNumber"
+              onChange={formik.handleChange}
+              value={formik.values.phoneNumber}
+              onBlur={formik.handleBlur}
               required
             />
+                {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+                      <div className="text-red-600">{formik.errors.phoneNumber}</div>
+                    ) : null}
           </div>
           <div className="input-box">
             <label>Birth Date</label>
@@ -122,8 +170,14 @@ const UserForm = ({ userAction }) => {
               type="date"
               placeholder="Enter birth date"
               name="dob"
+              onChange={formik.handleChange}
+              value={formik.values.dob}
+              onBlur={formik.handleBlur}
               required
             />
+             {formik.touched.dob && formik.errors.dob ? (
+                      <div className="text-red-600">{formik.errors.dob}</div>
+                    ) : null}
           </div>
         </div>
 
