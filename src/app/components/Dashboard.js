@@ -185,6 +185,7 @@ const  MyComponent =() => {
           </Dialog>
         </Transition.Root>
 
+
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
@@ -193,7 +194,7 @@ const  MyComponent =() => {
             <div className="flex h-16 shrink-0 items-center">
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                src="./logo.png"
                 alt="Your Company"
               />
             </div>
