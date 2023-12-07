@@ -189,7 +189,11 @@ const  MyComponent =() => {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-black px-6 pb-4"
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-black px-6 pb-4"style={{
+  background:  'linear-gradient(245deg, rgba(140.25, 12.27, 96.74, 0.50) 2%, rgba(73.68, 97.25, 112.62, 0.46) 49%, rgba(36.35, 16.49, 158.31, 0) 100%)',
+
+
+}}
         >
             <div className="flex h-16 shrink-0 items-center">
               <img
