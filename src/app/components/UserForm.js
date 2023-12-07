@@ -7,9 +7,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const UserForm = ({ userAction }) => {
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [companyID, setCompanyID] = useState();
 
   const formik = useFormik({
@@ -19,8 +16,8 @@ const UserForm = ({ userAction }) => {
       email: "",
       dob:"",
       phoneNumber:"",
-
-    
+      password:"",
+      confirmPassword:"",
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("This field is required!"),
@@ -28,8 +25,15 @@ const UserForm = ({ userAction }) => {
       email:  Yup.string().email("Invalid email address").required("Required"),
       phoneNumber: Yup.string().matches(/^[0-9]{11}$/, 'Invalid phone number').required("This field is required!"),
       dob: Yup.date().required("This field is required!").max(new Date(), 'Birthdate cannot be in the future'),
-
-   
+      password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters')
+    .matches(/\d/, 'Password must contain at least one number')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[a-z]/, 'Password must contain at least one lowercase letter'),
+    confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm Password is required'),
     }),
     
   });
@@ -52,30 +56,7 @@ const UserForm = ({ userAction }) => {
     event.target.files[0];
   };
 
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    const pass = e.target.value;
-
-    var errorMessage = "";
-
-    if (pass.length < 8) {
-      errorMessage = "Password must be at least 8 characters.";
-    } else if (!/\d/.test(pass)) {
-      errorMessage = "Password must have at least one number.";
-    } else if (!/[A-Z]/.test(pass) || !/[a-z]/.test(pass)) {
-      errorMessage =
-        "Password must have at least one uppercase and one lowercase letter.";
-    } else {
-      errorMessage = "";
-    }
-
-    setError(errorMessage);
-  };
-  const passwordsMatch = password === confirmPassword;
+ 
   return (
     <section
       className="container"
@@ -204,25 +185,31 @@ const UserForm = ({ userAction }) => {
           <input
             type="password"
             placeholder="Password"
-            onChange={handlePasswordChange}
+            onChange={formik.handleChange}
+              value={formik.values.password}
+              onBlur={formik.handleBlur}
             name="password"
             required
           />
-          {error && <p style={{ color: "red" }}>{error}</p>}
+           {formik.touched.password && formik.errors.password ? (
+                      <div className="text-red-600">{formik.errors.password}</div>
+                    ) : null}
         </div>
 
         <div className="input-box w-full mt-[20px]">
           <label>Confirm Password</label>
           <input
+          name="confirmPassword"
             type="password"
             placeholder="Confirm password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             required
           />
-          {confirmPassword.length > 0 && !passwordsMatch && (
-            <p style={{ color: "red" }}>Passwords do not match.</p>
-          )}
+          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                      <div className="text-red-600">{formik.errors.confirmPassword}</div>
+                    ) : null}
         </div>
 
         <Link href="/Signup">
