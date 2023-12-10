@@ -1,0 +1,26 @@
+.side {
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    
+    
+  }
+.side .ellipse {
+    background: linear-gradient(
+      180deg,
+      rgba(140.25, 12.27, 96.74, 0.5) 1.76%,
+      rgba(73.68, 97.25, 112.62, 0.46) 49.27%,
+      rgba(36.35, 16.49, 158.31, 0) 100%
+    );
+    border-radius: 619.5px/386.5px;
+    filter: blur(512px);
+    height: 773px;
+    left: 277px;
+    position: absolute;
+    top: 0;
+    width: 1239px;
+  }

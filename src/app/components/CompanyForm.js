@@ -26,7 +26,7 @@ const CompanyForm = ({ onSubmit }) => {
       companyName: Yup.string().required("Company Name is Required"),
       emailAddress: Yup.string()
         .email("Invalid email address")
-        .required("Required"),
+        .required("Please provide Email Address"),
       streetAddress: Yup.string().required("Street Address is Required"),
       phoneNumber: Yup.string()
         .matches(/^[0-9]{11}$/, "Invalid phone number")
@@ -75,7 +75,7 @@ const CompanyForm = ({ onSubmit }) => {
             required
           />
           {formik.touched.companyName && formik.errors.companyName ? (
-            <div className="text-pink-600">{formik.errors.companyName}</div>
+            <div className=" text-indigo-300">{formik.errors.companyName}</div>
           ) : null}
         </div>
 
