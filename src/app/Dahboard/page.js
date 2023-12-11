@@ -2,11 +2,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use server";
 
-import MyComponent from '../components/Dashboard';
+import MyHeader from '../components/Header';
   
 const Mypage = (props) => {
-  return <MyComponent 
-   />;
+ 
 };
 
 export default Mypage;

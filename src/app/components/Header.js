@@ -25,7 +25,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const  MyComponent =() => {
+const  MyHeader =() => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
@@ -135,4 +135,4 @@ const  MyComponent =() => {
     </>
   )
 }
-export default MyComponent
+export default MyHeader

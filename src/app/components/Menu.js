@@ -16,8 +16,8 @@ import {
 // import "../styles/style.css";
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Upload Document', href: '#', icon: UsersIcon, current: false },
+  { name: 'Dashboard', href: '/Dahboard', icon: HomeIcon, current: true },
+  { name: 'Upload Document', href: '/Dahboard/UploadDocuments', icon: UsersIcon, current: false },
   { name: 'Create new project', href: '#', icon: FolderIcon, current: false },
   { name: 'Document managment', href: '#', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
@@ -36,6 +36,7 @@ function classNames(...classes) {
 
 const  MyComponent =() => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+ 
 
   return (
     <>
@@ -190,8 +191,8 @@ const  MyComponent =() => {
             }}
           >
             <div className="flex h-16 shrink-0 items-center">
-              <a href="/Dashboard">
-                <img className="h-12 w-auto" src="./logo.png" alt="Your Company" />
+              <a href="/Dahboard">
+                <img className="h-12 w-auto" src="../logo.png" alt="Your Company" />
               </a>
             </div>
             <nav className="flex flex-1 flex-col">
