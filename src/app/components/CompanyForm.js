@@ -4,11 +4,42 @@ import countryList from "react-select-country-list";
 import "../globals.css";
 import "../styles/style.css";
 import { useRouter } from "next/navigation";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const CompanyForm = ({ onSubmit }) => {
   const options = useMemo(() => countryList().getData(), []);
   const router = useRouter();
+  const formik = useFormik({
+    initialValues: {
+      companyName: "",
+      emailAddress:"",
+      streetAddress:"",
+      phoneNumber:"",
+      selectedCountry:"",
+      city:"",
+      postalCode:"",
+      companyWebsite:"",
 
+    },
+    validationSchema: Yup.object({
+      companyName: Yup.string().required("Company Name is Required"),
+      emailAddress: Yup.string()
+        .email("Invalid email address")
+        .required("Please provide Email Address"),
+      streetAddress: Yup.string().required("Street Address is Required"),
+      phoneNumber: Yup.string()
+        .matches(/^[0-9]{11}$/, "Invalid phone number")
+        .required("Phone Number is Required"),
+
+      selectedCountry: Yup.string().required("Please select a country"),
+      city: Yup.string().required("City is Required"),
+      postalCode: Yup.number().required("Postal Code is Required"),
+      companyWebsite: Yup.string()
+        .url("Invalid URL")
+        .required("Company Website is Required"),
+    }),
+  });
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -22,166 +53,179 @@ const CompanyForm = ({ onSubmit }) => {
 
   return (
     <section className="container">
-      <img className="float-left" src="/logo.png" width={120} height={40} />
-      <div className="center-content">
-        <header>Company Registration Form</header>
-        <br />
-      </div>
+      <img src="/logo.png" width={150} height={150} />
+    
+        <header className="mt-9 mr-9 text-center text-gray-900">Company Registration Form</header>
+     
+   
+      <div className="overlap">
+      <div className="ellipse" />
+
       <form onSubmit={handleSubmit} className="form">
         <div className="input-box">
-          <br />
-          <br /> <label>Company Name</label>
+        
+         <label >Company Name</label>
           <input
             type="text"
             name="companyName"
             placeholder="Company name"
-            // value={formData.companyName}
-            // onChange={changeHandler}
+            onChange={formik.handleChange}
+            value={formik.values.companyName}
+            onBlur={formik.handleBlur}
             required
           />
-          {/* Display error message for companyName */}
-          {/* <span style={{ color: "red" }}>{formErrors.companyName}</span> */}
+          {formik.touched.companyName && formik.errors.companyName ? (
+            <div className=" text-indigo-300">{formik.errors.companyName}</div>
+          ) : null}
         </div>
 
         <div className="input-box">
-          <label>Email Address</label>
+          <label className="">Email Address</label>
           <input
             type="email"
             name="emailAddress"
             placeholder="Enter email address"
-            // value={formData.emailAddress}
-            // onChange={changeHandler}
             required
+            onChange={formik.handleChange}
+            value={formik.values.emailAddress}
+            onBlur={formik.handleBlur}
           />
-          {/* <span style={{ color: "red" }}>{formErrors.emailAddress}</span> */}
+          {formik.touched.emailAddress && formik.errors.emailAddress ? (
+            <div className="text-pink-600">{formik.errors.emailAddress}</div>
+          ) : null}
         </div>
 
         <div className="column">
           <div className="input-box">
-            <label>Phone Number</label>
+            <label className="">Phone Number</label>
             <input
-              type="number"
+              type="tel"
               name="phoneNumber"
               placeholder="Enter phone number"
-              // value={formData.phoneNumber}
-              // onChange={changeHandler}
-              required
+              onChange={formik.handleChange}
+              value={formik.values.phoneNumber}
+              onBlur={formik.handleBlur}
             />
-            {/* <span style={{ color: "red" }}>{formErrors.phoneNumber}</span> */}
+            {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+              <div className="text-red-600">{formik.errors.phoneNumber}</div>
+            ) : null}
           </div>
         </div>
         <div className="input-box address">
-          <label>Address</label>
+          <label className="">Address</label>
           <input
             type="text"
             name="streetAddress"
             placeholder="Enter street address"
-            // value={formData.streetAddress}
-            // onChange={changeHandler}
             required
+            onChange={formik.handleChange}
+            value={formik.values.streetAddress}
+            onBlur={formik.handleBlur}
           />
-          {/* <span style={{ color: "red" }}>{formErrors.streetAddress}</span> */}
+          {formik.touched.streetAddress && formik.errors.streetAddress ? (
+            <div className="text-red-600">{formik.errors.streetAddress}</div>
+          ) : null}
         </div>
         <div className="column">
-          <div className="input-box select-box">
+          <div className="inputbox2 select-box">
             <select
               name="selectedCountry"
-              // value={formData.selectedCountry}
-              // onChange={changeHandler}
-              required
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.selectedCountry}
             >
-              <option value="" disabled>
-                Select a country
-              </option>
+              <option value="">Select a country</option>
               {options.map((country) => (
                 <option key={country.value} value={country.value}>
                   {country.label}
                 </option>
               ))}
             </select>
+            {formik.touched.selectedCountry && formik.errors.selectedCountry ? (
+              <div className="text-red-600">
+                {formik.errors.selectedCountry}
+              </div>
+            ) : null}
           </div>
-        </div>
-        <div className="column">
+        {/* <div className="column"> */}
           <div className="input-box">
             <input
               type="text"
               name="city"
               placeholder="Enter your city"
-              // value={formData.city}
-              // onChange={changeHandler}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.city}
               required
-            />
-            {/* <span style={{ color: "red" }}>{formErrors.city}</span> */}
+              />
+            {formik.touched.city && formik.errors.city ? (
+              <div className="text-red-600">{formik.errors.city}</div>
+              ) : null}
           </div>
           <div className="input-box">
             <input
               type="number"
               name="postalCode"
               placeholder="Enter postal code"
-              // value={formData.postalCode}
-              // onChange={changeHandler}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.postalCode}
               required
-            />
-            {/* <span style={{ color: "red" }}>{formErrors.postalCode}</span> */}
+              />
+            {formik.touched.postalCode && formik.errors.postalCode ? (
+              <div className="text-red-600">{formik.errors.postalCode}</div>
+              ) : null}
+              </div>
           </div>
-        </div>
+       
         <div className="column">
           <div className="input-box">
-            <label>Company&apos;s Website</label>
+            <label className="">Company&apos;s Website</label>
             <input
               type="url"
               name="companyWebsite"
               placeholder="Enter Company website URL"
-              // value={formData.companyWebsite}
-              // onChange={changeHandler}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.companyWebsite}
               required
             />
             <br />
-            {/* <span style={{ color: "red" }}>{formErrors.companyWebsite}</span> */}
+            {formik.touched.companyWebsite && formik.errors.companyWebsite ? (
+              <div className="text-red-600">{formik.errors.companyWebsite}</div>
+            ) : null}
           </div>
         </div>
         <div>
           <div className="input-box file-upload">
-            <label className="buttonUpload">
-              Choose File
+            <label className="">
+              upload File
               <input
                 type="file"
                 className="custom-file-upload"
                 multiple={false}
                 accept=".pdf, .doc, .docx"
-                // onChange={handleFileUpload}
               />
             </label>
           </div>
         </div>
 
+     
         <br />
         <input type="checkbox" required />
         <span></span>
-        <label>
+        <label className="">
           {" "}
           You are permitted to share your employee data with Trade Suite and
           provide explicit consent for them to store and manage this data on
           behalf of your company.
         </label>
 
-        {/* Use Link component for navigation */}
-        {/* <Link href="/Signup/UserSignup"> */}
-
-        {/* <button className="submit-btn" type="submit"  >Next</button> */}
-
-        <button
-          className="submit-btn"
-          type="submit"
-          //  onClick={handleSubmit}
-        >
+        <button className="submit-btn" type="submit">
           Next{" "}
         </button>
-        {/* <button className="submit-btn" type="button">    
-    Next
-  </button> 
-        {/* </Link> */}
       </form>
+      </div>
     </section>
   );
 };

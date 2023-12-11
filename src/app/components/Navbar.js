@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 const navigation = [
   { name: "TradeSuite", href: "#" },
-  { name: "Dashboard", href: "#" },
+  { name: "Dashboard", href: "../Dahboard" },
   { name: "Messages", href: "#" },
   { name: "XTurn Finance", href: "#" },
   { name: "Research Center", href: "#" },
