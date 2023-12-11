@@ -1,10 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/navigation";
 
 const LoginForm = ({ LoginAction }) => {
+  const router = useRouter();
+  const [isWrongPassword, setIsWrongPassword] = useState(false);
+  const [isWrongEmail, setIsWrongEmail] = useState(false);
+  
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -12,16 +17,26 @@ const LoginForm = ({ LoginAction }) => {
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string()
-        .required("Password is required")
-        .min(8, "Min 9 chars")
-        .max(10, "Max 9 chars"),
+      password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
       const response = await LoginAction(values);
-      console.log(response);
+      if (response.message === "wrongEmail") setIsWrongEmail(true);
+      if (response.message === "wrongPassword") setIsWrongPassword(true);
+      if (response.message === "LoggedIn") {
+        console.log(response);
+        router.push("/");
+      }
     },
   });
+  const handleEmailChange = (e) => {
+    formik.handleChange(e);
+    setIsWrongEmail(false);
+  };
+  const handlePasswordChange = (e) => {
+    formik.handleChange(e);
+    setIsWrongPassword(false);
+  };
   return (
     <div className="h-[100vh]">
       <div className="flex min-h-full flex-1">
@@ -68,7 +83,7 @@ const LoginForm = ({ LoginAction }) => {
                         type="email"
                         autoComplete="email"
                         required
-                        onChange={formik.handleChange}
+                        onChange={handleEmailChange}
                         value={formik.values.email}
                         onBlur={formik.handleBlur}
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -77,6 +92,11 @@ const LoginForm = ({ LoginAction }) => {
                     {formik.touched.email && formik.errors.email ? (
                       <div className="text-red-600">{formik.errors.email}</div>
                     ) : null}
+                    {isWrongEmail && (
+                      <div className="text-red-600">
+                        Your email address is incorrect
+                      </div>
+                    )}
                   </div>
 
                   <div>
@@ -92,7 +112,7 @@ const LoginForm = ({ LoginAction }) => {
                         name="password"
                         type="password"
                         autoComplete="current-password"
-                        onChange={formik.handleChange}
+                        onChange={handlePasswordChange}
                         value={formik.values.password}
                         onBlur={formik.handleBlur}
                         required
@@ -104,6 +124,11 @@ const LoginForm = ({ LoginAction }) => {
                         {formik.errors.password}
                       </div>
                     ) : null}
+                    {isWrongPassword && (
+                      <div className="text-red-600">
+                        Your password address is incorrect
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex items-center justify-between">
