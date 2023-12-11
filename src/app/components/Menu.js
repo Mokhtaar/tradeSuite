@@ -17,9 +17,9 @@ import {
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Upload Document', href: '#', icon: UsersIcon, current: false },
+  { name: 'Create new project', href: '#', icon: FolderIcon, current: false },
+  { name: 'Document managment', href: '#', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
 ]
@@ -178,7 +178,8 @@ const  MyComponent =() => {
         {/* Sidebar */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col" style={{ height: '100vh' }}>
           <div
-            className="flex flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6 pb-4"
+            className="flex flex-col gap-y-5 overflow-y-auto  px-6 pb-4"
+            // border-r border-gray-200
             style={{
               backgroundColor: 'black', // Set the black background for the entire sidebar
               backgroundImage:
