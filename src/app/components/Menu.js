@@ -82,6 +82,7 @@ const  MyComponent =() => {
                       </button>
                     </div>
                   </Transition.Child>
+                  
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div
                   className="side">
@@ -173,25 +174,23 @@ const  MyComponent =() => {
         </Transition.Root>
 
         
-       
-        {/* Static sidebar for desktop */}
         
-          <div className="ellipse" />
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-          {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6 pb-4"
-          style={{
-  background:  'linear-gradient(180deg,rgba(140.25, 12.27, 96.74, 0.5) 1.76%,rgba(73.68, 97.25, 112.62, 0.46) 49.27%,rgba(36.35, 16.49, 158.31, 0) 100%',
-}}
-
-        >
+        {/* Sidebar */}
+        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col" style={{ height: '100vh' }}>
+          <div
+            className="flex flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6 pb-4"
+            style={{
+              backgroundColor: 'black', // Set the black background for the entire sidebar
+              backgroundImage:
+                'linear-gradient(180deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)',
+              backgroundSize: 'cover', // Maintain the gradient for specific elements
+              height: '100%', // Set the sidebar height to fill the viewport height
+              overflowY: 'hidden', // Hide the overflow content
+            }}
+          >
             <div className="flex h-16 shrink-0 items-center">
-            <a href="/Dahboard">
-              <img
-                className="h-12 w-auto"
-                src="./logo.png"
-                alt="Your Company"
-              />
+              <a href="/Dashboard">
+                <img className="h-12 w-auto" src="./logo.png" alt="Your Company" />
               </a>
             </div>
             <nav className="flex flex-1 flex-col">
@@ -206,7 +205,7 @@ const  MyComponent =() => {
                             item.current
                               ? 'bg-gray-50 text-indigo-600'
                               : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                            'group flex gap-x-3 text-gray-700 rounded-md p-2 text-sm leading-6 font-semibold'
                           )}
                         >
                           <item.icon
@@ -267,16 +266,9 @@ const  MyComponent =() => {
               </ul>
             </nav>
          
+            </div>
         </div>
-
-      
-        
-
-         
-      
-       
-    
-      </div>
+     
     </>
   )
 }
