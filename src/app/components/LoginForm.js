@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
@@ -23,8 +24,9 @@ const LoginForm = ({ LoginAction }) => {
       if (response.message === "wrongEmail") setIsWrongEmail(true);
       if (response.message === "wrongPassword") setIsWrongPassword(true);
       if (response.message === "LoggedIn") {
-        console.log(response);
-        router.push("/");
+        const decoded = jwtDecode(response.token);
+        console.log({ response, user: decoded.user });
+        // router.push("/");
       }
     },
   });
