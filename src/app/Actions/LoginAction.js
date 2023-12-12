@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import prisma from "../../../lib/prisma";
 import jwt from "jsonwebtoken";
 
-const LoginAction = async (values, formData) => {
+const LoginAction = async (values) => {
   // console.log(formData);
   const email = values.email;
   const password = values.password;

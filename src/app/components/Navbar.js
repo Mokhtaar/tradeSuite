@@ -3,20 +3,18 @@
 import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from 'next/link';
-
-
+import Link from "next/link";
 
 const navigation = [
   { name: "TradeSuite", href: "#" },
-  { name: "Dashboard", href: "../Dahboard" },
+  { name: "Dashboard", href: "../Dashboard" },
   { name: "Messages", href: "#" },
   { name: "XTurn Finance", href: "#" },
   { name: "Research Center", href: "#" },
   { name: "Active Trades", href: "#" },
 ];
 const Navbar = () => {
-  const isUserLoggedIn=false;//G
+  const isUserLoggedIn = false; //G
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
@@ -65,14 +63,12 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               <Link
-                href="../Signup" 
+                href="../Signup"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Log in <span aria-hidden="true">&rarr;</span>
               </Link>
             </div>
-
-
           </nav>
           <Dialog
             as="div"
@@ -85,11 +81,7 @@ const Navbar = () => {
               <div className="flex items-center justify-between">
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">Your Company</span>
-                  <img
-                    className="sm:h-8 w-auto"
-                    src="./logo.png"
-                    alt=""
-                  />
+                  <img className="sm:h-8 w-auto" src="./logo.png" alt="" />
                 </a>
                 <button
                   type="button"
@@ -121,7 +113,6 @@ const Navbar = () => {
                       Log in
                     </a>
                   </div>
-
                 </div>
               </div>
             </Dialog.Panel>
