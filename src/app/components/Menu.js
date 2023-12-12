@@ -46,7 +46,7 @@ function classNames(...classes) {
     const updatedNavigation = navigation.map((item) => {
       return {
         ...item,
-        current: item.href.toLowerCase() === href.toLowerCase(),
+        current: item.href,
       };
     });
   

@@ -25,7 +25,7 @@ const UploadDocument = () => {
             <div className="input_field flex flex-col w-max mx-auto text-center">
               <label>
                 <input className="text-sm cursor-pointer w-36 hidden" type="file" multiple />
-                <div className="text bg-indigo-600 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                <div className="text bg-gradient-to-tr from-[#4776E6] from-20% via-[#8E54E9] from-50%   to-[#8E54E9] from-100% text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                   Select
                 </div>
               </label>
