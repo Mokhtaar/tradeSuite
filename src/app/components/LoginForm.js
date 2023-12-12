@@ -25,8 +25,9 @@ const LoginForm = ({ LoginAction }) => {
       if (response.message === "wrongPassword") setIsWrongPassword(true);
       if (response.message === "LoggedIn") {
         const decoded = jwtDecode(response.token);
-        console.log({ response, user: decoded.user });
-        // router.push("/");
+        const userString = JSON.stringify(decoded.user);
+        localStorage.setItem("userInfo", userString);
+        router.push("../Dashboard");
       }
     },
   });

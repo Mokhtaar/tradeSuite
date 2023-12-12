@@ -17,13 +17,13 @@ import Link from "next/link";
 const tabs = [
   {
     name: "Dashboard",
-    href: "/Dahboard",
+    href: "/Dashboard",
     icon: HomeIcon,
     current: true,
   },
   {
     name: "Upload Document",
-    href: "/Dahboard/UploadDocuments",
+    href: "/Dashboard/UploadDocuments",
     icon: FolderIcon,
     current: false,
   },
@@ -225,7 +225,7 @@ const MyComponent = () => {
           }}
         >
           <div className="flex h-16 shrink-0 items-center">
-            <a href="/Dahboard">
+            <a href="/Dashboard">
               <img
                 className="h-12 w-auto"
                 src="../logo.png"
