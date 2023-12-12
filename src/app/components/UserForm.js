@@ -14,68 +14,60 @@ const UserForm = ({ userAction }) => {
       firstName: "",
       lastName: "",
       email: "",
-      dob:"",
-      phoneNumber:"",
-      password:"",
-      confirmPassword:"",
+      dob: "",
+      phoneNumber: "",
+      password: "",
+      confirmPassword: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("This field is required!"),
       lastName: Yup.string().required("This field is required!"),
-      email:  Yup.string().email("Invalid email address").required("Required"),
-      phoneNumber: Yup.string().matches(/^[0-9]{11}$/, 'Invalid phone number').required("This field is required!"),
-      dob: Yup.date().required("This field is required!").max(new Date(), 'Birthdate cannot be in the future'),
+      email: Yup.string().email("Invalid email address").required("Required"),
+      phoneNumber: Yup.string()
+        .matches(/^[0-9]{11}$/, "Invalid phone number")
+        .required("This field is required!"),
+      dob: Yup.date()
+        .required("This field is required!")
+        .max(new Date(), "Birthdate cannot be in the future"),
       password: Yup.string()
-    .required('Password is required')
-    .min(8, 'Password must be at least 8 characters')
-    .matches(/\d/, 'Password must contain at least one number')
-    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .matches(/[a-z]/, 'Password must contain at least one lowercase letter'),
-    confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Confirm Password is required'),
+        .required("Password is required")
+        .min(8, "Password must be at least 8 characters")
+        .matches(/\d/, "Password must contain at least one number")
+        .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+        .matches(
+          /[a-z]/,
+          "Password must contain at least one lowercase letter"
+        ),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .required("Confirm Password is required"),
     }),
-    
   });
 
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
   }, []);
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     const userData = new FormData(event.target);
-    userAction(userData, +companyID);
-    if (error) {
-      console.log("There are errors in the form. Submission prevented.");
-      return;
-    }
+    const response = await userAction(userData, +companyID);
+    console.log(response);
   };
 
   const handleFileChange = (event) => {
     event.target.files[0];
   };
 
- 
   return (
-    <section
-      className="container"
-   
-    >
-      <Image
-        src="/logo.png"
-        alt="Your Company"
-        width={150}
-        height={150}
-      />
+    <section className="container">
+      <Image src="/logo.png" alt="Your Company" width={150} height={150} />
       <header className="mt-9 mr-9 text-center text-gray-900">
         Create User Account
       </header>
 
-     
-
       <form action="" className="form" onSubmit={handleFormSubmit}>
-      <div className="ellipse" />
+        <div className="ellipse" />
         <div className="column">
           <div className="mt-9 input-box">
             <label>First Name</label>
@@ -84,13 +76,13 @@ const UserForm = ({ userAction }) => {
               placeholder="Enter first name"
               name="firstName"
               onChange={formik.handleChange}
-            value={formik.values.firstName}
-            onBlur={formik.handleBlur}
+              value={formik.values.firstName}
+              onBlur={formik.handleBlur}
               required
             />
-             {formik.touched.firstName && formik.errors.firstName ? (
-                      <div className="text-red-600">{formik.errors.firstName}</div>
-                    ) : null}
+            {formik.touched.firstName && formik.errors.firstName ? (
+              <div className="text-red-600">{formik.errors.firstName}</div>
+            ) : null}
           </div>
 
           <div className="mt-9 input-box">
@@ -104,9 +96,9 @@ const UserForm = ({ userAction }) => {
               onBlur={formik.handleBlur}
               required
             />
-              {formik.touched.lastName && formik.errors.lastName ? (
-                      <div className="text-red-600">{formik.errors.lastName}</div>
-                    ) : null}
+            {formik.touched.lastName && formik.errors.lastName ? (
+              <div className="text-red-600">{formik.errors.lastName}</div>
+            ) : null}
           </div>
         </div>
 
@@ -121,9 +113,9 @@ const UserForm = ({ userAction }) => {
             onBlur={formik.handleBlur}
             required
           />
-           {formik.touched.email && formik.errors.email ? (
-                      <div className="text-red-600">{formik.errors.email}</div>
-                    ) : null}
+          {formik.touched.email && formik.errors.email ? (
+            <div className="text-red-600">{formik.errors.email}</div>
+          ) : null}
         </div>
 
         <div className="column">
@@ -138,9 +130,9 @@ const UserForm = ({ userAction }) => {
               onBlur={formik.handleBlur}
               required
             />
-                {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-                      <div className="text-red-600">{formik.errors.phoneNumber}</div>
-                    ) : null}
+            {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+              <div className="text-red-600">{formik.errors.phoneNumber}</div>
+            ) : null}
           </div>
           <div className="input-box">
             <label>Birth Date</label>
@@ -153,9 +145,9 @@ const UserForm = ({ userAction }) => {
               onBlur={formik.handleBlur}
               required
             />
-             {formik.touched.dob && formik.errors.dob ? (
-                      <div className="text-red-600">{formik.errors.dob}</div>
-                    ) : null}
+            {formik.touched.dob && formik.errors.dob ? (
+              <div className="text-red-600">{formik.errors.dob}</div>
+            ) : null}
           </div>
         </div>
 
@@ -186,30 +178,30 @@ const UserForm = ({ userAction }) => {
             type="password"
             placeholder="Password"
             onChange={formik.handleChange}
-              value={formik.values.password}
-              onBlur={formik.handleBlur}
+            value={formik.values.password}
+            onBlur={formik.handleBlur}
             name="password"
             required
           />
-           {formik.touched.password && formik.errors.password ? (
-                      <div className="text-red-600">{formik.errors.password}</div>
-                    ) : null}
+          {formik.touched.password && formik.errors.password ? (
+            <div className="text-red-600">{formik.errors.password}</div>
+          ) : null}
         </div>
 
         <div className="input-box w-full mt-[20px]">
           <label>Confirm Password</label>
           <input
-          name="confirmPassword"
+            name="confirmPassword"
             type="password"
             placeholder="Confirm password"
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+            onBlur={formik.handleBlur}
             required
           />
           {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                      <div className="text-red-600">{formik.errors.confirmPassword}</div>
-                    ) : null}
+            <div className="text-red-600">{formik.errors.confirmPassword}</div>
+          ) : null}
         </div>
 
         <Link href="/Signup">

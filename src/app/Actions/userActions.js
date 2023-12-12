@@ -9,8 +9,9 @@ const addUser = async (userData, companyID) => {
 
   const body = {
     password: hashedPassword,
-    firstName: userData.get("firstName"),
-    lastName: userData.get("lastName"),
+    // firstName: userData.get("firstName"),
+    // lastName: userData.get("lastName"),
+    name: `${userData.get("firstName")} ${userData.get("lastName")}`,
     email: userData.get("email"),
     phoneNumber: parseInt(userData.get("phoneNumber")),
     dob: new Date(userData.get("dob")).toISOString(),
@@ -21,8 +22,9 @@ const addUser = async (userData, companyID) => {
     await prisma.User.create({
       data: body,
     });
+    return { message: "User has been created succefully" };
   } catch (error) {
-    console.log(error.message);
+    return { message: error.message };
   }
 };
 

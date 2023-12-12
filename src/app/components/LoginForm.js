@@ -9,7 +9,6 @@ const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
   const [isWrongPassword, setIsWrongPassword] = useState(false);
   const [isWrongEmail, setIsWrongEmail] = useState(false);
-  
   const formik = useFormik({
     initialValues: {
       email: "",
