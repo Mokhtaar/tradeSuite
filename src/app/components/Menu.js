@@ -40,21 +40,23 @@ function classNames(...classes) {
 ]);
   
   const handleNavigation = (href) => {
-    setCurrentPage(href);
+    setCurrentPage(href.toLowerCase());
 
-  // Update the navigation items to set the current property
-  const updatedNavigation = navigation.map((item) => {
-    return {
-      ...item,
-      current: item.href === href,
-    };
-  });
-
-  // Set the updated navigation items
-  setNavigation(updatedNavigation);
-
-  setSidebarOpen(false);
+    // Update the navigation items to set the current property
+    const updatedNavigation = navigation.map((item) => {
+      return {
+        ...item,
+        current: item.href.toLowerCase() === href.toLowerCase(),
+      };
+    });
+  
+    // Set the updated navigation items
+    setNavigation(updatedNavigation);
+  
+    setSidebarOpen(false);
+  
   };
+
 
   return (
     <>
@@ -231,7 +233,7 @@ backgroundSize: 'cover', // Maintain the gradient for specific elements
                           href={item.href}
                           onClick={() => handleNavigation(item.href)}
                           className={classNames(
-                            item.current
+                            item.href=== currentPage
                               ? 'bg-gray-50 text-indigo-600'
                               : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
                             'group flex gap-x-3 text-gray-700 rounded-md p-2 text-sm leading-6 font-semibold'
