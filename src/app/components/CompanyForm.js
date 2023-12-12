@@ -52,10 +52,10 @@ const CompanyForm = ({ onSubmit }) => {
   };
 
   return (
-    <section className="container">
+    <section className="containers">
       <img src="/logo.png" width={150} height={150} />
     
-        <header className="mt-9 mr-9 text-center text-gray-900">Company Registration Form</header>
+        <header>Company Registration Form</header>
      
    
       <div className="overlap">
@@ -75,7 +75,7 @@ const CompanyForm = ({ onSubmit }) => {
             required
           />
           {formik.touched.companyName && formik.errors.companyName ? (
-            <div className=" text-indigo-300">{formik.errors.companyName}</div>
+            <div className=" text-red-400">{formik.errors.companyName}</div>
           ) : null}
         </div>
 

@@ -2,6 +2,7 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
+
 import {
   CalendarIcon,
   ChartPieIcon,
@@ -15,14 +16,7 @@ import {
 
 // import "../styles/style.css";
 
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Upload Document', href: '#', icon: UsersIcon, current: false },
-  { name: 'Create new project', href: '#', icon: FolderIcon, current: false },
-  { name: 'Document managment', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
+
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
@@ -34,8 +28,33 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const  MyComponent =() => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+ 
+  const MyComponent = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState('/Dahboard'); // Set the initial current page
+  const [navigation, setNavigation] = useState([
+  { name: 'Dashboard', href: '/Dahboard', icon: HomeIcon, current: currentPage === '/Dahboard' },
+  { name: 'Upload Document', href: '/Dahboard/UploadDocuments', icon: FolderIcon, current: currentPage === '/Dahboard/UploadDocuments' },
+  { name: 'Document management', href: '#', icon: DocumentDuplicateIcon, current: currentPage === '#' },
+]);
+  
+  const handleNavigation = (href) => {
+    setCurrentPage(href);
+
+  // Update the navigation items to set the current property
+  const updatedNavigation = navigation.map((item) => {
+    return {
+      ...item,
+      current: item.href === href,
+    };
+  });
+
+  // Set the updated navigation items
+  setNavigation(updatedNavigation);
+
+  setSidebarOpen(false);
+  };
 
   return (
     <>
@@ -102,8 +121,9 @@ const  MyComponent =() => {
                               <li key={item.name}>
                                 <a
                                   href={item.href}
+                                  onClick={() => handleNavigation(item.href)}
                                   className={classNames(
-                                    item.current
+                                    item.href === currentPage
                                       ? 'bg-gray-50 text-indigo-600'
                                       : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -181,17 +201,24 @@ const  MyComponent =() => {
             className="flex flex-col gap-y-5 overflow-y-auto  px-6 pb-4"
             // border-r border-gray-200
             style={{
+
+          
               backgroundColor: 'black', // Set the black background for the entire sidebar
               backgroundImage:
-                'linear-gradient(180deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)',
-              backgroundSize: 'cover', // Maintain the gradient for specific elements
+              
+             'linear-gradient(180deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)',
+              // 'linear-gradient(245deg, rgba(140, 12, 97, 0.50) -13.09%, rgba(74, 97, 113, 0.46) 17.18%, rgba(36, 16, 158, 0.00) 49.48%)',
+              
+backgroundSize: 'cover', // Maintain the gradient for specific elements
               height: '100%', // Set the sidebar height to fill the viewport height
               overflowY: 'hidden', // Hide the overflow content
-            }}
+            
+            } }
           >
+           
             <div className="flex h-16 shrink-0 items-center">
-              <a href="/Dashboard">
-                <img className="h-12 w-auto" src="./logo.png" alt="Your Company" />
+              <a href="/Dahboard">
+                <img className="h-12 w-auto" src="../logo.png" alt="Your Company" />
               </a>
             </div>
             <nav className="flex flex-1 flex-col">
@@ -202,6 +229,7 @@ const  MyComponent =() => {
                       <li key={item.name}>
                         <a
                           href={item.href}
+                          onClick={() => handleNavigation(item.href)}
                           className={classNames(
                             item.current
                               ? 'bg-gray-50 text-indigo-600'
@@ -266,11 +294,11 @@ const  MyComponent =() => {
                 </li>
               </ul>
             </nav>
+         </div>
          
-            </div>
         </div>
      
     </>
   )
-}
+                            }
 export default MyComponent

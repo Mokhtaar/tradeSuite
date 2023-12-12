@@ -25,7 +25,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const  MyComponent =() => {
+const  MyHeader =() => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
@@ -42,9 +42,12 @@ const  MyComponent =() => {
       <div>
         <div className="lg:pl-72">
           <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8" style={{
-             backgroundColor: 'black',
-              backgroundImage:
-                'linear-gradient(180deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)',
+              backgroundColor: 'black',
+                backgroundImage:
+              'linear-gradient(425deg, rgba(140.25, 12.27, 96.74, 0.5) 1.27%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)',
+            //  ' linear-gradient(425deg, rgba(140, 12, 97, 0.50) 1.27, rgba(74, 97, 113, 0.46) 49.27%, rgba(36, 16, 158, 0.00) 100%)',
+
+             
             }}>
             <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
               <span className="sr-only">Open sidebar</span>
@@ -135,4 +138,4 @@ const  MyComponent =() => {
     </>
   )
 }
-export default MyComponent
+export default MyHeader

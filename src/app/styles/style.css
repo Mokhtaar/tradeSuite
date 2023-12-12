@@ -20,9 +20,9 @@ body {
 body .ellipse {
   background: linear-gradient(
     180deg,
-    rgba(140.25, 12.27, 96.74, 0.5) 80.76%,
-    rgba(73.68, 97.25, 112.62, 0.46) 49.27%,
-    rgba(36.35, 16.49, 158.31, 0) 100%
+    rgba(140.25, 12.27, 96.74, 0.5) 100%,
+    rgba(73.68, 97.25, 112.62, 0.46) 19.27%,
+    rgba(36.35, 16.49, 158.31, 0) 10%
   );
   border-radius: 619.5px/386.5px;
   filter: blur(512px);
@@ -33,7 +33,7 @@ body .ellipse {
   width: 1239px;
 }
 
-/* .container {
+.containers {
   position: relative;
   width: 90%;
   padding: 25px;
@@ -42,14 +42,14 @@ body .ellipse {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 } */
 
-/* .container header {
+.containers header {
   font-size: 40px;
   color: white;
   font-weight: bold;
   text-align: center;
 
 }
-.container .form {
+.containers .form {
   margin-top: 30px;
 } */
 .form .input-box {
