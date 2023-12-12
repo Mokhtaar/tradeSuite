@@ -3,8 +3,12 @@ import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import OurServices from "./components/OurServices";
 import Testmonials from "./components/Testmonials";
+import { getCurrentUser } from "../../lib/session";
 
-export default function Home() {
+async function Home() {
+  const user = await getCurrentUser();
+  console.log(user);
+
   return (
     <>
       <Navbar />
@@ -17,3 +21,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;

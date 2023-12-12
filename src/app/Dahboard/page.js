@@ -3,9 +3,10 @@
 "use server";
 
 import MyHeader from '../components/Header';
+import UploadDocument from '../components/UploadDocument'
   
 const Mypage = (props) => {
- 
+
 };
 
 export default Mypage;
