@@ -14,7 +14,7 @@ const UploadDocument = () => {
                   type="text"
                   className="h-12 px-3 w-full border-gray-200 border rounded focus:outline-none focus:border-gray-300"
                 />
-              </div>
+    </div>
     </div>
           <div
             className="file_upload p-5 relative border-4 border-dotted border-gray-300 rounded-lg"
@@ -38,7 +38,7 @@ const UploadDocument = () => {
             <div className="input_field flex flex-col w-max mx-auto text-center">
               <label>
                 <input className="text-sm cursor-pointer w-36 hidden" type="file" multiple />
-                <div className="text bg-gradient-to-tr from-[#4776E6] from-20% via-[#8E54E9] from-50%   to-[#8E54E9] from-100% text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                   Select
                 </div>
               </label>
@@ -47,9 +47,9 @@ const UploadDocument = () => {
             </div>
             
           </div>
-          <button className="w-full h-12 text-lg w-32 mt-5 bg-blue-600 rounded text-white hover:bg-blue-700">
+          <button className="w-full h-12 text-lg  mt-5 bg-blue-600 rounded text-white hover:bg-blue-700">
                   Create
-                </button>
+         </button>
         </div>
       </div>
       </div>
