@@ -60,7 +60,7 @@ const UserForm = ({ userAction }) => {
   };
 
   return (
-    <section className="container">
+    <section className="containers">
       <Image src="/logo.png" alt="Your Company" width={150} height={150} />
       <header className="mt-9 mr-9 text-center text-gray-900">
         Create User Account
