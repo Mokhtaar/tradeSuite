@@ -208,7 +208,7 @@ const MyComponent = () => {
       {/* Sidebar */}
       <div
         className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col"
-        style={{ height: "100vh" }}
+        style={{ height: "100vh" ,  width: "40vh" }}
       >
         <div
           className="flex flex-col gap-y-5 overflow-y-auto  px-6 pb-4"

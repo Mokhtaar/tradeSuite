@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from 'next/navigation';
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -53,6 +55,7 @@ const UserForm = ({ userAction }) => {
     const userData = new FormData(event.target);
     const response = await userAction(userData, +companyID);
     console.log(response);
+    router.push('/Login');
   };
 
   const handleFileChange = (event) => {

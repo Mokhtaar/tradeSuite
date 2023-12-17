@@ -43,6 +43,7 @@ const MyHeader = () => {
 
   return (
     <>
+    
       {/*
         This example requires updating your template:
 
@@ -53,7 +54,7 @@ const MyHeader = () => {
       */}
       <div>
         <div>
-          <div className="lg:pl-72">
+          <div className="lg:pl-60">
             <div
               className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
               style={{
@@ -81,7 +82,8 @@ const MyHeader = () => {
               <div className="relative flex flex-1 lg:flex lg:gap-x-12 text-white ">
                 {" "}
                 {/* Modified line */}
-                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center justify-center">
+                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center justify-center" 
+                >
                   {navigation.map((item) => (
                     <a
                       key={item.name}
