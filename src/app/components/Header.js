@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon } from "@heroicons/react/24/outline";
+import { useRouter } from 'next/navigation';
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
@@ -22,6 +23,7 @@ function classNames(...classes) {
 }
 
 const MyHeader = () => {
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState();
 
@@ -30,6 +32,15 @@ const MyHeader = () => {
     const userInfo = JSON.parse(userString);
     setUser(userInfo);
   }, []);
+
+  const handleSignOut = () => {
+    // Perform sign-out action here, such as clearing user data from localStorage
+    localStorage.removeItem('userInfo');
+    setUser(null); // Set the user state to null or an appropriate value indicating signed out
+    router.push('/');
+  
+  };
+
   return (
     <>
       {/*
@@ -130,15 +141,16 @@ const MyHeader = () => {
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
-                              <a
-                                href={item.href}
-                                className={classNames(
-                                  active ? "bg-gray-50" : "",
-                                  "block px-3 py-1 text-sm leading-6 text-gray-900"
-                                )}
-                              >
-                                {item.name}
-                              </a>
+                            <a
+                    href={item.href}
+                    onClick={item.name === 'Sign out' ? handleSignOut : undefined}
+                    className={classNames(
+                      active ? "bg-gray-50" : "",
+                      "block px-3 py-1 text-sm leading-6 text-gray-900"
+                    )}
+                  >
+                    {item.name}
+                  </a>
                             )}
                           </Menu.Item>
                         ))}
