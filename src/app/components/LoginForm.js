@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
@@ -8,8 +8,11 @@ import { jwtDecode } from "jwt-decode";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
+ 
   const [isWrongPassword, setIsWrongPassword] = useState(false);
   const [isWrongEmail, setIsWrongEmail] = useState(false);
+ 
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,6 +31,7 @@ const LoginForm = ({ LoginAction }) => {
         const userString = JSON.stringify(decoded.user);
         localStorage.setItem("userInfo", userString);
         router.push("../Dashboard");
+       
       }
     },
   });
@@ -38,7 +42,9 @@ const LoginForm = ({ LoginAction }) => {
   const handlePasswordChange = (e) => {
     formik.handleChange(e);
     setIsWrongPassword(false);
+    
   };
+  
   return (
     <div className="h-[100vh]">
       <div className="flex min-h-full flex-1">
