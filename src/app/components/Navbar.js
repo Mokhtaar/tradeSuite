@@ -34,7 +34,7 @@ const Navbar = () => {
               <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-28 w-auto mix-blend-color-burn"
+                  className="h-15 w-15 mix-blend-color-burn"
                   src="./logo.png"
                   alt=""
                 />
@@ -63,7 +63,7 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               <Link
-                href="../Signup"
+                href="../Login"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Log in <span aria-hidden="true">&rarr;</span>
@@ -107,7 +107,7 @@ const Navbar = () => {
                   </div>
                   <div className="py-6">
                     <a
-                      href="#"
+                      href="../login"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       Log in
