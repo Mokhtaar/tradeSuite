@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
-  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -212,9 +211,11 @@ const UserForm = ({ userAction }) => {
             Back
           </button>
         </Link>
+   
         <button className="submit-btn" type="submit">
           Submit
         </button>
+    
       </form>
     </section>
   );
