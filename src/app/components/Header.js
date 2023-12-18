@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon } from "@heroicons/react/24/outline";
-import { useRouter } from 'next/navigation';
+
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
@@ -11,7 +11,7 @@ import {
 
 const userNavigation = [
   { name: "Your profile", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Sign out", href: "/" },
 ];
 const navigation = [
   { name: "Messages", href: "#" },
@@ -23,7 +23,7 @@ function classNames(...classes) {
 }
 
 const MyHeader = () => {
-  const router = useRouter();
+ 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState();
 
@@ -37,7 +37,6 @@ const MyHeader = () => {
     // Perform sign-out action here, such as clearing user data from localStorage
     localStorage.removeItem('userInfo');
     setUser(null); // Set the user state to null or an appropriate value indicating signed out
-    router.push('/');
   
   };
 
@@ -82,13 +81,13 @@ const MyHeader = () => {
               <div className="relative flex flex-1 lg:flex lg:gap-x-12 text-white ">
                 {" "}
                 {/* Modified line */}
-                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center justify-center" 
+                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center justify-center rounded-[8px] border-b [border-bottom-style:solid] border-white "style={{ margin: '0 150px' }}
                 >
                   {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
-                      className="text-sm font-semibold leading-6 text-white-900"
+                      className="text-sm font-semibold leading-6 text-white-900 "
                     >
                       {item.name}
                     </a>
