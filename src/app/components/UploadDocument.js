@@ -3,7 +3,13 @@ import React from 'react';
 const UploadDocument = () => {
     return (
       <div>
-        <div className="fixed z-10 left-20 top-0 w-full h-full flex bg-black bg-opacity-60">
+        <div className="fixed z-10 left-20 top-0 w-full h-full flex  bg-opacity-20"
+        style={{
+          backgroundColor: "black", // Set the black background for the entire sidebar
+          backgroundImage:
+            "linear-gradient(180deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+       
+        }}>
       
         <div className="extraOutline p-4 mb-9 bg-white w-max bg-whtie m-auto rounded-lg ">
         <header className="text-center text-indigo-500 pb-7 mt-3 font-bold text-[40px] text-lg">Upload Files</header>
