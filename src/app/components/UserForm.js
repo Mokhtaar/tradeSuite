@@ -47,6 +47,7 @@ const UserForm = ({ userAction }) => {
 
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
+    
   }, []);
 
   const handleFormSubmit = async (event) => {

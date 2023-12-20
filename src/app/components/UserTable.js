@@ -12,6 +12,8 @@ const people = [
     useEffect(() => {
         setUser(localStorage.getItem("user"));
       }, []);
+
+      
     return (
         
       <div className="px-4 sm:px-6 lg:px-8">
