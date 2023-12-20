@@ -54,6 +54,8 @@ const UserForm = ({ userAction }) => {
     const userData = new FormData(event.target);
     const response = await userAction(userData, +companyID);
     console.log(response);
+    localStorage.setItem("user", userData);
+   // console.log(userData.name);
     router.push('/Login');
   };
 

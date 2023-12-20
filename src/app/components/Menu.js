@@ -221,7 +221,7 @@ const MyComponent = () => {
           style={{
             backgroundColor: "black", // Set the black background for the entire sidebar
             backgroundImage:
-              "linear-gradient(160deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+              "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
             // 'linear-gradient(245deg, rgba(140, 12, 97, 0.50) -13.09%, rgba(74, 97, 113, 0.46) 17.18%, rgba(36, 16, 158, 0.00) 49.48%)',
 
             backgroundSize: "cover", // Maintain the gradient for specific elements

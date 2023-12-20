@@ -1,8 +1,12 @@
 import React from 'react'
 
-const Admin = () => {
+import { getCurrentUser } from "../../../lib/session";
+async function Admin  ()  {
+  const user = await getCurrentUser();
+  console.log(user);
   return (
-    <div>Admin</div>
+    <main className="flex min-h-screen flex-col items-center justify-between">
+      </main>
   )
 }
 
