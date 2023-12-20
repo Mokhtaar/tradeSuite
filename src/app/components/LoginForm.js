@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
@@ -8,8 +8,11 @@ import { jwtDecode } from "jwt-decode";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
+ 
   const [isWrongPassword, setIsWrongPassword] = useState(false);
   const [isWrongEmail, setIsWrongEmail] = useState(false);
+ 
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,6 +31,7 @@ const LoginForm = ({ LoginAction }) => {
         const userString = JSON.stringify(decoded.user);
         localStorage.setItem("userInfo", userString);
         router.push("../Dashboard");
+       
       }
     },
   });
@@ -38,7 +42,9 @@ const LoginForm = ({ LoginAction }) => {
   const handlePasswordChange = (e) => {
     formik.handleChange(e);
     setIsWrongPassword(false);
+    
   };
+  
   return (
     <div className="h-[100vh]">
       <div className="flex min-h-full flex-1">
@@ -56,10 +62,10 @@ const LoginForm = ({ LoginAction }) => {
               <p className="mt-2 text-sm leading-6 text-gray-500">
                 Not a member?{" "}
                 <a
-                  href="#"
+                  href="../Signup"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
-                  Start a 14 day free trial
+                  Sign up now
                 </a>
               </p>
             </div>
@@ -162,6 +168,7 @@ const LoginForm = ({ LoginAction }) => {
                   <div>
                     <button
                       type="submit"
+                     
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Sign in

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from 'next/navigation';
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
@@ -53,6 +54,9 @@ const UserForm = ({ userAction }) => {
     const userData = new FormData(event.target);
     const response = await userAction(userData, +companyID);
     console.log(response);
+    localStorage.setItem("user", userData);
+   // console.log(userData.name);
+    router.push('/Login');
   };
 
   const handleFileChange = (event) => {
@@ -60,7 +64,7 @@ const UserForm = ({ userAction }) => {
   };
 
   return (
-    <section className="container">
+    <section className="containers">
       <Image src="/logo.png" alt="Your Company" width={150} height={150} />
       <header className="mt-9 mr-9 text-center text-gray-900">
         Create User Account
@@ -209,9 +213,11 @@ const UserForm = ({ userAction }) => {
             Back
           </button>
         </Link>
+   
         <button className="submit-btn" type="submit">
           Submit
         </button>
+    
       </form>
     </section>
   );

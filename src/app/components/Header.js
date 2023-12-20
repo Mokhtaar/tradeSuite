@@ -10,7 +10,7 @@ import {
 
 const userNavigation = [
   { name: "Your profile", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Sign out", href: "/" },
 ];
 const navigation = [
   { name: "Messages", href: "#" },
@@ -22,6 +22,7 @@ function classNames(...classes) {
 }
 
 const MyHeader = () => {
+ 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState();
 
@@ -30,9 +31,17 @@ const MyHeader = () => {
     const userInfo = JSON.parse(userString);
     setUser(userInfo);
   }, []);
+
+  const handleSignOut = () => {
+    // Perform sign-out action here, such as clearing user data from localStorage
+    localStorage.removeItem('userInfo');
+    setUser(null); // Set the user state to null or an appropriate value indicating signed out
   
+  };
+
   return (
     <>
+    
       {/*
         This example requires updating your template:
 
@@ -43,9 +52,9 @@ const MyHeader = () => {
       */}
       <div>
         <div>
-          <div className="lg:pl-72">
+          <div className="lg:pl-60">
             <div
-              className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+              className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4  bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
               style={{
                 backgroundColor: "black",
                 backgroundImage:
@@ -71,12 +80,13 @@ const MyHeader = () => {
               <div className="relative flex flex-1 lg:flex lg:gap-x-12 text-white ">
                 {" "}
                 {/* Modified line */}
-                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center justify-center">
+                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center justify-center rounded-[8px] border-b [border-bottom-style:solid] border-white "style={{ margin: '0 150px' }}
+                >
                   {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
-                      className="text-sm font-semibold leading-6 text-white-900"
+                      className="text-sm font-semibold leading-6 text-white-900 "
                     >
                       {item.name}
                     </a>
@@ -85,7 +95,7 @@ const MyHeader = () => {
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                   <button
                     type="button"
-                    className="-m-2.5 p-2.5 text-white-400 hover:text-gray-500"
+                    className="-m-2.5 p-2.5 text-white-400 hover:text-gray-500  lg:hidden"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -131,15 +141,16 @@ const MyHeader = () => {
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
-                              <a
-                                href={item.href}
-                                className={classNames(
-                                  active ? "bg-gray-50" : "",
-                                  "block px-3 py-1 text-sm leading-6 text-gray-900"
-                                )}
-                              >
-                                {item.name}
-                              </a>
+                            <a
+                    href={item.href}
+                    onClick={item.name === 'Sign out' ? handleSignOut : undefined}
+                    className={classNames(
+                      active ? "bg-gray-50" : "",
+                      "block px-3 py-1 text-sm leading-6 text-gray-900"
+                    )}
+                  >
+                    {item.name}
+                  </a>
                             )}
                           </Menu.Item>
                         ))}

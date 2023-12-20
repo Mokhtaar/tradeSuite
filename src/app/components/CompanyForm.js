@@ -55,7 +55,7 @@ const CompanyForm = ({ onSubmit }) => {
     <section className="containers">
       <img src="/logo.png" width={150} height={150} />
 
-      <header className="text-white">Company Registration Form</header>
+      <header className="mt-9 mr-9 text-center text-gray-900">Company Registration</header>
 
       <div className="overlap">
         <div className="ellipse" />
@@ -200,7 +200,7 @@ const CompanyForm = ({ onSubmit }) => {
           <div>
             <div className="input-box file-upload">
               <label className="">
-                upload File
+                Tax Register 
                 <input
                   type="file"
                   className="custom-file-upload"

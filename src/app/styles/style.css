@@ -136,7 +136,23 @@ form label {
   background-color: #999;
 }
 @media screen and (max-width: 500px) {
+  .containers{
+  overflow:hidden;
+ 
+  }
+  .containers header{
+    font-size: 20px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  }
+
   .form .column {
     flex-wrap: wrap;
+    width: auto;
   }
+  .submit-btn{
+width:auto;
+  }
+
 }

@@ -11,6 +11,7 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  Bars3Icon
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -59,6 +60,7 @@ const MyComponent = () => {
 
   return (
     <>
+            
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -109,11 +111,14 @@ const MyComponent = () => {
                         aria-hidden="true"
                       />
                     </button>
+              
                   </div>
                 </Transition.Child>
 
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="side">
+              
+
                   <div className="flex h-16 shrink-0 items-center">
                     <img
                       className="h-8 w-auto"
@@ -207,8 +212,8 @@ const MyComponent = () => {
 
       {/* Sidebar */}
       <div
-        className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col"
-        style={{ height: "100vh" }}
+        className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col "
+        style={{ height: "100vh" ,  width: "40vh" }}
       >
         <div
           className="flex flex-col gap-y-5 overflow-y-auto  px-6 pb-4"
@@ -216,7 +221,7 @@ const MyComponent = () => {
           style={{
             backgroundColor: "black", // Set the black background for the entire sidebar
             backgroundImage:
-              "linear-gradient(180deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+              "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
             // 'linear-gradient(245deg, rgba(140, 12, 97, 0.50) -13.09%, rgba(74, 97, 113, 0.46) 17.18%, rgba(36, 16, 158, 0.00) 49.48%)',
 
             backgroundSize: "cover", // Maintain the gradient for specific elements
