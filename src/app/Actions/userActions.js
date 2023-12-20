@@ -16,6 +16,7 @@ const addUser = async (userData, companyID) => {
     phoneNumber: parseInt(userData.get("phoneNumber")),
     dob: new Date(userData.get("dob")).toISOString(),
     companyID,
+    status:"pending",
   };
 
   try {

@@ -1,13 +1,19 @@
 import React from "react";
 import prisma from "../../../lib/prisma";
 
-const people = [
-  { name:" users.name", title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
-  // More people...
-]
+
   export default async function Table1() {
+
     const users = await prisma.user.findMany();
     const company = await prisma.company.findMany();
+    
+    const updatedUser = await prisma.user.update({
+      where: { email: "nona@gmail.com" },
+      data: { status: 'ttest' }, 
+    });
+
+    console.log(updatedUser)
+   
     return (
         
       <div className="px-4 sm:px-6 lg:px-8">
@@ -75,7 +81,7 @@ const people = [
                         <button className="text-indigo-600 hover:text-indigo-900">
                           Approve<span className="sr-only">, {user.name}</span>
                         </button>
-                        <button className="text-indigo-600 hover:text-indigo-900">
+                        <button className="text-indigo-600 hover:text-indigo-900" onClick={updatedUser}>
                           Reject<span className="sr-only">, {user.name}</span>
                         </button>
                         </div>
