@@ -30,6 +30,7 @@ const MyHeader = () => {
     const userInfo = JSON.parse(userString);
     setUser(userInfo);
   }, []);
+  
   return (
     <>
       {/*
