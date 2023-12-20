@@ -200,7 +200,7 @@ const CompanyForm = ({ onSubmit }) => {
           <div>
             <div className="input-box file-upload">
               <label className="">
-                upload File
+                Tax Register 
                 <input
                   type="file"
                   className="custom-file-upload"

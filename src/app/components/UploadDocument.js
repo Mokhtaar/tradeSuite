@@ -1,32 +1,33 @@
-import React from 'react';
+import React from "react";
 
 const UploadDocument = () => {
-    return (
-      <div>
-        <div className="fixed z-10 left-20 top-0 w-full h-full flex  bg-opacity-20"
+  return (
+    <div>
+      <div
+        className="fixed z-10 left-20 top-0 w-full h-full flex  bg-opacity-20"
         style={{
           backgroundColor: "black", // Set the black background for the entire sidebar
           backgroundImage:
             "linear-gradient(180deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
-       
-        }}>
-      
+        }}
+      >
         <div className="extraOutline p-4 mb-9 bg-white w-max bg-whtie m-auto rounded-lg ">
-        <header className="text-center text-indigo-500 pb-7 mt-3 font-bold text-[40px] text-lg">Upload Files</header>
-        <div className="p-3">
-              <div className="mb-2">
-                <span className="text-base">Title</span>
-                <input
-                  type="text"
-                  className="h-12 px-3 w-full border-gray-200 border rounded focus:outline-none focus:border-gray-300"
-                />
-    </div>
-    </div>
+          <header className="text-center text-indigo-500 pb-7 mt-3 font-bold text-[40px] text-lg">
+            Upload Files
+          </header>
+          <div className="p-3">
+            <div className="mb-2">
+              <span className="text-base">Title</span>
+              <input
+                type="text"
+                className="h-12 px-3 w-full border-gray-200 border rounded focus:outline-none focus:border-gray-300"
+              />
+            </div>
+          </div>
           <div
             className="file_upload p-5 relative border-4 border-dotted border-gray-300 rounded-lg"
-            style={{ width: '550px' }}
+            style={{ width: "550px" }}
           >
-           
             <svg
               className="text-indigo-500 w-24 mx-auto mb-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -43,23 +44,27 @@ const UploadDocument = () => {
             </svg>
             <div className="input_field flex flex-col w-max mx-auto text-center">
               <label>
-                <input className="text-sm cursor-pointer w-36 hidden" type="file" multiple />
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
                 <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                   Select
                 </div>
               </label>
-  
-              <div className="title text-indigo-500 uppercase">or drop files here</div>
+
+              <div className="title text-indigo-500 uppercase">
+                or drop files here
+              </div>
             </div>
-            
           </div>
           <button className="w-full h-12 text-lg  mt-5 bg-blue-600 rounded text-white hover:bg-blue-700">
-                  Create
-         </button>
+            Create
+          </button>
         </div>
       </div>
-      </div>
-    );
-
+    </div>
+  );
 };
-export default UploadDocument
+export default UploadDocument;

@@ -11,6 +11,7 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  Bars3Icon
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -59,6 +60,7 @@ const MyComponent = () => {
 
   return (
     <>
+            
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -109,11 +111,14 @@ const MyComponent = () => {
                         aria-hidden="true"
                       />
                     </button>
+              
                   </div>
                 </Transition.Child>
 
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="side">
+              
+
                   <div className="flex h-16 shrink-0 items-center">
                     <img
                       className="h-8 w-auto"
