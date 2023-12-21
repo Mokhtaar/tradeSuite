@@ -1,5 +1,5 @@
 import React from "react";
-import { getCurrentUser } from "../../../lib/session";
+
 
 import prisma from "../../../lib/prisma";
 async function Admin() {
