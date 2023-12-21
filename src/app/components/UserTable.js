@@ -73,7 +73,7 @@ const people = [
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{}</td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{}</td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4  text-sm font-medium sm:pr-0">
-                      <div className="flex justify-left gap-4">
+                      <div className="flex gap-4">
                         <button className="text-indigo-600 hover:text-indigo-900">
                           Approve<span className="sr-only">, {person.name}</span>
                         </button>

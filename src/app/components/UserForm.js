@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
@@ -55,8 +55,8 @@ const UserForm = ({ userAction }) => {
     const response = await userAction(userData, +companyID);
     console.log(response);
     localStorage.setItem("user", userData);
-   // console.log(userData.name);
-    router.push('/Login');
+    // console.log(userData.name);
+    router.push("/Login");
   };
 
   const handleFileChange = (event) => {
@@ -162,6 +162,7 @@ const UserForm = ({ userAction }) => {
             </label>
             <input
               type="file"
+              name="file"
               accept=".pdf,.doc,.docx"
               onChange={handleFileChange}
               required
@@ -213,11 +214,10 @@ const UserForm = ({ userAction }) => {
             Back
           </button>
         </Link>
-   
+
         <button className="submit-btn" type="submit">
           Submit
         </button>
-    
       </form>
     </section>
   );
