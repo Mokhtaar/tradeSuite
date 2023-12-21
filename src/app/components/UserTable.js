@@ -1,17 +1,19 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import prisma from "../../../lib/prisma";
 
 
-const people = [
-    { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
-    // More people...
-  ]
-  
-  export default function Table1() {
-    const [companyID, setUser] = useState();
-    useEffect(() => {
-        setUser(localStorage.getItem("user"));
-      }, []);
+  export default async function Table1() {
+
+    const users = await prisma.user.findMany();
+    const company = await prisma.company.findMany();
+    
+    const updatedUser = await prisma.user.update({
+      where: { email: "nona@gmail.com" },
+      data: { status: 'ttest' }, 
+    });
+
+    console.log(updatedUser)
+   
     return (
         
       <div className="px-4 sm:px-6 lg:px-8">
@@ -61,30 +63,34 @@ const people = [
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {people.map((person) => (
-                    <tr key={person.email}>
+                  {users.map((user) => (
+                  
+                <tbody className="divide-y divide-gray-200" key={user.id}>
+                    {company.map((company)=>(
+                      <tr key={company.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                        {person.name}
+                        {user.name}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.title}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.email}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.role}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{company.name}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{user.email}</td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{}</td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{}</td>
-                      <td className="relative whitespace-nowrap  py-4 pl-3 pr-4  text-sm font-medium sm:pr-0">
-                      <div className="flex justify-left gap-4">
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{}</td>
+                      <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
+                      <div className="flex gap-4">
                         <button className="text-indigo-600 hover:text-indigo-900">
-                          Approve<span className="sr-only">, {person.name}</span>
+                          Approve<span className="sr-only">, {user.name}</span>
                         </button>
-                        <button className="text-indigo-600 hover:text-indigo-900">
-                          Reject<span className="sr-only">, {person.name}</span>
+                        <button className="text-indigo-600 hover:text-indigo-900" onClick={updatedUser}>
+                          Reject<span className="sr-only">, {user.name}</span>
                         </button>
                         </div>
                       </td>
                     </tr>
-                  ))}
+                    ))}
+                
                 </tbody>
+                  ))}
               </table>
             </div>
           </div>

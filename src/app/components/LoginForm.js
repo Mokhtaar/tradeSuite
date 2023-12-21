@@ -26,6 +26,8 @@ const LoginForm = ({ LoginAction }) => {
       const response = await LoginAction(values);
       if (response.message === "wrongEmail") setIsWrongEmail(true);
       if (response.message === "wrongPassword") setIsWrongPassword(true);
+      if(response.message==="rejected") alert("rejected");
+      if(response.message==="pending") alert("pending");
       if (response.message === "LoggedIn") {
         const decoded = jwtDecode(response.token);
         const userString = JSON.stringify(decoded.user);
