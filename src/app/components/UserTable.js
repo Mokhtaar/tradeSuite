@@ -1,19 +1,16 @@
+"use client"
+
 import React from "react";
 import prisma from "../../../lib/prisma";
-
+import { Update } from "../Actions/adminActions";
 
   export default async function Table1() {
 
     const users = await prisma.user.findMany();
-    const company = await prisma.company.findMany();
-    
-    const updatedUser = await prisma.user.update({
-      where: { email: "nona@gmail.com" },
-      data: { status: 'ttest' }, 
-    });
-
-    console.log(updatedUser)
    
+  
+
+
     return (
         
       <div className="px-4 sm:px-6 lg:px-8">
@@ -63,40 +60,46 @@ import prisma from "../../../lib/prisma";
                     </th>
                   </tr>
                 </thead>
-                  {users.map((user) => (
                   
-                <tbody className="divide-y divide-gray-200" key={user.id}>
-                    {company.map((company)=>(
-                      <tr key={company.id}>
+                <tbody className="divide-y divide-gray-200">
+                  {users.map((user) => (
+                   
+                      <tr  key={user.id}>
+              
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                         {user.name}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{company.name}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{user.companyName}</td>
+                       
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{user.email}</td>
+               
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{}</td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{}</td>
+                      
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{}</td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                       <div className="flex gap-4">
                         <button className="text-indigo-600 hover:text-indigo-900">
                           Approve<span className="sr-only">, {user.name}</span>
                         </button>
-                        <button className="text-indigo-600 hover:text-indigo-900" onClick={updatedUser}>
+                 
+                        <button className="text-indigo-600 hover:text-indigo-900" onClick={Update()}>
                           Reject<span className="sr-only">, {user.name}</span>
                         </button>
                         </div>
                       </td>
-                    </tr>
-                    ))}
-                
-                </tbody>
+      
+                    </tr> 
+
                   ))}
+                </tbody>
+               
               </table>
             </div>
           </div>
         </div>
         </main>
-      </div>
+  </div>
   
-    )
+  )
   }

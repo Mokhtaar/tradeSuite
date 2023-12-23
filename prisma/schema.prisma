@@ -48,11 +48,15 @@ model User {
   proofOfAddress  String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now())
-  company         Company?  @relation(fields: [companyID], references: [id])
+  company         Company?  @relation(fields: [companyID,companyName], references: [id,name])
   companyID       Int?
-  status          String?     
+  status          String?  
+  companyName     String?  
+
   accounts        Account[]
   sessions        Session[]
+   
+
 }
 
 model VerificationToken {
@@ -77,6 +81,9 @@ model Company {
   fileUpload  String?
   postalCode  Int
   users       User[]
+
+ 
+  @@unique([id, name])
 }
 
 // model Project {
