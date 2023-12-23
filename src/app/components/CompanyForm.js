@@ -8,31 +8,17 @@ import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { SignedUrlAction } from "../Actions/getSignedUrl";
+import { AddCompanyFile } from "../Actions/AddComapanyFile";
 
 const computeSHA256 = async (file) => {
-  try {
-    const buffer = await file.arrayBuffer();
-    const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join("");
-    return hashHex;
-  } catch (error) {
-    console.error("Error computing SHA-256 hash", error);
-    throw error;
-  }
+  const buffer = await file?.arrayBuffer();
+  const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+  return hashHex;
 };
-
-// const computeSHA256 = async (file) => {
-//   const buffer = await file?.arrayBuffer();
-//   const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
-//   const hashArray = Array.from(new Uint8Array(hashBuffer));
-//   const hashHex = hashArray
-//     .map((b) => b.toString(16).padStart(2, "0"))
-//     .join("");
-//   return hashHex;
-// };
 
 const CompanyForm = ({ onSubmit }) => {
   const options = useMemo(() => countryList().getData(), []);
@@ -81,63 +67,21 @@ const CompanyForm = ({ onSubmit }) => {
 
   const handleFileUpload = async (e) => {
     if (file) {
-      try {
-        const signedURLResult = await SignedUrlAction({
-          fileSize: file.size,
-          fileType: file.type,
-          checksum: await computeSHA256(file),
-        });
-
-        if (signedURLResult.success) {
-          const url = signedURLResult.success.url;
-          console.log(url);
-          // Get the file content as ArrayBuffer
-          // const fileContent = await file.arrayBuffer();
-
-          try {
-            // Use file content as the body of the request
-            await fetch(url, {
-              method: "PUT",
-              headers: {
-                "Content-Type": file.type,
-              },
-              body: file,
-            });
-
-            console.log("File upload successful");
-          } catch (uploadError) {
-            console.error("Error uploading file", uploadError);
-          }
-        } else {
-          console.error("Error getting signed URL", signedURLResult.failure);
-        }
-      } catch (error) {
-        console.error("Error preparing file upload", error);
-       
+      const response = await SignedUrlAction({
+        fileSize: file.size,
+        fileType: file.type,
+        checksum: await computeSHA256(file),
+      });
+      if (response.success) {
+        const url = response.success.url;
+        console.log(url);
+        uploadFile(url);
+      } else {
+        console.error("Error getting signed URL", response.failure);
       }
     }
   };
 
-  // const handleFileUpload = async (e) => {
-  //   if (file) {
-  //     const signedURLResult = await getSignedURL({
-  //       fileSize: file.size,
-  //       fileType: file.type,
-  //       checksum: await computeSHA256(file),
-  //     });
-  //     console.log(signedURLResult);
-  //     const url = signedURLResult.success?.url;
-  //     await fetch(url, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": file.type,
-  //       },
-  //       body: file,
-  //     });
-  //   }
-  // };
-
-  //   console.log(file);
   //   if (fileURL) {
   //     URL.revokeObjectURL(fileURL);
   //   }
@@ -149,19 +93,19 @@ const CompanyForm = ({ onSubmit }) => {
   //   }
   // };
 
-  // const uploadFile = async (url, file) => {
-  //   try {
-  //     const response = await axios.put(url, file, {
-  //       headers: {
-  //         "Content-Type": file.type,
-  //       },
-  //     });
-  //     console.log("Upload successful", response.data);
-  //   } catch (error) {
-  //     // Handle errors
-  //     console.error("Error uploading file", error);
-  //   }
-  // };
+  const uploadFile = async (url) => {
+    try {
+      const response = await axios.put(url, file, {
+        headers: {
+          "Content-Type": file?.type,
+        },
+      });
+      await AddCompanyFile(url.split("?")[0]);
+      console.log("Upload successful");
+    } catch (error) {
+      console.error("Error uploading file", error);
+    }
+  };
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);

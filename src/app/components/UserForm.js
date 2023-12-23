@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
-
+const router=useRouter();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -47,6 +47,7 @@ const UserForm = ({ userAction }) => {
 
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
+    
   }, []);
 
   const handleFormSubmit = async (event) => {
@@ -54,9 +55,9 @@ const UserForm = ({ userAction }) => {
     const userData = new FormData(event.target);
     const response = await userAction(userData, +companyID);
     console.log(response);
-    localStorage.setItem("user", userData);
-    // console.log(userData.name);
-    router.push("/Login");
+   // localStorage.setItem("user", userData);
+   // console.log(userData.name);
+    router.push('/Login');
   };
 
   const handleFileChange = (event) => {
