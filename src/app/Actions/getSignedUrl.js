@@ -29,8 +29,8 @@ const s3 = new S3Client({
 
 const maxFileSize = 1024 * 1024 * 10;
 
-export async function SignedUrlAction(fileSize, fileType, checksum) {
-  console.log(fileSize, fileType, checksum);
+export async function SignedUrlAction() {
+//   console.log(fileSize, fileType, checksum);
   // const session = await auth()
   //if !session return {faliure: "not authenticated"}
   //   console.log(fileType);

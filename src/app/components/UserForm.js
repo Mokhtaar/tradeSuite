@@ -6,10 +6,11 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import { SignedUrlAction } from "../Actions/getSignedUrl";
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
-const router=useRouter();
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -47,7 +48,6 @@ const router=useRouter();
 
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
-    
   }, []);
 
   const handleFormSubmit = async (event) => {
@@ -55,9 +55,35 @@ const router=useRouter();
     const userData = new FormData(event.target);
     const response = await userAction(userData, +companyID);
     console.log(response);
-   // localStorage.setItem("user", userData);
-   // console.log(userData.name);
-    router.push('/Login');
+    // localStorage.setItem("user", userData);
+    // console.log(userData.name);
+    router.push("/Login");
+  };
+
+  const handleFileUpload = async (e) => {
+    if (file) {
+      const response = await SignedUrlAction();
+      if (response.success) {
+        const url = response.success.url;
+        uploadFile(url);
+      } else {
+        console.error("Error getting signed URL", response.failure);
+      }
+    }
+  };
+  
+  const uploadFile = async (url) => {
+    try {
+      const response = await axios.put(url, file, {
+        headers: {
+          "Content-Type": file?.type,
+        },
+      });
+      await AddCompanyFile(url.split("?")[0]);
+      console.log("Upload successful");
+    } catch (error) {
+      console.error("Error uploading file", error);
+    }
   };
 
   const handleFileChange = (event) => {

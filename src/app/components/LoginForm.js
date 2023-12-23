@@ -1,17 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import { signIn } from "next-auth/react";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
- 
+
   const [isWrongPassword, setIsWrongPassword] = useState(false);
   const [isWrongEmail, setIsWrongEmail] = useState(false);
- 
 
   const formik = useFormik({
     initialValues: {
@@ -23,17 +23,24 @@ const LoginForm = ({ LoginAction }) => {
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
-      const response = await LoginAction(values);
+      // const response = await LoginAction(values);
+      const response = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+      response?.error ? console.log(response.error) : router.push("/");
+
+      console.log(response);
       if (response.message === "wrongEmail") setIsWrongEmail(true);
       if (response.message === "wrongPassword") setIsWrongPassword(true);
-      if(response.message==="rejected") alert("rejected");
-      if(response.message==="pending") alert("pending");
+      if (response.message === "rejected") alert("rejected");
+      if (response.message === "pending") alert("pending");
       if (response.message === "LoggedIn") {
         const decoded = jwtDecode(response.token);
         const userString = JSON.stringify(decoded.user);
         localStorage.setItem("userInfo", userString);
         router.push("../Dashboard");
-       
       }
     },
   });
@@ -45,7 +52,7 @@ const LoginForm = ({ LoginAction }) => {
     formik.handleChange(e);
     setIsWrongPassword(false);
   };
-  
+
   return (
     <div className="h-[100vh]">
       <div className="flex min-h-full flex-1">
@@ -169,7 +176,6 @@ const LoginForm = ({ LoginAction }) => {
                   <div>
                     <button
                       type="submit"
-                     
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Sign in

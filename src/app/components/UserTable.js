@@ -1,11 +1,24 @@
 "use client";
 
-import React from "react";
-import prisma from "../../../lib/prisma";
-import { Update } from "../Actions/adminActions";
+import React, { useEffect, useState } from "react";
+import { UpdateUserStatus } from "../Actions/adminActions";
+import { GetAdminTableData } from "../Actions/adminActions";
 
-export default async function Table1() {
-  const users = await prisma.user.findMany();
+export default function Table1() {
+  const [users, setUsers] = useState([]);
+
+  const getUsers = async () => {
+    const users = await GetAdminTableData();
+    setUsers(users.users);
+  };
+
+  const updateUserStatus = async () => {
+    const res = await UpdateUserStatus(email);
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -81,7 +94,7 @@ export default async function Table1() {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200">
-                  {users.map((user) => (
+                  {users?.map((user) => (
                     <tr key={user.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                         {user.name}
@@ -113,7 +126,7 @@ export default async function Table1() {
 
                           <button
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={Update()}
+                            onClick={() => updateUserStatus(user.email)}
                           >
                             Reject<span className="sr-only">, {user.name}</span>
                           </button>
