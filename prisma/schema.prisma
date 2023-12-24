@@ -49,9 +49,8 @@ model User {
   company         Company?  @relation(fields: [companyID], references: [id])
   companyID       Int?
   status          String?
-
-  accounts Account[]
-  sessions Session[]
+  accounts        Account[]
+  sessions        Session[]
 }
 
 model VerificationToken {
