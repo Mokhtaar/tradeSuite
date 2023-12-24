@@ -1,21 +1,25 @@
 "use server";
-import prisma from '../../../lib/prisma';
 
-export default async function handler(req, res) {
-  if (req.method !== 'PUT') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
-  }
+import prisma from "../../../lib/prisma";
 
-  const { email, status } = req.body;
-
+export async function UpdateUserStatus(email) {
   try {
     await prisma.user.update({
-      where: { email },
-      data: { status },
+      where: { email: email },
+      data: { status: "test" },
     });
-    
-    return res.status(200).json({ message: 'Status updated successfully' });
+
+    console.log("User status updated successfully");
   } catch (error) {
-    return res.status(500).json({ error: 'Something went wrong' });
+    console.error("Error updating user status:", error);
+  }
+}
+
+export async function GetAdminTableData() {
+  try {
+    const users = await prisma.user.findMany();
+    return { users };
+  } catch (error) {
+    console.error("Error updating user status:", error);
   }
 }

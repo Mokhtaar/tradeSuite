@@ -7,6 +7,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import { getCurrentUser } from '../../../lib/session';
 
 const navigation = [
   { name: 'Registration Approval', href: '#', icon: UsersIcon, current: true },

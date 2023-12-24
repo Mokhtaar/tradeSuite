@@ -6,6 +6,17 @@ import bcrypt from "bcrypt";
 const addUser = async (userData, companyID) => {
   const intialPassword = userData.get("password");
   const hashedPassword = await bcrypt.hash(intialPassword, 10);
+  const company = await prisma.company.findUnique({
+    where: {
+      id: companyID,
+    },
+  });
+
+  if (!company) {
+    // Handle the case where the company does not exist
+    return { message: "Company not found" };
+  }
+
 
   const body = {
     password: hashedPassword,
@@ -17,6 +28,8 @@ const addUser = async (userData, companyID) => {
     dob: new Date(userData.get("dob")).toISOString(),
     companyID,
     status:"pending",
+    companyName: company.name,
+
   };
 
   try {

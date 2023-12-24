@@ -1,16 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import countryList from "react-select-country-list";
-
 import "../styles/style.css";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { SignedUrlAction } from "../Actions/getSignedUrl";
+import { AddCompanyFile } from "../Actions/AddComapanyFile";
+
+const computeSHA256 = async (file) => {
+  const buffer = await file?.arrayBuffer();
+  const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+  return hashHex;
+};
 
 const CompanyForm = ({ onSubmit }) => {
   const options = useMemo(() => countryList().getData(), []);
   const router = useRouter();
+  const [file, setFile] = useState();
+  const [fileURL, setFileURL] = useState();
   const formik = useFormik({
     initialValues: {
       companyName: "",
@@ -51,11 +65,63 @@ const CompanyForm = ({ onSubmit }) => {
     }
   };
 
+  const handleFileUpload = async (e) => {
+    if (file) {
+      const response = await SignedUrlAction({
+        // fileSize: file.size,
+        // fileType: file.type,
+        // checksum: await computeSHA256(file),
+      });
+      if (response.success) {
+        const url = response.success.url;
+        console.log(url);
+        uploadFile(url);
+      } else {
+        console.error("Error getting signed URL", response.failure);
+      }
+    }
+  };
+
+  //   if (fileURL) {
+  //     URL.revokeObjectURL(fileURL);
+  //   }
+  //   if (file) {
+  //     const url = URL.createObjectURL(file);
+  //     setFileURL(url);
+  //   } else {
+  //     setFileURL(undefined);
+  //   }
+  // };
+
+  const uploadFile = async (url) => {
+    try {
+      const response = await axios.put(url, file, {
+        headers: {
+          "Content-Type": file?.type,
+        },
+      });
+      await AddCompanyFile(url.split("?")[0]);
+      console.log("Upload successful");
+    } catch (error) {
+      console.error("Error uploading file", error);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  useEffect(() => {
+    handleFileUpload();
+  }, [file]);
+
   return (
     <section className="containers">
       <img src="/logo.png" width={150} height={150} />
 
-      <header className="mt-9 mr-9 text-center text-gray-900">Company Registration</header>
+      <header className="mt-9 mr-9 text-center text-gray-900">
+        Company Registration
+      </header>
 
       <div className="overlap">
         <div className="ellipse" />
@@ -200,12 +266,14 @@ const CompanyForm = ({ onSubmit }) => {
           <div>
             <div className="input-box file-upload">
               <label className="">
-                Tax Register 
+                Tax Register
                 <input
                   type="file"
+                  name="file"
                   className="custom-file-upload"
                   multiple={false}
                   accept=".pdf, .doc, .docx"
+                  onChange={handleFileChange}
                 />
               </label>
             </div>
