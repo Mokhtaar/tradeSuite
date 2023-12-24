@@ -4,20 +4,16 @@ import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../Actions/AdminActions";
 import { GetAdminTableData } from "../Actions/AdminActions";
 import { useSelector } from "react-redux";
-import { increment, decrement } from "../features/user/UserSlice";
+import { increment, decrement } from "../GlobalRedux/Features/user/UserSlice";
 
 export default function Table1() {
   const [users, setUsers] = useState([]);
-  const count = useSelector((state) => state.counter.value);
+  const count = useSelector((state) => state.user.value);
 
-  useEffect(() => {
-    console.log(count);
-  }, []);
-  
   const getUsers = async () => {
     const users = await GetAdminTableData();
+    console.log(users);
     setUsers(users.users);
-    console.log(users.users[0].company.name);
   };
 
   const handleUpdateUserStatus = async (email) => {
@@ -108,13 +104,11 @@ export default function Table1() {
                         {user.name}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.companyName}
+                        {user.company.name}
                       </td>
-
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {user.email}
                       </td>
-
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {}
                       </td>

@@ -1,11 +1,12 @@
+"use client";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: 0,
+  value: 10,
 };
 
 export const counterSlice = createSlice({
-  name: "counter",
+  name: "user",
   initialState,
   reducers: {
     increment: (state) => {

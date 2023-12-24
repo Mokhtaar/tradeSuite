@@ -20,10 +20,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-  
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@unique([provider, providerAccountId])
 }
 
@@ -48,15 +45,12 @@ model User {
   proofOfAddress  String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now())
-  company         Company?  @relation(fields: [companyID,companyName], references: [id,name])
+  company         Company?  @relation(fields: [companyID], references: [id])
   companyID       Int?
-  status          String?  
-  companyName     String?  
+  status          String?
 
-  accounts        Account[]
-  sessions        Session[]
-   
-
+  accounts Account[]
+  sessions Session[]
 }
 
 model VerificationToken {
@@ -82,7 +76,6 @@ model Company {
   postalCode  Int
   users       User[]
 
- 
   @@unique([id, name])
 }
 
