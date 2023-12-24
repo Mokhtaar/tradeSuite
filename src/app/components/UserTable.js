@@ -1,8 +1,23 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import prisma from "../../../lib/prisma";
 
 
   export default async function Table1() {
+    const [usersWithCompanies, setUsersWithCompanies] = useState([]);
+
+    useEffect(() => {
+      const fetchUsersWithCompanies = async () => {
+        const users = await prisma.user.findMany({
+          include: {
+            company: true,
+          },
+        });
+        setUsersWithCompanies(users);
+      };
+  
+      fetchUsersWithCompanies();
+    }, []);
 
     const users = await prisma.user.findMany();
     const company = await prisma.company.findMany();
@@ -79,10 +94,10 @@ import prisma from "../../../lib/prisma";
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                       <div className="flex gap-4">
                         <button className="text-indigo-600 hover:text-indigo-900">
-                          Approve<span className="sr-only">, {user.name}</span>
+                          Approve<span className="sr-only">, {user.id}</span>
                         </button>
                         <button className="text-indigo-600 hover:text-indigo-900" onClick={updatedUser}>
-                          Reject<span className="sr-only">, {user.name}</span>
+                          Reject<span className="sr-only">, {user.id}</span>
                         </button>
                         </div>
                       </td>
