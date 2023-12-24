@@ -12,7 +12,7 @@ export default function Table1() {
     setUsers(users.users);
   };
 
-  const updateUserStatus = async () => {
+  const updateUserStatus = async (email) => {
     const res = await UpdateUserStatus(email);
   };
 

@@ -39,14 +39,14 @@ export async function SignedUrlAction() {
   //     return { failure: "Invalid file type" };
   //   }
 
-  if (fileSize > maxFileSize) {
-    return { failure: "File too large" };
-  }
+  // if (fileSize > maxFileSize) {
+  //   return { failure: "File too large" };
+  // }
 
   const putObjectCommand = new PutObjectCommand({
     Bucket: AWS_BUCKET_NAME,
     Key: generateFileName(),
-    ContentType: fileType,
+    // ContentType: fileType,
     // ContentLength: fileSize,
     // ChecksumSHA256: checksum,
     // Metadata:{
