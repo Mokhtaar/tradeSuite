@@ -113,11 +113,7 @@ export default function Table1() {
                         {user.name}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-<<<<<<< HEAD
-                        {user.company.name}
-=======
-                        {user.name}
->>>>>>> 01442ac93d2dd3416c63cd1484a91d1416a8ca40
+                        {user.compnay.name}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {user.email}
