@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon } from "@heroicons/react/24/outline";
+import { useSession, signOut } from 'next-auth/react';
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
@@ -25,19 +26,21 @@ const MyHeader = () => {
  
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState();
+  const {data} = useSession();
+
 
   useEffect(() => {
-    const userString = localStorage.getItem("userInfo");
-    const userInfo = JSON.parse(userString);
-    setUser(userInfo);
-  }, []);
+   console.log(data)
+  }, [data]);
 
-  const handleSignOut = () => {
-    // Perform sign-out action here, such as clearing user data from localStorage
-    localStorage.removeItem('userInfo');
-    setUser(null); // Set the user state to null or an appropriate value indicating signed out
-  
+  const handleSignOut = async () => {
+    try {
+      await signOut({redirect:false,callbackUrl: '/'});
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
+
 
   return (
     <>
@@ -120,7 +123,7 @@ const MyHeader = () => {
                           className="ml-4 text-sm font-semibold leading-6 text-white-900"
                           aria-hidden="true"
                         >
-                          {user?.name}
+                          {data?.user.name}
                         </span>
                         <ChevronDownIcon
                           className="ml-2 h-5 w-5 text-white-400"
