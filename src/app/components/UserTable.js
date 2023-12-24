@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UpdateUserStatus } from "../Actions/AdminActions";
-import { GetAdminTableData } from "../Actions/AdminActions";
+import { UpdateUserStatus } from "../Actions/adminActions";
+import { GetAdminTableData } from "../Actions/adminActions";
 
 
 export default function Table1() {
@@ -114,7 +114,7 @@ export default function Table1() {
                         {user.name}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.name}
+                        {user.company.name}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
