@@ -13,7 +13,7 @@ export default function Table1() {
     console.log(users.users[0].company.name);
   };
 
-  const updateUserStatus = async (email) => {
+  const handleUpdateUserStatus = async (email) => {
     const res = await UpdateUserStatus(email);
   };
 
@@ -127,7 +127,7 @@ export default function Table1() {
 
                           <button
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={() => updateUserStatus(user.email)}
+                            onClick={() => handleUpdateUserStatus(user.email)}
                           >
                             Reject<span className="sr-only">, {user.name}</span>
                           </button>
