@@ -3,10 +3,17 @@
 import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../Actions/AdminActions";
 import { GetAdminTableData } from "../Actions/AdminActions";
+import { useSelector } from "react-redux";
+import { increment, decrement } from "../features/user/UserSlice";
 
 export default function Table1() {
   const [users, setUsers] = useState([]);
+  const count = useSelector((state) => state.counter.value);
 
+  useEffect(() => {
+    console.log(count);
+  }, []);
+  
   const getUsers = async () => {
     const users = await GetAdminTableData();
     console.log(users?.users);
