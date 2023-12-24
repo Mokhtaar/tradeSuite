@@ -4,13 +4,15 @@ import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../Actions/AdminActions";
 import { GetAdminTableData } from "../Actions/AdminActions";
 
+
 export default function Table1() {
   const [users, setUsers] = useState([]);
 
+  
   const getUsers = async () => {
-   // const users = await GetAdminTableData();
-    setUsers(users);
-   // console.log(users.users[0].company.name);
+    const users = await GetAdminTableData();
+    console.log(users?.users);
+    setUsers(users?.users);
   };
 
   // const handleUpdateUserStatus = async (email) => {

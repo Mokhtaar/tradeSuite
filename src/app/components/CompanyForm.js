@@ -10,6 +10,8 @@ import * as Yup from "yup";
 import { SignedUrlAction } from "../Actions/GetSignedUrl";
 import { AddCompanyFile } from "../Actions/AddComapanyFile";
 
+import { useSession } from "next-auth/react";
+
 const computeSHA256 = async (file) => {
   const buffer = await file?.arrayBuffer();
   const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
@@ -21,6 +23,7 @@ const computeSHA256 = async (file) => {
 };
 
 const CompanyForm = ({ onSubmit }) => {
+  const { data } = useSession();
   const options = useMemo(() => countryList().getData(), []);
   const router = useRouter();
   const [file, setFile] = useState();
