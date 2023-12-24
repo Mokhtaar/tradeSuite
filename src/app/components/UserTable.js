@@ -137,7 +137,7 @@ export default function Table1() {
 
                           <button
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={() => handleUserAction(user.email,"Rejected")}
+                            onClick={() => handleUserAction(user.email, "Rejected")}
                           >
                             Reject<span className="sr-only">, {user.name}</span>
                           </button>
