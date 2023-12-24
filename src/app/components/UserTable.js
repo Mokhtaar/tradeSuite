@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UpdateUserStatus } from "../Actions/adminActions";
-import { GetAdminTableData } from "../Actions/adminActions";
+import { UpdateUserStatus } from "../Actions/AdminActions";
+import { GetAdminTableData } from "../Actions/AdminActions";
 
 export default function Table1() {
   const [users, setUsers] = useState([]);
@@ -10,9 +10,10 @@ export default function Table1() {
   const getUsers = async () => {
     const users = await GetAdminTableData();
     setUsers(users.users);
+    console.log(users.users[0].company.name);
   };
 
-  const updateUserStatus = async () => {
+  const updateUserStatus = async (email) => {
     const res = await UpdateUserStatus(email);
   };
 

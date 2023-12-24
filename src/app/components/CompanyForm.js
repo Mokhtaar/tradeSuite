@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { SignedUrlAction } from "../Actions/getSignedUrl";
+import { SignedUrlAction } from "../Actions/GetSignedUrl";
 import { AddCompanyFile } from "../Actions/AddComapanyFile";
 
 const computeSHA256 = async (file) => {

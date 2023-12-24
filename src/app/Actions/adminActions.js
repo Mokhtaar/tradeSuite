@@ -1,5 +1,4 @@
 "use server";
-
 import prisma from "../../../lib/prisma";
 
 export async function UpdateUserStatus(email) {
@@ -8,7 +7,6 @@ export async function UpdateUserStatus(email) {
       where: { email: email },
       data: { status: "test" },
     });
-
     console.log("User status updated successfully");
   } catch (error) {
     console.error("Error updating user status:", error);
@@ -17,7 +15,11 @@ export async function UpdateUserStatus(email) {
 
 export async function GetAdminTableData() {
   try {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      include: {
+        company: true,
+      },
+    });
     return { users };
   } catch (error) {
     console.error("Error updating user status:", error);
