@@ -7,7 +7,7 @@ import { GetAdminTableData } from "../Actions/AdminActions";
 
 export default function Table1() {
   const [users, setUsers] = useState([]);
-
+  const[show,setShow]=useState(true);
   
   const getUsers = async () => {
     const users = await GetAdminTableData();
@@ -17,7 +17,12 @@ export default function Table1() {
 
   const handleUpdateUserStatus = async (email) => {
     const res = await UpdateUserStatus(email);
+    setUsers((prevUsers) => prevUsers.filter((user) => user.email !== email));
   };
+
+  const handleDelete=()=>{
+    setShow(!show)
+  }
 
   useEffect(() => {
     getUsers();
@@ -122,7 +127,7 @@ export default function Table1() {
                       </td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
-                          <button className="text-indigo-600 hover:text-indigo-900">
+                          <button className="text-indigo-600 hover:text-indigo-900"    onClick={() => handleUpdateUserStatus(user.email)}>
                             Approve
                             <span className="sr-only">, {user.name}</span>
                           </button>

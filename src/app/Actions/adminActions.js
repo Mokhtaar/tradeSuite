@@ -16,9 +16,9 @@ export async function UpdateUserStatus(email) {
 export async function GetAdminTableData() {
   try {
     const users = await prisma.user.findMany({
-      // include: {
-      //   company: true,
-      // },
+       // include: {
+       //   company: true,
+       // },
     });
     console.log(users)
     
