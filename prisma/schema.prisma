@@ -13,12 +13,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?
-  access_token      String?
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String? @db.Text
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -35,22 +35,22 @@ model Session {
 
 model User {
   id              String    @id @default(cuid())
+  name            String?
   email           String    @unique
+  password        String?
   emailVerified   DateTime?
   image           String?
-  name            String?
-  companyID       Int?
-  createdAt       DateTime  @default(now())
   dob             DateTime?
-  password        String?
   phoneNumber     Int?
-  proofOfAddress  String?
   proofOfIdentity String?
+  proofOfAddress  String?
+  createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now())
+  company         Company?  @relation(fields: [companyID], references: [id])
+  companyID       Int?
   status          String?
   accounts        Account[]
   sessions        Session[]
-  Company         Company?  @relation(fields: [companyID], references: [id])
 }
 
 model VerificationToken {
@@ -74,7 +74,18 @@ model Company {
   updatedAt   DateTime @default(now())
   fileUpload  String?
   postalCode  Int
-  User        User[]
+  users       User[]
 
   @@unique([id, name])
 }
+
+// model Project {
+//   id                  Int      @id @default(autoincrement())
+//   projectName         String
+//   createdAt           DateTime @default(now())
+//   updatedAt           DateTime @default(now())
+//   projectDescription  String?
+//   otherProjectDetails String?
+//   company             Company  @relation(fields: [companyID], references: [id])
+//   companyID           Int      @unique
+// }
