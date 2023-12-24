@@ -22,7 +22,7 @@ export default function Table1() {
     try {
       await UpdateUserStatus(email, newStatus);
       // Assuming you have a function to refresh the user list after an update
-      getUsers();
+     
     } catch (error) {
       console.error("Error updating user status:", error);
     }

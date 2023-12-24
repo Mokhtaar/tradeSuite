@@ -15,8 +15,8 @@ const LoginAction = async (values) => {
     const correctPassword = await bcrypt.compare(password, user.password);
     if (!correctPassword) return { message: "wrongPassword" };
 
-    if (user.status === "Rejected") return { message: "Rejected" };
-    if (user.status === "Approved") return { message: "Approved" };
+    // if (user.status === "Rejected") return { message: "Rejected" };
+    // if (user.status === "Approved") return { message: "Approved" };
 
     return { user };
   } catch (error) {

@@ -7,7 +7,7 @@ export async function UpdateUserStatus(email, newSatus) {
       where: { email: email },
       data: { status: newSatus },
     });
-    console.log("User status updated to '${newStatus}' successfully");
+    console.log(`User status updated successfully`);
   } catch (error) {
     console.error("Error updating user status:", error);
   }

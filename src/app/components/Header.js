@@ -146,7 +146,7 @@ const MyHeader = () => {
                             {({ active }) => (
                             <a
                     href={item.href}
-                    onClick={item.name === 'Sign out' ? handleSignOut : undefined}
+                    onClick={item.name === 'Sign out' ? handleSignOut() : undefined}
                     className={classNames(
                       active ? "bg-gray-50" : "",
                       "block px-3 py-1 text-sm leading-6 text-gray-900"
