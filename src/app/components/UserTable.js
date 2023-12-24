@@ -9,8 +9,8 @@ export default function Table1() {
 
   const getUsers = async () => {
     const users = await GetAdminTableData();
-    setUsers(users.users);
-    console.log(users.users[0].company.name);
+    console.log(users?.users);
+    setUsers(users?.users);
   };
 
   const handleUpdateUserStatus = async (email) => {
@@ -101,7 +101,7 @@ export default function Table1() {
                         {user.name}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.companyName}
+                        {user.company.name}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

@@ -13,16 +13,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-  
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -37,26 +35,22 @@ model Session {
 
 model User {
   id              String    @id @default(cuid())
-  name            String?
   email           String    @unique
-  password        String?
   emailVerified   DateTime?
   image           String?
-  dob             DateTime?
-  phoneNumber     Int?
-  proofOfIdentity String?
-  proofOfAddress  String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @default(now())
-  company         Company?  @relation(fields: [companyID,companyName], references: [id,name])
+  name            String?
   companyID       Int?
-  status          String?  
-  companyName     String?  
-
+  createdAt       DateTime  @default(now())
+  dob             DateTime?
+  password        String?
+  phoneNumber     Int?
+  proofOfAddress  String?
+  proofOfIdentity String?
+  updatedAt       DateTime  @default(now())
+  status          String?
   accounts        Account[]
   sessions        Session[]
-   
-
+  Company         Company?  @relation(fields: [companyID], references: [id])
 }
 
 model VerificationToken {
@@ -80,19 +74,7 @@ model Company {
   updatedAt   DateTime @default(now())
   fileUpload  String?
   postalCode  Int
-  users       User[]
+  User        User[]
 
- 
   @@unique([id, name])
 }
-
-// model Project {
-//   id                  Int      @id @default(autoincrement())
-//   projectName         String
-//   createdAt           DateTime @default(now())
-//   updatedAt           DateTime @default(now())
-//   projectDescription  String?
-//   otherProjectDetails String?
-//   company             Company  @relation(fields: [companyID], references: [id])
-//   companyID           Int      @unique
-// }
