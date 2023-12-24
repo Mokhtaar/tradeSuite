@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon } from "@heroicons/react/24/outline";
-import { useSession, signOut } from 'next-auth/react';
+import { useSession, signOut } from "next-auth/react";
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
@@ -23,28 +23,24 @@ function classNames(...classes) {
 }
 
 const MyHeader = () => {
- 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState();
-  const {data} = useSession();
-
+  const { data } = useSession();
 
   useEffect(() => {
-   console.log(data)
+    console.log(data);
   }, [data]);
 
   const handleSignOut = async () => {
     try {
-      await signOut({redirect:false,callbackUrl: '/'});
+      await signOut({ redirect: false, callbackUrl: "/" });
     } catch (error) {
-      console.error('Error signing out:', error);
+      console.error("Error signing out:", error);
     }
   };
 
-
   return (
     <>
-    
       {/*
         This example requires updating your template:
 
@@ -83,7 +79,9 @@ const MyHeader = () => {
               <div className="relative flex flex-1 lg:flex lg:gap-x-12 text-white ">
                 {" "}
                 {/* Modified line */}
-                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center justify-center rounded-[8px] border-b [border-bottom-style:solid] border-white "style={{ margin: '0 150px' }}
+                <div
+                  className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center justify-center rounded-[8px] border-b [border-bottom-style:solid] border-white "
+                  style={{ margin: "0 150px" }}
                 >
                   {navigation.map((item) => (
                     <a
@@ -144,16 +142,20 @@ const MyHeader = () => {
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
-                            <a
-                    href={item.href}
-                    onClick={item.name === 'Sign out' ? handleSignOut : undefined}
-                    className={classNames(
-                      active ? "bg-gray-50" : "",
-                      "block px-3 py-1 text-sm leading-6 text-gray-900"
-                    )}
-                  >
-                    {item.name}
-                  </a>
+                              <a
+                                href={item.href}
+                                onClick={
+                                  item.name === "Sign out"
+                                    ? handleSignOut
+                                    : undefined
+                                }
+                                className={classNames(
+                                  active ? "bg-gray-50" : "",
+                                  "block px-3 py-1 text-sm leading-6 text-gray-900"
+                                )}
+                              >
+                                {item.name}
+                              </a>
                             )}
                           </Menu.Item>
                         ))}

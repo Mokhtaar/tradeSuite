@@ -10,6 +10,11 @@ import { useSession } from "next-auth/react";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
+  const { data } = useSession();
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const [isWrongPassword, setIsWrongPassword] = useState(false);
   const [isWrongEmail, setIsWrongEmail] = useState(false);
@@ -31,11 +36,8 @@ const LoginForm = ({ LoginAction }) => {
         redirect: false,
       });
 
-      console.log("first", response)
-
       response?.error ? console.log(response.error) : router.push("/");
 
-      console.log(response);
       if (response.message === "wrongEmail") setIsWrongEmail(true);
       if (response.message === "wrongPassword") setIsWrongPassword(true);
       if (response.message === "Rejected") alert("Rejected");
