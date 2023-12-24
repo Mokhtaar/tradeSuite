@@ -127,14 +127,14 @@ export default function Table1() {
                       </td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
-                          <button className="text-indigo-600 hover:text-indigo-900"    onClick={() => handleUpdateUserStatus(user.email)}>
+                          <button className="text-indigo-600 hover:text-indigo-900">
                             Approve
                             <span className="sr-only">, {user.name}</span>
                           </button>
 
                           <button
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={() => handleUpdateUserStatus(user.email)}
+                            onClick={() => handleUserAction(user.email,"Rejected")}
                           >
                             Reject<span className="sr-only">, {user.name}</span>
                           </button>
