@@ -3,22 +3,31 @@
 import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../Actions/AdminActions";
 import { GetAdminTableData } from "../Actions/AdminActions";
-import { useSelector } from "react-redux";
-import { increment, decrement } from "../GlobalRedux/Features/user/UserSlice";
+
 
 export default function Table1() {
   const [users, setUsers] = useState([]);
-  const count = useSelector((state) => state.user.value);
 
   const getUsers = async () => {
     const users = await GetAdminTableData();
-    console.log(users);
-    setUsers(users.users);
+    console.log(users?.users);
+    setUsers(users?.users);
   };
 
-  const handleUpdateUserStatus = async (email) => {
-    const res = await UpdateUserStatus(email);
+  // const handleUpdateUserStatus = async (email) => {
+  //   const res = await UpdateUserStatus(email);
+  // };
+
+  const handleUserAction = async (email, newStatus) => {
+    try {
+      await UpdateUserStatus(email, newStatus);
+      // Assuming you have a function to refresh the user list after an update
+      getUsers();
+    } catch (error) {
+      console.error("Error updating user status:", error);
+    }
   };
+  
 
   useEffect(() => {
     getUsers();
@@ -104,7 +113,11 @@ export default function Table1() {
                         {user.name}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+<<<<<<< HEAD
                         {user.company.name}
+=======
+                        {user.name}
+>>>>>>> 01442ac93d2dd3416c63cd1484a91d1416a8ca40
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {user.email}
@@ -121,14 +134,14 @@ export default function Table1() {
                       </td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
-                          <button className="text-indigo-600 hover:text-indigo-900">
+                          <button className="text-indigo-600 hover:text-indigo-900" onClick={() => handleUserAction(user.email,"Approved")}>
                             Approve
                             <span className="sr-only">, {user.name}</span>
                           </button>
 
                           <button
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={() => handleUpdateUserStatus(user.email)}
+                            onClick={() => handleUserAction(user.email,"Rejected")}
                           >
                             Reject<span className="sr-only">, {user.name}</span>
                           </button>

@@ -70,11 +70,7 @@ const CompanyForm = ({ onSubmit }) => {
 
   const handleFileUpload = async (e) => {
     if (file) {
-      const response = await SignedUrlAction({
-        // fileSize: file.size,
-        // fileType: file.type,
-        // checksum: await computeSHA256(file),
-      });
+      const response = await SignedUrlAction();
       if (response.success) {
         const url = response.success.url;
         console.log(url);

@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
@@ -29,13 +30,16 @@ const LoginForm = ({ LoginAction }) => {
         password: values.password,
         redirect: false,
       });
+
+      console.log("first", response)
+
       response?.error ? console.log(response.error) : router.push("/");
 
       console.log(response);
       if (response.message === "wrongEmail") setIsWrongEmail(true);
       if (response.message === "wrongPassword") setIsWrongPassword(true);
-      if (response.message === "rejected") alert("rejected");
-      if (response.message === "pending") alert("pending");
+      if (response.message === "Rejected") alert("Rejected");
+      if (response.message === "Approved") alert("Approved");
       if (response.message === "LoggedIn") {
         const decoded = jwtDecode(response.token);
         const userString = JSON.stringify(decoded.user);
