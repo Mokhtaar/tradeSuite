@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
-import { SignedUrlAction } from "../Actions/getSignedUrl";
+import { SignedUrlAction } from "../Actions/GetSignedUrl";
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
@@ -71,7 +71,7 @@ const UserForm = ({ userAction }) => {
       }
     }
   };
-  
+
   const uploadFile = async (url) => {
     try {
       const response = await axios.put(url, file, {
