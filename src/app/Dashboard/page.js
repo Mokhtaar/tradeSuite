@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-"use server";
+import UserDashboard from "../components/UserDashboard";
 
-import MyHeader from '../components/Header';
-import UploadDocument from '../components/UploadDocument'
-  
-const Mypage = (props) => {
+import React from "react";
 
+const page = () => {
+  return <UserDashboard />;
 };
 
-export default Mypage;
+export default page;

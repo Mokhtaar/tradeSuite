@@ -1,7 +1,4 @@
 import { Inter } from "next/font/google";
-import MyComponent from "../components/Menu";
-import MyHeader from "../components/Header";
-import UploadDocument from "../components/UploadDocument";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,12 +9,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <>
-      <MyComponent />
-
-      <MyHeader />
-
+    <html lang="en">
       <body className={inter.className}>{children}</body>
-      </>
+    </html>
   );
 }
