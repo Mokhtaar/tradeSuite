@@ -3,11 +3,12 @@ import prisma from "../../../lib/prisma";
 
 export async function UpdateUserStatus(email, newSatus) {
   try {
-    await prisma.user.update({
+    const user = await prisma.user.update({
       where: { email: email },
       data: { status: newSatus },
     });
-    console.log(`User status updated successfully`);
+  
+    return { user };
   } catch (error) {
     console.error("Error updating user status:", error);
   }

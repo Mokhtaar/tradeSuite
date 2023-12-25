@@ -1,37 +1,38 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UpdateUserStatus } from "../Actions/adminActions";
-import { GetAdminTableData } from "../Actions/adminActions";
+import { UpdateUserStatus } from "../Actions/AdminActions";
+import { GetAdminTableData } from "../Actions/AdminActions";
 
 
 export default function Table1() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState();
 
-  const getUsers = async () => {
-    const users = await GetAdminTableData();
-    console.log(users?.users);
-    setUsers(users?.users);
-  };
-
-  // const handleUpdateUserStatus = async (email) => {
-  //   const res = await UpdateUserStatus(email);
-  // };
-
-  const handleUserAction = async (email, newStatus) => {
-    try {
-      await UpdateUserStatus(email, newStatus);
-      // Assuming you have a function to refresh the user list after an update
-     
+  
+const getUsers = async () => {
+  try {
+    const userData = await GetAdminTableData();
+    const updatedUsers = userData?.users.filter((user)=> user.status == "pending")
+    setUsers(updatedUsers);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+  }
+};
+      
+const handleUserAction = async (email, newStatus) => {
+  try {
+      const res = await UpdateUserStatus(email, newStatus);
+      const updatedUsers = users.filter((user)=> user.id !== res.user.id)
+      setUsers(updatedUsers)
     } catch (error) {
       console.error("Error updating user status:", error);
     }
   };
-  
 
   useEffect(() => {
     getUsers();
-  }, []);
+
+ }, []);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -115,9 +116,11 @@ export default function Table1() {
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {user.company.name}
                       </td>
+
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {user.email}
                       </td>
+
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {}
                       </td>
@@ -130,7 +133,7 @@ export default function Table1() {
                       </td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
-                          <button className="text-indigo-600 hover:text-indigo-900" onClick={() => handleUserAction(user.email,"Approved")}>
+                          <button className="text-indigo-600 hover:text-indigo-900"    onClick={() =>  handleUserAction(user.email, "Approved")}>
                             Approve
                             <span className="sr-only">, {user.name}</span>
                           </button>

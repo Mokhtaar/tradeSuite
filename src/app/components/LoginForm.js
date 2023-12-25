@@ -43,8 +43,11 @@ const LoginForm = ({ LoginAction }) => {
         }else{
           if (data?.user.userStatus === 'Approved') {
             router.push('/Dashboard');
-          } else {
+          } else if(data?.user.userStatus === 'Rejected'){
             alert('You are rejected. Contact admin for access.');
+          }
+          else {
+            alert('Pending');
           }
 
         }
