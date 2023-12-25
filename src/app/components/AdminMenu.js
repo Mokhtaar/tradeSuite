@@ -119,7 +119,7 @@ export default function Example() {
                         <li>
                           <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
-                            {teams.map((team) => (
+                            {/* {teams.map((team) => (
                               <li key={team.name}>
                                 <a
                                   href={team.href}
@@ -143,7 +143,7 @@ export default function Example() {
                                   <span className="truncate">{team.name}</span>
                                 </a>
                               </li>
-                            ))}
+                            ))} */}
                           </ul>
                         </li>
                       </ul>
@@ -205,7 +205,7 @@ export default function Example() {
                 <li>
                   <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
-                    {teams.map((team) => (
+                    {/* {teams.map((team) => (
                       <li key={team.name}>
                         <a
                           href={team.href}
@@ -229,7 +229,7 @@ export default function Example() {
                           <span className="truncate">{team.name}</span>
                         </a>
                       </li>
-                    ))}
+                    ))} */}
                   </ul>
                 </li>
                 <li className="-mx-6 mt-auto">

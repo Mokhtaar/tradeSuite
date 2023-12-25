@@ -3,11 +3,12 @@ import prisma from "../../../lib/prisma";
 
 export async function UpdateUserStatus(email, newSatus) {
   try {
-    await prisma.user.update({
+    const user = await prisma.user.update({
       where: { email: email },
       data: { status: newSatus },
     });
-    console.log("User status updated to '${newStatus}' successfully");
+  
+    return { user };
   } catch (error) {
     console.error("Error updating user status:", error);
   }
@@ -19,6 +20,9 @@ export async function GetAdminTableData() {
       include: {
         company: true,
       },
+      where:{
+        status:"pending"
+      }
     });
     console.log(users);
 
