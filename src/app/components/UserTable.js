@@ -4,30 +4,26 @@ import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../Actions/AdminActions";
 import { GetAdminTableData } from "../Actions/AdminActions";
 
-
 export default function Table1() {
   const [users, setUsers] = useState();
 
- const getUsers = async () => {
-  const users = await GetAdminTableData();
-  console.log(users?.users);
-  setUsers(users?.users);
-};
+  const getUsers = async () => {
+    const users = await GetAdminTableData();
+    console.log(users?.users);
+    setUsers(users?.users);
+  };
 
-
-const handleUserAction = async (email, newStatus) => {
-  try {
-    await UpdateUserStatus(email, newStatus);
-   getUsers();
-   
-  } catch (error) {
-    console.error("Error updating user status:", error);
-  }
-};
-useEffect(() => {
-  getUsers();
-}, []);
-
+  const handleUserAction = async (email, newStatus) => {
+    try {
+      await UpdateUserStatus(email, newStatus);
+      getUsers();
+    } catch (error) {
+      console.error("Error updating user status:", error);
+    }
+  };
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
