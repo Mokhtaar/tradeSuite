@@ -8,31 +8,26 @@ import { GetAdminTableData } from "../Actions/AdminActions";
 export default function Table1() {
   const [users, setUsers] = useState();
 
-  
-const getUsers = async () => {
-  try {
-    const userData = await GetAdminTableData();
-    const updatedUsers = userData?.users.filter((user)=> user.status == "pending")
-    setUsers(updatedUsers);
-  } catch (error) {
-    console.error('Error fetching users:', error);
-  }
+ const getUsers = async () => {
+  const users = await GetAdminTableData();
+  console.log(users?.users);
+  setUsers(users?.users);
 };
-      
+
+
 const handleUserAction = async (email, newStatus) => {
   try {
-      const res = await UpdateUserStatus(email, newStatus);
-      const updatedUsers = users.filter((user)=> user.id !== res.user.id)
-      setUsers(updatedUsers)
-    } catch (error) {
-      console.error("Error updating user status:", error);
-    }
-  };
+    await UpdateUserStatus(email, newStatus);
+   getUsers();
+   
+  } catch (error) {
+    console.error("Error updating user status:", error);
+  }
+};
+useEffect(() => {
+  getUsers();
+}, []);
 
-  useEffect(() => {
-    getUsers();
-
- }, []);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
