@@ -146,7 +146,7 @@ const MyHeader = () => {
                                 href={item.href}
                                 onClick={
                                   item.name === "Sign out"
-                                    ? handleSignOut
+                                    ? handleSignOut()
                                     : undefined
                                 }
                                 className={classNames(

@@ -133,14 +133,14 @@ const handleUserAction = async (email, newStatus) => {
                       </td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
-                          <button className="text-indigo-600 hover:text-indigo-900"    onClick={() =>  handleUserAction(user.email, "Approved")}>
+                          <button value="Approved" className="text-indigo-600 hover:text-indigo-900" onClick={(e) =>  handleUserAction(user.email, e.target.value)}>
                             Approve
                             <span className="sr-only">, {user.name}</span>
                           </button>
 
-                          <button
+                          <button value="Rejected"
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={() => handleUserAction(user.email, "Rejected")}
+                            onClick={(e) => handleUserAction(user.email,e.target.value)}
                           >
                             Reject<span className="sr-only">, {user.name}</span>
                           </button>
