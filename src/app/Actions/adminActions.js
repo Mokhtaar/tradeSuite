@@ -21,7 +21,7 @@ export async function GetAdminTableData() {
         company: true,
       },
       where:{
-        status:"Approved"
+        status:"pending"
       }
     });
     console.log(users);
