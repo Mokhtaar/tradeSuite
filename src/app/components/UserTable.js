@@ -4,30 +4,26 @@ import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../Actions/AdminActions";
 import { GetAdminTableData } from "../Actions/AdminActions";
 
-
 export default function Table1() {
   const [users, setUsers] = useState();
 
- const getUsers = async () => {
-  const users = await GetAdminTableData();
-  console.log(users?.users);
-  setUsers(users?.users);
-};
+  const getUsers = async () => {
+    const users = await GetAdminTableData();
+    console.log(users?.users);
+    setUsers(users?.users);
+  };
 
-
-const handleUserAction = async (email, newStatus) => {
-  try {
-    await UpdateUserStatus(email, newStatus);
-   getUsers();
-   
-  } catch (error) {
-    console.error("Error updating user status:", error);
-  }
-};
-useEffect(() => {
-  getUsers();
-}, []);
-
+  const handleUserAction = async (email, newStatus) => {
+    try {
+      await UpdateUserStatus(email, newStatus);
+      getUsers();
+    } catch (error) {
+      console.error("Error updating user status:", error);
+    }
+  };
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -128,14 +124,21 @@ useEffect(() => {
                       </td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
-                          <button className="text-indigo-600 hover:text-indigo-900"    onClick={() =>  handleUserAction(user.email, "Approved")}>
+                          <button
+                            className="text-indigo-600 hover:text-indigo-900"
+                            onClick={() =>
+                              handleUserAction(user.email, "Approved")
+                            }
+                          >
                             Approve
                             <span className="sr-only">, {user.name}</span>
                           </button>
 
                           <button
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={() => handleUserAction(user.email, "Rejected")}
+                            onClick={() =>
+                              handleUserAction(user.email, "Rejected")
+                            }
                           >
                             Reject<span className="sr-only">, {user.name}</span>
                           </button>
