@@ -20,6 +20,9 @@ export async function GetAdminTableData() {
       include: {
         company: true,
       },
+      where:{
+        status:"pending"
+      }
     });
     console.log(users);
 
