@@ -1,7 +1,7 @@
 
 import { Inter } from "next/font/google";
 import Example from '../components/AdminMenu';
-
+const inter = Inter({ subsets: ["latin"] });
 import Table1 from '../components/UserTable';
 
 export const metadata = {
@@ -11,9 +11,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <>
-    <Example/>
-    <Table1/>
-    </>
+    <html lang="en">
+    <body className={inter.className}>{children}</body>
+  </html>
   );
 }

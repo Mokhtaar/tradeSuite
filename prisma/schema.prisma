@@ -79,6 +79,16 @@ model Company {
   @@unique([id, name])
 }
 
+model Admin {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+ password     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  @@unique([id])
+}
+
 // model Project {
 //   id                  Int      @id @default(autoincrement())
 //   projectName         String

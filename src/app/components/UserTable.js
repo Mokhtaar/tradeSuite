@@ -1,11 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UpdateUserStatus } from "../Actions/AdminActions";
-import { GetAdminTableData } from "../Actions/AdminActions";
+import { UpdateUserStatus , GetAdminTableData} from "../Actions/adminActions";
+import { useRouter } from 'next/navigation';
 
 export default function Table1() {
   const [users, setUsers] = useState();
+  const router=useRouter();
+
+const  handleAdmin =()=>{
+router.push("./Admin/AddAdmin");
+  }
 
   const getUsers = async () => {
     const users = await GetAdminTableData();
@@ -41,6 +46,7 @@ export default function Table1() {
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <button
               type="button"
+              onClick={handleAdmin}
               className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Add Admin
