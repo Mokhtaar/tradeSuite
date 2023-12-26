@@ -39,8 +39,8 @@ export default function AdminUsersData() {
               Users
             </h1>
             <p className="mt-2 text-sm text-gray-700">
-              A list of all the users in your account including their name,
-              title, email and role.
+              A list of all the users including their Name,
+              Email, Company name and Documents.
             </p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">

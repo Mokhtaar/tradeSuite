@@ -42,9 +42,13 @@ const LoginForm = ({ LoginAction }) => {
           console.log(response?.error)
 
         }else{
-          if (data?.user.status === 'Approved') {
+          if (data?.user.status === 'Approved' && data?.user.role === "USER") {
             router.push('/Dashboard');
-          } else if(data?.user.status === 'Rejected'){
+          } 
+         else if (data?.user.status === 'Approved' && data?.user.role === "ADMIN") {
+            router.push('/Admin');
+          } 
+          else if(data?.user.status === 'Rejected'){
             alert('You are rejected. Contact admin for access.');
           }
           else {
