@@ -1,8 +1,8 @@
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import HeroSection from "./components/HeroSection";
-import OurServices from "./components/OurServices";
-import Testmonials from "./components/Testmonials";
+import Navbar from "./Components/HomePage/Navbar";
+import Footer from "./Components/HomePage/Footer";
+import HeroSection from "./components/HomePage/HeroSection";
+import OurServices from "./components/HomePage/OurServices";
+import Testmonials from "./components/HomePage/Testmonials";
 import { getCurrentUser } from "../../lib/session";
 
 async function Home() {
