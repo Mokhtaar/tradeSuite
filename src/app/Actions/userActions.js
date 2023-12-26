@@ -10,15 +10,12 @@ const addUser = async (userData, companyID) => {
 
   const body = {
     password: hashedPassword,
-
     name: `${userData.get("firstName")} ${userData.get("lastName")}`,
     email: userData.get("email"),
     phoneNumber: parseInt(userData.get("phoneNumber")),
     dob: new Date(userData.get("dob")).toISOString(),
     companyID,
     status:"pending",
-
-
   };
 
   try {

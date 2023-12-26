@@ -12,7 +12,6 @@ export async function newAdmin(adminData) {
     name: adminData.get("name"),
     email: adminData.get("email"),
     password: hashedPassword,
-   
   };
 
   try {
