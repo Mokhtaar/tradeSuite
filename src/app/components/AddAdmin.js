@@ -3,16 +3,18 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-export default function AddAdmin({adminActions}) {
+export default function AddAdmin({userAction}) {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      firstName: "",
+      lastName:"",
       email: "",
       password: "",
     },
     validationSchema: Yup.object({
-      name: Yup.string().required("This field is required!"),
+      firstName: Yup.string().required("This field is required!"),
+      lastName: Yup.string().required("This field is required!"),
   
       email: Yup.string().email("Invalid email address").required("Required"),
     
@@ -31,14 +33,14 @@ export default function AddAdmin({adminActions}) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const adminData = new FormData(event.target);
-     const response = await adminActions(adminData);
-     console.log(response);
+    const userData = new FormData(event.target);
+    const response = await userAction(userData, null);
+    console.log(response);
   //  router.push("/Login");
   };
     return (
       <>
-  <div className="h-screen bg-black" style={{
+  <div className="h-full bg-black" style={{
                 backgroundImage:
                   "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
               }}>
@@ -61,22 +63,43 @@ export default function AddAdmin({adminActions}) {
 
              
                   <label className="block text-sm font-medium leading-6 text-gray-900">
-                    UserName
+                    First Name
                   </label>
                   <div className="mt-2">
                     <input
-                      id="name"
-                      name="name"
+                      id="firstName"
+                      name="firstName"
                       type="text"
                       autoComplete="text"
                       onChange={formik.handleChange}
-              value={formik.values.name}
+              value={formik.values.firstName}
               onBlur={formik.handleBlur}
                       required
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
-                      {formik.touched.name && formik.errors.name ? (
-              <div className="text-red-600">{formik.errors.name}</div>
+                      {formik.touched.firstName && formik.errors.firstName ? (
+              <div className="text-red-600">{formik.errors.firstName}</div>
+            ) : null}
+                  </div>
+
+
+                  <label className="block text-sm font-medium leading-6 text-gray-900">
+                    Last Name
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="name"
+                      name="lastName"
+                      type="text"
+                      autoComplete="text"
+                      onChange={formik.handleChange}
+              value={formik.values.lastName}
+              onBlur={formik.handleBlur}
+                      required
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                      {formik.touched.lastName && formik.errors.lastName ? (
+              <div className="text-red-600">{formik.errors.lastName}</div>
             ) : null}
                   </div>
 
