@@ -7,7 +7,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { getCurrentUser } from '../../../lib/session';
+import { getCurrentUser } from '../../../../lib/session';
 
 const navigation = [
   { name: 'Registration Approval', href: '#', icon: UsersIcon, current: true },
@@ -18,7 +18,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function AdminSideBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (

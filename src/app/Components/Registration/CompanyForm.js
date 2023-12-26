@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { SignedUrlAction } from "../Actions/GetSignedUrl";
-import { AddCompanyFile } from "../Actions/AddComapanyFile";
+import { SignedUrlAction } from "../../Actions/GetSignedUrl";
+import { AddCompanyFile } from "../../Actions/AddComapanyFile";
 
 import { useSession } from "next-auth/react";
 

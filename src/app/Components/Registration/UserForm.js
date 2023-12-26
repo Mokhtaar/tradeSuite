@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
-import { SignedUrlAction } from "../Actions/GetSignedUrl";
+import { SignedUrlAction } from "../../Actions/GetSignedUrl";
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();

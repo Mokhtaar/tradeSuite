@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
+import Footer from "./Components/HomePage/Footer";
+import Navbar from "./Components/HomePage/Navbar";
 import NextAuthProvider from "./NextAuthProvider";
 import { ReduxProvider } from "./GlobalRedux/ReduxProvider";
 

@@ -1,8 +1,14 @@
-import React from "react";
-async function Admin() {
+import AdminSideBar from "../Components/Admin/AdminSideBar";
+import AdminUsersData from "../Components/Admin/AdminUsersData";
 
+import React from "react";
+
+async function Admin() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between"></main>
+    <>
+      <AdminSideBar />
+      <AdminUsersData />
+    </>
   );
 }
 

@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UpdateUserStatus } from "../Actions/AdminActions";
-import { GetAdminTableData } from "../Actions/AdminActions";
+import { UpdateUserStatus } from "../../Actions/AdminActions";
+import { GetAdminTableData } from "../../Actions/AdminActions";
 import { useSession } from "next-auth/react";
 
-export default function Table1() {
+export default function AdminUsersData() {
   const [users, setUsers] = useState();
   const { data, update } = useSession();
 
@@ -24,7 +24,7 @@ export default function Table1() {
       console.error("Error updating user status:", error);
     }
   };
-  
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -109,7 +109,7 @@ export default function Table1() {
                         {user.name}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.company.name}
+                        {user.company?.name}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -129,9 +129,10 @@ export default function Table1() {
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
                           <button
+                            value="Approved"
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={() =>
-                              handleUserAction(user.email, "Approved")
+                            onClick={(e) =>
+                              handleUserAction(user.email, e.target.value)
                             }
                           >
                             Approve
@@ -139,9 +140,10 @@ export default function Table1() {
                           </button>
 
                           <button
+                            value="Rejected"
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={() =>
-                              handleUserAction(user.email, "Rejected")
+                            onClick={(e) =>
+                              handleUserAction(user.email, e.target.value)
                             }
                           >
                             Reject<span className="sr-only">, {user.name}</span>
