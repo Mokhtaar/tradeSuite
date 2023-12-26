@@ -1,25 +1,30 @@
 "use client";
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
   DocumentDuplicateIcon,
   UsersIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { getCurrentUser } from '../../../../lib/session';
+} from "@heroicons/react/24/outline";
+import { getCurrentUser } from "../../../../lib/session";
 
 const navigation = [
-  { name: 'Registration Approval', href: '#', icon: UsersIcon, current: true },
-  { name: 'Documents Verification', href: '#', icon: DocumentDuplicateIcon, current: false },
-]
+  { name: "Registration Approval", href: "#", icon: UsersIcon, current: true },
+  {
+    name: "Documents Verification",
+    href: "#",
+    icon: DocumentDuplicateIcon,
+    current: false,
+  },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function AdminSideBar() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
@@ -33,7 +38,11 @@ export default function AdminSideBar() {
       */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
-          <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
+          <Dialog
+            as="div"
+            className="relative z-50 lg:hidden"
+            onClose={setSidebarOpen}
+          >
             <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-300"
@@ -67,20 +76,28 @@ export default function AdminSideBar() {
                     leaveTo="opacity-0"
                   >
                     <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
-                      <button type="button" className="-m-2.5 p-2.5" onClick={() => setSidebarOpen(false)}>
+                      <button
+                        type="button"
+                        className="-m-2.5 p-2.5"
+                        onClick={() => setSidebarOpen(false)}
+                      >
                         <span className="sr-only">Close sidebar</span>
-                        <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                        <XMarkIcon
+                          className="h-6 w-6 text-white"
+                          aria-hidden="true"
+                        />
                       </button>
                     </div>
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <div className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2"
-                  style={{
-                    backgroundColor: "black", // Set the black background for the entire sidebar
-                    backgroundImage:
-                      "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
-                  
-                  }}>
+                  <div
+                    className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2"
+                    style={{
+                      backgroundColor: "black", // Set the black background for the entire sidebar
+                      backgroundImage:
+                        "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+                    }}
+                  >
                     <div className="flex h-16 shrink-0 items-center">
                       <img
                         className="h-8 w-auto"
@@ -98,15 +115,17 @@ export default function AdminSideBar() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? 'bg-gray-50 text-indigo-600'
-                                      : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                      ? "bg-gray-50 text-indigo-600"
+                                      : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
-                                      item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-                                      'h-6 w-6 shrink-0'
+                                      item.current
+                                        ? "text-indigo-600"
+                                        : "text-gray-400 group-hover:text-indigo-600",
+                                      "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
                                   />
@@ -117,7 +136,9 @@ export default function AdminSideBar() {
                           </ul>
                         </li>
                         <li>
-                          <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                          <div className="text-xs font-semibold leading-6 text-gray-400">
+                            Your teams
+                          </div>
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {/* {teams.map((team) => (
                               <li key={team.name}>
@@ -158,21 +179,22 @@ export default function AdminSideBar() {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6"
-          style={{
-            backgroundColor: "black", // Set the black background for the entire sidebar
-            backgroundImage:
-              "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
-        
-          }}>
+          <div
+            className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6"
+            style={{
+              backgroundColor: "black", // Set the black background for the entire sidebar
+              backgroundImage:
+                "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+            }}
+          >
             <div className="flex h-16 shrink-0 items-center">
-            <a href="/Admin">
-              <img
-                className="h-12 w-auto"
-                src="../logo.png"
-                alt="Your Company"
-              />
-            </a>
+              <a href="/Admin">
+                <img
+                  className="h-12 w-auto"
+                  src="../logo.png"
+                  alt="Your Company"
+                />
+              </a>
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -184,15 +206,17 @@ export default function AdminSideBar() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? 'bg-gray-50 text-indigo-600'
-                              : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                              ? "bg-gray-50 text-indigo-600"
+                              : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
                         >
                           <item.icon
                             className={classNames(
-                              item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-                              'h-6 w-6 shrink-0'
+                              item.current
+                                ? "text-indigo-600"
+                                : "text-gray-400 group-hover:text-indigo-600",
+                              "h-6 w-6 shrink-0"
                             )}
                             aria-hidden="true"
                           />
@@ -203,7 +227,9 @@ export default function AdminSideBar() {
                   </ul>
                 </li>
                 <li>
-                  <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                  <div className="text-xs font-semibold leading-6 text-gray-400">
+                    Your teams
+                  </div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {/* {teams.map((team) => (
                       <li key={team.name}>
@@ -252,11 +278,17 @@ export default function AdminSideBar() {
         </div>
 
         <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
-          <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
+          <button
+            type="button"
+            className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
+            onClick={() => setSidebarOpen(true)}
+          >
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
-          <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">Dashboard</div>
+          <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
+            Dashboard
+          </div>
           <a href="#">
             <span className="sr-only">Your profile</span>
             <img
@@ -266,9 +298,8 @@ export default function AdminSideBar() {
             />
           </a>
         </div>
-
-     
       </div>
-    </>
-  )
+          
+    </>
+  );
 }

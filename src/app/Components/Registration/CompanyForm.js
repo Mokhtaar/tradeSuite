@@ -9,7 +9,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { SignedUrlAction } from "../../Actions/GetSignedUrl";
 import { AddCompanyFile } from "../../Actions/AddComapanyFile";
-
 import { useSession } from "next-auth/react";
 
 const computeSHA256 = async (file) => {

@@ -119,10 +119,30 @@ export default function AdminUsersData() {
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {}
+                      {user.proofOfAddress ? (
+                          <a
+                            href={user.proofOfAddress}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {}
+                      {user.proofOfIdentity ? (
+                          <a
+                            href={user.proofOfAddress}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
