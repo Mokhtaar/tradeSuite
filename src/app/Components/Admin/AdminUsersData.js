@@ -126,7 +126,17 @@ export default function AdminUsersData() {
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.company?.fileUpload}
+                        {user.company?.fileUpload ? (
+                          <a
+                            href={user.company.fileUpload}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
                       </td>
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
