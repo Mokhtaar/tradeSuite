@@ -2,17 +2,17 @@
 
 import prisma from "../../../lib/prisma";
 
-const AddCompanyFile = async (url) => {
+const AddCompanyFile = async (url, id) => {
   try {
     const updateComapny = await prisma.company.update({
       where: {
-        id: 1,
+        id,
       },
       data: {
         fileUpload: url,
       },
     });
-    return { success: "File has been uploaded successfully"};
+    return { success: "File has been uploaded successfully" };
   } catch (error) {
     return { error: error.message, status: 404 };
   }

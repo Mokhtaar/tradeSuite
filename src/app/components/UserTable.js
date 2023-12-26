@@ -3,9 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../Actions/AdminActions";
 import { GetAdminTableData } from "../Actions/AdminActions";
+import { useSession } from "next-auth/react";
 
 export default function Table1() {
   const [users, setUsers] = useState();
+  const { data, update } = useSession();
 
   const getUsers = async () => {
     const users = await GetAdminTableData();
@@ -16,11 +18,13 @@ export default function Table1() {
   const handleUserAction = async (email, newStatus) => {
     try {
       await UpdateUserStatus(email, newStatus);
+      update();
       getUsers();
     } catch (error) {
       console.error("Error updating user status:", error);
     }
   };
+  
   useEffect(() => {
     getUsers();
   }, []);

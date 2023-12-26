@@ -1,8 +1,6 @@
+import Example from "../components/AdminMenu";
 
-import { Inter } from "next/font/google";
-import Example from '../components/AdminMenu';
-
-import Table1 from '../components/UserTable';
+import Table1 from "../components/UserTable";
 
 export const metadata = {
   title: "TradeSuite",
@@ -12,8 +10,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <>
-    <Example/>
-    <Table1/>
+      <Example />
+      <Table1 />
     </>
   );
 }

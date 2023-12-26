@@ -70,14 +70,6 @@ export default function UserDashboard() {
     console.log(data);
   }, [data]);
 
-  const handleSignOut = async () => {
-    try {
-      await signOut({ redirect: false, callbackUrl: "/" });
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
-
   const handleNavigation = (selectedTab) => {
     const updatedNavigation = navigation.map((tab) => ({
       ...tab,
@@ -330,7 +322,7 @@ export default function UserDashboard() {
                                 // href={item.href}
                                 onClick={
                                   item.name === "Sign out"
-                                    ? handleSignOut()
+                                    ? signOut({ callbackUrl: "/" })
                                     : undefined
                                 }
                                 className={classNames(

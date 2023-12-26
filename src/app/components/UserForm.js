@@ -10,6 +10,11 @@ import { SignedUrlAction } from "../Actions/GetSignedUrl";
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
+  const [idFile, setIdFile] = useState();
+  const [poaFile, setPoaFile] = useState();
+  const [fileType, setFileType] = useState();
+  const [signedIdFileURL, setSignedIdFileURL] = useState();
+  const [signedPoaFileURL, setSignedPoaFileURL] = useState();
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -60,34 +65,41 @@ const UserForm = ({ userAction }) => {
     router.push("/Login");
   };
 
-  const handleFileUpload = async (e) => {
-    if (file) {
+  const getSignedURL = async () => {
+    if (idFile || poaFile) {
       const response = await SignedUrlAction();
       if (response.success) {
         const url = response.success.url;
-        uploadFile(url);
+        fileType === "id" ? setSignedIdFileURL(url) : setSignedPoaFileURL(url);
+        // setSignedFileURL(url);
       } else {
         console.error("Error getting signed URL", response.failure);
       }
     }
   };
 
-  const uploadFile = async (url) => {
-    try {
-      const response = await axios.put(url, file, {
-        headers: {
-          "Content-Type": file?.type,
-        },
-      });
-      await AddCompanyFile(url.split("?")[0]);
-      console.log("Upload successful");
-    } catch (error) {
-      console.error("Error uploading file", error);
-    }
-  };
+  // const uploadFile = async (id) => {
+  //   try {
+  //     const response = await axios.put(signedFileURL, file, {
+  //       headers: {
+  //         "Content-Type": file?.type,
+  //       },
+  //     });
+  //     await AddCompanyFile(signedFileURL.split("?")[0], id);
+  //     console.log("Upload successful");
+  //   } catch (error) {
+  //     console.error("Error uploading file", error);
+  //   }
+  // };
 
-  const handleFileChange = (event) => {
-    event.target.files[0];
+  useEffect(() => {
+    getSignedURL();
+  }, [idFile, poaFile]);
+
+  const handleFileChange = (event, fileType) => {
+    const selectedFile = event.target.files[0];
+    fileType === "id" ? setIdFile(selectedFile) : setPoaFile(selectedFile);
+    setFileType(fileType);
   };
 
   return (
@@ -191,7 +203,7 @@ const UserForm = ({ userAction }) => {
               type="file"
               name="file"
               accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
+              onChange={(e) => handleFileChange(e, "id")}
               required
             />
           </div>
@@ -200,7 +212,12 @@ const UserForm = ({ userAction }) => {
             <label htmlFor="file-upload" className="upload-btn">
               Proof Of Address
             </label>
-            <input type="file" accept=".pdf,.doc,.docx" required />
+            <input
+              type="file"
+              onChange={(e) => handleFileChange(e, "poa")}
+              accept=".pdf,.doc,.docx"
+              required
+            />
           </div>
         </div>
 

@@ -27,7 +27,7 @@ const CompanyForm = ({ onSubmit }) => {
   const options = useMemo(() => countryList().getData(), []);
   const router = useRouter();
   const [file, setFile] = useState();
-  const [fileURL, setFileURL] = useState();
+  const [signedFileURL, setSignedFileURL] = useState();
   const formik = useFormik({
     initialValues: {
       companyName: "",
@@ -61,45 +61,33 @@ const CompanyForm = ({ onSubmit }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const response = await onSubmit(formData);
-    console.log(response);
+    await uploadFile(response.id);
     if (response.status === 200) {
       localStorage.setItem("companyID", response.id);
       router.push("/Signup/UserSignup");
     }
   };
 
-  const handleFileUpload = async (e) => {
+  const getSignedURL = async () => {
     if (file) {
       const response = await SignedUrlAction();
       if (response.success) {
         const url = response.success.url;
-        console.log(url);
-        uploadFile(url);
+        setSignedFileURL(url);
       } else {
         console.error("Error getting signed URL", response.failure);
       }
     }
   };
 
-  //   if (fileURL) {
-  //     URL.revokeObjectURL(fileURL);
-  //   }
-  //   if (file) {
-  //     const url = URL.createObjectURL(file);
-  //     setFileURL(url);
-  //   } else {
-  //     setFileURL(undefined);
-  //   }
-  // };
-
-  const uploadFile = async (url) => {
+  const uploadFile = async (id) => {
     try {
-      const response = await axios.put(url, file, {
+      const response = await axios.put(signedFileURL, file, {
         headers: {
           "Content-Type": file?.type,
         },
       });
-      await AddCompanyFile(url.split("?")[0]);
+      await AddCompanyFile(signedFileURL.split("?")[0], id);
       console.log("Upload successful");
     } catch (error) {
       console.error("Error uploading file", error);
@@ -111,7 +99,7 @@ const CompanyForm = ({ onSubmit }) => {
   };
 
   useEffect(() => {
-    handleFileUpload();
+    getSignedURL();
   }, [file]);
 
   return (
