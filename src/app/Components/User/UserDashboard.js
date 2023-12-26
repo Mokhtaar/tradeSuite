@@ -194,7 +194,7 @@ export default function UserDashboard() {
                 backgroundImage:
                   "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
               }}
-              className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-black px-6 pb-4"
+              className="flex grow flex-col gap-y-5 overflow-y-auto  bg-black px-6 pb-4"
             >
               <div className="flex h-16 shrink-0 items-center">
                 <img
@@ -244,7 +244,7 @@ export default function UserDashboard() {
                 backgroundImage:
                   "linear-gradient(425deg, rgba(140.25, 12.27, 96.74, 0.5) 1.27%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
               }}
-              className="sticky text-gray-200 top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-black px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+              className="sticky text-gray-200 top-0 z-40 flex h-16 shrink-0 items-center gap-x-4  bg-black px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
             >
               <button
                 type="button"

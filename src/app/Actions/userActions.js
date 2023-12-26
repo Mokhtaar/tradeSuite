@@ -3,7 +3,7 @@
 import prisma from "../../../lib/prisma";
 import bcrypt from "bcrypt";
 
-const addUser = async (userData, companyID) => {
+const addUser = async (userData, companyID,role) => {
   const intialPassword = userData.get("password");
   const hashedPassword = await bcrypt.hash(intialPassword, 10);
 
@@ -14,7 +14,8 @@ const addUser = async (userData, companyID) => {
     phoneNumber: parseInt(userData.get("phoneNumber")),
     dob: new Date(userData.get("dob")).toISOString(),
     companyID,
-    status:"pending",
+    status: role === "ADMIN" ? "Approved" : "Pending",
+    role,
   };
 
   try {

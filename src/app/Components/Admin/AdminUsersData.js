@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../../Actions/AdminActions";
 import { GetAdminTableData } from "../../Actions/AdminActions";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function AdminUsersData() {
   const [users, setUsers] = useState();
@@ -43,12 +44,13 @@ export default function AdminUsersData() {
             </p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <button
-              type="button"
-              className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Add Admin
-            </button>
+          
+            <Link
+                href="../Admin/AddAdmin"
+                className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+               Add Admin <span aria-hidden="true">&rarr;</span>
+              </Link>
           </div>
         </div>
         <div className="mt-8 flow-root">
