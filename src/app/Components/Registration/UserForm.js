@@ -5,8 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { SignedUrlAction } from "../../Actions/GetSignedUrl";
+import { AddUserFiles } from "../../Actions/userActions";
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
@@ -58,11 +60,17 @@ const UserForm = ({ userAction }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const userData = new FormData(event.target);
-    const response = await userAction(userData, +companyID);
-    console.log(response);
+    const response = await userAction(userData, 1);
+    const userId = response.success.response.id;
+    uploadFiles(userId);
+    // const res = await AddUserFiles(
+    //   userId,
+    //   signedPoaFileURL.split("?")[0],
+    //   signedIdFileURL.split("?")[0]
+    // );
     // localStorage.setItem("user", userData);
     // console.log(userData.name);
-    router.push("/Login");
+    // router.push("/Login");
   };
 
   const getSignedURL = async () => {
@@ -70,36 +78,46 @@ const UserForm = ({ userAction }) => {
       const response = await SignedUrlAction();
       if (response.success) {
         const url = response.success.url;
+        console.log(url.split("?")[0]);
         fileType === "id" ? setSignedIdFileURL(url) : setSignedPoaFileURL(url);
-        // setSignedFileURL(url);
       } else {
         console.error("Error getting signed URL", response.failure);
       }
     }
   };
 
-  // const uploadFile = async (id) => {
-  //   try {
-  //     const response = await axios.put(signedFileURL, file, {
-  //       headers: {
-  //         "Content-Type": file?.type,
-  //       },
-  //     });
-  //     await AddCompanyFile(signedFileURL.split("?")[0], id);
-  //     console.log("Upload successful");
-  //   } catch (error) {
-  //     console.error("Error uploading file", error);
-  //   }
-  // };
+  const uploadFiles = async (id) => {
+    try {
+      await axios.put(signedIdFileURL, idFile, {
+        headers: {
+          "Content-Type": idFile?.type,
+        },
+      });
+      await axios.put(signedPoaFileURL, poaFile, {
+        headers: {
+          "Content-Type": poaFile?.type,
+        },
+      });
+
+      AddUserFiles(
+        id,
+        signedPoaFileURL.split("?")[0],
+        signedIdFileURL.split("?")[0]
+      );
+      console.log("Upload successful");
+    } catch (error) {
+      console.error("Error uploading file", error);
+    }
+  };
 
   useEffect(() => {
     getSignedURL();
   }, [idFile, poaFile]);
 
   const handleFileChange = (event, fileType) => {
+    setFileType(fileType);
     const selectedFile = event.target.files[0];
     fileType === "id" ? setIdFile(selectedFile) : setPoaFile(selectedFile);
-    setFileType(fileType);
   };
 
   return (

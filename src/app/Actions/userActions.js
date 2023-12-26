@@ -1,9 +1,8 @@
 "use server";
-
 import prisma from "../../../lib/prisma";
 import bcrypt from "bcrypt";
 
-const addUser = async (userData, companyID,role) => {
+const addUser = async (userData, companyID, role) => {
   const intialPassword = userData.get("password");
   const hashedPassword = await bcrypt.hash(intialPassword, 10);
 
@@ -28,4 +27,21 @@ const addUser = async (userData, companyID,role) => {
   }
 };
 
-export { addUser };
+const AddUserFiles = async (id, signedPoaFileURL, signedIdFileURL) => {
+  try {
+    const addUserFiles = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        proofOfAddress: signedPoaFileURL,
+        proofOfIdentity: signedIdFileURL,
+      },
+    });
+    return { success: "File has been uploaded successfully" };
+  } catch (error) {
+    return { error: error.message, status: 404 };
+  }
+};
+
+export { addUser, AddUserFiles };
