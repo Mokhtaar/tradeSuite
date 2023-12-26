@@ -1,7 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 export default function Testmonials() {
   return (
-    <section className="relative w-screen bg-gradient-radial from-[#c8fded] isolate overflow-hidden px-6 py-24 sm:py-32 lg:px-8">
+    <section className="relative w-screen isolate overflow-hidden px-6 py-24 sm:py-32 lg:px-8"
+    style={{
+      backgroundColor: "black", // Set the black background for the entire sidebar
+      backgroundImage:
+        "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+    }}
+    >
       {/* <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] opacity-20" /> */}
       {/* <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" /> */}
       <div className="mx-auto max-w-2xl lg:max-w-4xl">

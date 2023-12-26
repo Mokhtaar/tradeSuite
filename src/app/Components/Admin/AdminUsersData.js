@@ -39,8 +39,8 @@ export default function AdminUsersData() {
               Users
             </h1>
             <p className="mt-2 text-sm text-gray-700">
-              A list of all the users in your account including their name,
-              title, email and role.
+              A list of all the users including their Name,
+              Email, Company name and Documents.
             </p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
@@ -119,10 +119,30 @@ export default function AdminUsersData() {
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {}
+                      {user.proofOfAddress ? (
+                          <a
+                            href={user.proofOfAddress}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {}
+                      {user.proofOfIdentity ? (
+                          <a
+                            href={user.proofOfAddress}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
