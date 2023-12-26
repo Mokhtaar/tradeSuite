@@ -6,12 +6,12 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const navigation = [
-  { name: "TradeSuite", href: "#" },
+  { name: "Home", href: "#" },
   { name: "Dashboard", href: "../Dashboard" },
-  { name: "Messages", href: "#" },
-  { name: "XTurn Finance", href: "#" },
-  { name: "Research Center", href: "#" },
-  { name: "Active Trades", href: "#" },
+  { name: "About", href: "#" },
+  { name: "Pricing", href: "#" },
+  { name: "Learn", href: "#" },
+  { name: "Community", href: "#" },
 ];
 const Navbar = () => {
   const isUserLoggedIn = false; //G
@@ -34,7 +34,7 @@ const Navbar = () => {
               <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-15 w-15 mix-blend-color-burn"
+                  className="mx-auto h-12 w-auto"
                   src="./logo.png"
                   alt=""
                 />
@@ -55,18 +55,23 @@ const Navbar = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-sm font-semibold leading-6 text-gray-900"
+                  className="text-sm font-semibold leading-6 text-white"
                 >
                   {item.name}
                 </a>
               ))}
             </div>
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end ">
               <Link
                 href="../Login"
-                className="text-sm font-semibold leading-6 text-gray-900"
+                className="text-sm font-semibold leading-6 w-24 h-[38px] px-6 py-2 rounded-lg shadow inline-flex items-center justify-center text-white"
+                style={{
+                  backgroundImage: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
+                  borderImage: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
+                  borderImageSlice: '1',
+                }}
               >
-                Log in <span aria-hidden="true">&rarr;</span>
+                Log in 
               </Link>
             </div>
           </nav>
