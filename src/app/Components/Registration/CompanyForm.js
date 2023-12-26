@@ -2,7 +2,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import countryList from "react-select-country-list";
-import "../styles/style.css";
+import "../../styles/style.css";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useFormik } from "formik";

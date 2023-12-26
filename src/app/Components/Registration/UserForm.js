@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import "../styles/style.css";
+import "../../styles/style.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useFormik } from "formik";
