@@ -60,17 +60,10 @@ const UserForm = ({ userAction }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const userData = new FormData(event.target);
-    const response = await userAction(userData, 1);
+    const response = await userAction(userData, +companyID);
     const userId = response.success.response.id;
-    uploadFiles(userId);
-    // const res = await AddUserFiles(
-    //   userId,
-    //   signedPoaFileURL.split("?")[0],
-    //   signedIdFileURL.split("?")[0]
-    // );
-    // localStorage.setItem("user", userData);
-    // console.log(userData.name);
-    // router.push("/Login");
+    const result = await uploadFiles(userId);
+    result.success ? router.push("/Login") : console.log(result.error);
   };
 
   const getSignedURL = async () => {
@@ -78,7 +71,6 @@ const UserForm = ({ userAction }) => {
       const response = await SignedUrlAction();
       if (response.success) {
         const url = response.success.url;
-        console.log(url.split("?")[0]);
         fileType === "id" ? setSignedIdFileURL(url) : setSignedPoaFileURL(url);
       } else {
         console.error("Error getting signed URL", response.failure);
@@ -99,14 +91,14 @@ const UserForm = ({ userAction }) => {
         },
       });
 
-      AddUserFiles(
+      const response = await AddUserFiles(
         id,
         signedPoaFileURL.split("?")[0],
         signedIdFileURL.split("?")[0]
       );
-      console.log("Upload successful");
+      return response;
     } catch (error) {
-      console.error("Error uploading file", error);
+      return "Error uploading file", error;
     }
   };
 

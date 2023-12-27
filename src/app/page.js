@@ -3,7 +3,9 @@ import Footer from "./Components/HomePage/Footer";
 import HeroSection from "./components/HomePage/HeroSection";
 import OurServices from "./components/HomePage/OurServices";
 import Testmonials from "./components/HomePage/Testmonials";
-import { getCurrentUser } from "../../lib/session";
+// import { getCurrentUser } from "../../lib/session";
+// import { getCurrentUser } from "@/lib/session";
+import { getCurrentUser } from "@/lib/session";
 
 async function Home() {
   const user = await getCurrentUser();

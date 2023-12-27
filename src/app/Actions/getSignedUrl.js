@@ -6,7 +6,7 @@ import crypto from "crypto";
 const { AWS_BUCKET_REGION, AWS_ACCESS_KEY, AWS_SECRET_KEY, AWS_BUCKET_NAME } =
   process.env;
 
-  const generateFileName = (bytes = 32) =>
+const generateFileName = (bytes = 32) =>
   crypto.randomBytes(bytes).toString("hex");
 
 if (
@@ -31,10 +31,10 @@ const s3 = new S3Client({
 const maxFileSize = 1024 * 1024 * 10;
 
 export async function SignedUrlAction() {
-//   console.log(fileSize, fileType, checksum);
-//   const session = await auth()
-//   if !session return {faliure: "not authenticated"}
-//     console.log(fileType);
+  //   console.log(fileSize, fileType, checksum);
+  //   const session = await auth()
+  //   if !session return {faliure: "not authenticated"}
+  //     console.log(fileType);
 
   //   if (!acceptedTypes.includes(fileType)) {
   //     return { failure: "Invalid file type" };
@@ -56,7 +56,7 @@ export async function SignedUrlAction() {
   });
 
   const url = await getSignedUrl(s3, putObjectCommand, {
-    expiresIn: 60,
+    expiresIn: 120,
   });
 
   return { success: { url } };

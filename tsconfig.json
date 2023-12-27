@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -26,9 +22,10 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "lib/session.js", "lib/auth.js", "src/app/api/auth/[...nextauth]/route.js"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "**/*.tsx",
+    "lib/session.js",
+    "lib/auth.js",
+    "src/app/api/auth/[...nextauth]/route.js"
+  ],
+  "exclude": ["node_modules"]
 }
