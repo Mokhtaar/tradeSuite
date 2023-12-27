@@ -15,7 +15,116 @@ const UploadDocument = () => {
           <header className="text-center text-indigo-500 pb-7 mt-3 font-bold text-[40px] text-lg">
             Upload Files
           </header>
-          <div className="p-3">
+<div className="p-3">
+            <div className="mb-2">
+              <span className="text-base">please Provide a detailed business plan outlining the purpose of the financing, your company's history, and future projections.</span>
+              </div>
+              </div>
+          <div className="input_field flex flex-col w-max mx-auto text-center ">
+            <div className="flex flex-row items-start justify-end space-x-4">
+              <label >
+               Income Statment
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              <label>
+               Balance Sheet
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              </div>
+              <label>
+                Cash Flow Statement
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              <label>
+                Supplier Details
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              <label>
+                Past orders
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              <label>
+              Yearly Sales Volume
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              <label>
+              Bank Account Statements
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              <label>
+              Previous Yearly Invoices
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              <label>
+             Other Supported Documents
+                <input
+                  className="text-sm cursor-pointer w-36 hidden"
+                  type="file"
+                  multiple
+                />
+                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                  Select
+                </div>
+              </label>
+              </div>
+              
+          {/* <div className="p-3">
             <div className="mb-2">
               <span className="text-base">Title</span>
               <input
@@ -61,7 +170,7 @@ const UploadDocument = () => {
           </div>
           <button className="w-full h-12 text-lg  mt-5 bg-blue-600 rounded text-white hover:bg-blue-700">
             Create
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
