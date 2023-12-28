@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../../styles/style.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,6 +17,8 @@ const UserForm = ({ userAction }) => {
   const [fileType, setFileType] = useState();
   const [signedIdFileURL, setSignedIdFileURL] = useState();
   const [signedPoaFileURL, setSignedPoaFileURL] = useState();
+  const prevIdFile = useRef();
+  const prevPoaFile = useRef();
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -60,25 +62,17 @@ const UserForm = ({ userAction }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const userData = new FormData(event.target);
-    const response = await userAction(userData, 1);
+    const response = await userAction(userData, +companyID);
     const userId = response.success.response.id;
-    uploadFiles(userId);
-    // const res = await AddUserFiles(
-    //   userId,
-    //   signedPoaFileURL.split("?")[0],
-    //   signedIdFileURL.split("?")[0]
-    // );
-    // localStorage.setItem("user", userData);
-    // console.log(userData.name);
-    // router.push("/Login");
+    const result = await uploadFiles(userId);
+    result.success ? router.push("/Login") : console.log(result.error);
   };
 
-  const getSignedURL = async () => {
-    if (idFile || poaFile) {
-      const response = await SignedUrlAction();
+  const getSignedURL = async (file) => {
+    if (file) {
+      const response = await SignedUrlAction(file.type);
       if (response.success) {
         const url = response.success.url;
-        console.log(url.split("?")[0]);
         fileType === "id" ? setSignedIdFileURL(url) : setSignedPoaFileURL(url);
       } else {
         console.error("Error getting signed URL", response.failure);
@@ -98,20 +92,22 @@ const UserForm = ({ userAction }) => {
           "Content-Type": poaFile?.type,
         },
       });
-
-      AddUserFiles(
+      const response = await AddUserFiles(
         id,
         signedPoaFileURL.split("?")[0],
         signedIdFileURL.split("?")[0]
       );
-      console.log("Upload successful");
+      return response;
     } catch (error) {
-      console.error("Error uploading file", error);
+      return "Error uploading file", error;
     }
   };
 
   useEffect(() => {
-    getSignedURL();
+    prevIdFile.current !== idFile && getSignedURL(idFile);
+    prevPoaFile.current !== poaFile && getSignedURL(poaFile);
+    prevIdFile.current = idFile;
+    prevPoaFile.current = poaFile;
   }, [idFile, poaFile]);
 
   const handleFileChange = (event, fileType) => {
@@ -221,6 +217,7 @@ const UserForm = ({ userAction }) => {
               type="file"
               name="file"
               accept=".pdf,.doc,.docx"
+              ref={prevIdFile}
               onChange={(e) => handleFileChange(e, "id")}
               required
             />
@@ -231,6 +228,7 @@ const UserForm = ({ userAction }) => {
               Proof Of Address
             </label>
             <input
+              ref={prevPoaFile}
               type="file"
               onChange={(e) => handleFileChange(e, "poa")}
               accept=".pdf,.doc,.docx"

@@ -38,7 +38,7 @@ const AddUserFiles = async (id, signedPoaFileURL, signedIdFileURL) => {
         proofOfIdentity: signedIdFileURL,
       },
     });
-    return { success: "File has been uploaded successfully" };
+    return { success: "Files have been uploaded successfully" };
   } catch (error) {
     return { error: error.message, status: 404 };
   }

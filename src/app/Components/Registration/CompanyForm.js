@@ -69,7 +69,7 @@ const CompanyForm = ({ onSubmit }) => {
 
   const getSignedURL = async () => {
     if (file) {
-      const response = await SignedUrlAction();
+      const response = await SignedUrlAction(file.type);
       if (response.success) {
         const url = response.success.url;
         setSignedFileURL(url);

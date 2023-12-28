@@ -36,37 +36,30 @@ const LoginForm = ({ LoginAction }) => {
         redirect: false,
       });
 
-      
-        
-        if(response?.error){
-          console.log(response?.error)
-
-        }else{
-          if (data?.user.status === 'Approved' && data?.user.role === "USER") {
-            router.push('/Dashboard');
-          } 
-         else if (data?.user.status === 'Approved' && data?.user.role === "ADMIN") {
-            router.push('/Admin');
-          } 
-          else if(data?.user.status === 'Rejected'){
-            alert('You are rejected. Contact admin for access.');
-          }
-          else {
-            alert('Pending');
-          }
-
+      if (response?.error) {
+        console.log(response?.error);
+      } else {
+        if (data?.user.status === "Approved" && data?.user.role === "USER") {
+          router.push("/Dashboard");
+        } else if (
+          data?.user.status === "Approved" &&
+          data?.user.role === "ADMIN"
+        ) {
+          router.push("/Admin");
+        } else if (data?.user.status === "Rejected") {
+          alert("You are rejected. Contact admin for access.");
+        } else {
+          alert("Pending");
         }
-    
-    // response?.error ? console.log(response.error) : router.push("/");
+      }
 
-   
+      // response?.error ? console.log(response.error) : router.push("/");
+
       // if (response.message === "wrongEmail") setIsWrongEmail(true);
       // if (response.message === "wrongPassword") setIsWrongPassword(true);
-  
     },
   });
 
-  
   const handleEmailChange = (e) => {
     formik.handleChange(e);
     setIsWrongEmail(false);

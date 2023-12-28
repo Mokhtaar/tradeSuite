@@ -39,18 +39,17 @@ export default function AdminUsersData() {
               Users
             </h1>
             <p className="mt-2 text-sm text-gray-700">
-              A list of all the users including their Name,
-              Email, Company name and Documents.
+              A list of all the users including their Name, Email, Company name
+              and Documents.
             </p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          
             <Link
-                href="../Admin/AddAdmin"
-                className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-               Add Admin <span aria-hidden="true">&rarr;</span>
-              </Link>
+              href="../Admin/AddAdmin"
+              className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Add Admin <span aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
         </div>
         <div className="mt-8 flow-root">
@@ -119,7 +118,7 @@ export default function AdminUsersData() {
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {user.proofOfAddress ? (
+                        {user.proofOfAddress ? (
                           <a
                             href={user.proofOfAddress}
                             target="_blank"
@@ -132,7 +131,7 @@ export default function AdminUsersData() {
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {user.proofOfIdentity ? (
+                        {user.proofOfIdentity ? (
                           <a
                             href={user.proofOfAddress}
                             target="_blank"
