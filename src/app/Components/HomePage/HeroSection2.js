@@ -1,17 +1,17 @@
 export default function HeroSection2() {
     return (
-        <div className="w-screen  "style={{
+        <div className="w-screen"style={{
           backgroundColor: "black", 
           backgroundImage:
             "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
         }}>
-        <div className="inline-flex flex-col items-start gap-[96px] px-0 py-[120px] relative">
-        <div className="flex flex-col w-[1440px] items-center gap-[32px] px-[120px] py-0 relative flex-[0_0_auto]">
-          <div className="flex flex-col items-center gap-[16px] self-stretch w-full relative flex-[0_0_auto]"></div>
-            <p className="relative self-stretch mt-[-1.00px] [font-family:'Inter',Helvetica] font-normal text-[#ffffffa3] text-[24px] text-center tracking-[0] leading-[28.8px]">
+<div className="inline-flex flex-col sm:flex-row  gap-4 sm:gap-8 px-4 sm:px-8 py-32 sm:py-4 relative mb-50">
+  <div className="flex flex-col w-full sm:w-screen items-center gap-4 sm:gap-8 px-4 sm:px-8 py-4 sm:py-8 relative">
+    <div className="flex flex-col items-center gap-4 self-stretch w-full relative"></div>
+            <p className="relative self-stretch mt-[-1.00px] [font-family:'Inter',Helvetica] font-normal text-[#ffffffa3] text-[24px] text-center tracking-[0] leading-[28.8px] pt-10">
               The Next Generation of Trust and Security
             </p>
-            <p className="relative self-stretch [font-family:'Libre_Franklin',Helvetica] font-bold text-transparent text-[64px] text-center tracking-[-0.42px] leading-[76.8px]">
+            <p className="relative self-stretch [font-family:'Libre_Franklin',Helvetica] font-bold text-transparent  text-4xl sm:text-6xl lg:text-6xl  text-center tracking-[-0.42px] leading-[76.8px]">
             <span className="text-[#ffffff]">
               Revolutionize Your Industry with
               <br />
@@ -34,11 +34,11 @@ export default function HeroSection2() {
             </div>
           
             </div>
-            <div className="inline-flex flex-col items-center justify-center gap-[32px] relative flex-[0_0_auto]">
-        <p className="relative self-stretch mt-[-1.00px] [font-family:'Libre_Franklin',Helvetica] font-medium text-[#8359e8a3] text-[16px] text-center tracking-[0.27px] leading-[22.4px]">
+            <div className="inline-flex flex-col items-center justify-center gap-[32px] relative sm:w-screen">
+        <p className="relative self-stretch mt-[-1.00px] [font-family:'Libre_Franklin',Helvetica] font-medium text-[#8359e8a3] text-[16px] text-center tracking-[0.27px] leading-[22.4px]  ml-10">
           Powering Tolls And Colaboration For Cripto Curency
         </p>
-        <div className="flex flex-row w-[1440px] items-center justify-center gap-[32px] pt-0 pb-[32px] px-[120px]">
+        <div className="flex flex-row sm:flex-col w-full sm:w-screen items-center justify-center gap-[32px] pt-0 pb-[32px] px-[4%] ">
           <div className="relative w-[153px] h-[32px] opacity-60">
             <div className="relative w-[102px] h-[21px] top-[5px] left-[25px]">
               <div className="relative h-[21px] ">
