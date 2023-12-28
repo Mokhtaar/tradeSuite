@@ -1,7 +1,7 @@
 export default function HeroSection2() {
   return (
     <div
-      className="w-screen"
+      className="w-full overflow-hidden "
       style={{
         backgroundColor: "black",
         backgroundImage:
@@ -11,10 +11,10 @@ export default function HeroSection2() {
       <div className="inline-flex flex-col sm:flex-row  gap-4 sm:gap-8 px-4 sm:px-8 py-32 sm:py-4 relative  ">
         <div className="flex flex-col w-full sm:w-screen items-center gap-4 sm:gap-8 px-4 sm:px-8 py-4 sm:py-8 relative">
           <div className="flex flex-col items-center gap-4 self-stretch w-full relative"></div>
-          <p className="relative self-stretch mt-[-1.00px] [font-family:'Inter',Helvetica] font-normal text-[#ffffffa3] text-[24px] text-center tracking-[0] leading-[28.8px] pt-10">
+          <p className="relative self-stretch mt-[-1.00px] [font-family:'Inter',Helvetica] font-normal text-[#ffffffa3] text-[24px] text-center tracking-[0] leading-[28.8px] pt-20 ">
             The Next Generation of Trust and Security
           </p>
-          <p className="relative self-stretch [font-family:'Libre_Franklin',Helvetica] font-bold text-transparent  text-4xl sm:text-6xl lg:text-6xl  text-center tracking-[-0.42px] leading-[76.8px]">
+          <p className="relative self-stretch [font-family:'Libre_Franklin',Helvetica] font-bold text-transparent  text-4xl sm:text-8xl lg:text-7xl  text-center tracking-[-0.42px] leading-[76.8px]">
             <span className="text-[#ffffff]">
               Revolutionize Your Industry with
               <br />
@@ -40,7 +40,7 @@ export default function HeroSection2() {
           Powering Tolls And Colaboration For Cripto Curency
         </p>
         <div className="flex flex-row  w-full sm:w-screen items-center justify-center gap-[32px] pt-0 pb-[32px] px-[4%] ">
-          <div className="relative w-[102px] h-[21px] top-[5px] left-[25px]">
+          <div className="relative w-[102px] h-[21px] top-[5px] left-[25px]   ">
          
               <img
                 className="absolute  h-[30px] top-0 right-[180px] sm:right-[250px]"
