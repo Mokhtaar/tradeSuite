@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import useFileObjects from "../../../../lib/hooks/useFileObjects";
-import useFileUploader from "../../../../lib/hooks/useFileUploader";
+import useFileObjects from "@/lib/hooks/useFileObjects";
+import useFileUploader from "@/lib/hooks/useFileUploader";
 
 const UploadDocument = () => {
   const { fileObjects, handleFileChange } = useFileObjects();
