@@ -9,8 +9,9 @@ const UploadDocument = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     for (const fileObject of fileObjects) {
-      uploadFile(fileObject);
+      await uploadFile(1, fileObject);
     }
+    console.log("uploaded");
   };
 
   return (

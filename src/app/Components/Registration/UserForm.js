@@ -1,14 +1,11 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/style.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { SignedUrlAction } from "../../Actions/GetSignedUrl";
-import { AddUserFiles } from "../../Actions/userActions";
 import useFileObjects from "../../../../lib/hooks/useFileObjects";
 import useFileUploader from "../../../../lib/hooks/useFileUploader";
 
