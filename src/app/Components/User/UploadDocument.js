@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { AddUserDocuments } from "../../Actions/userActions";
 import { SignedUrlAction } from "../../Actions/GetSignedUrl";
@@ -43,13 +43,11 @@ const UploadDocument = () => {
     const file = files[0];
     const keyExists = fileObjects.some((obj) => Object.keys(obj)[0] === name);
     setFileObjects((prevFileObjects) => {
-      if (keyExists) {
-        return prevFileObjects.map((obj) =>
-          Object.keys(obj)[0] === name ? { [name]: file } : obj
-        );
-      } else {
-        return [...prevFileObjects, { [name]: file }];
-      }
+      return keyExists
+        ? prevFileObjects.map((obj) =>
+            Object.keys(obj)[0] === name ? { [name]: file } : obj
+          )
+        : [...prevFileObjects, { [name]: file }];
     });
   };
 
