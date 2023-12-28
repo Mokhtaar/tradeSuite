@@ -1,9 +1,61 @@
 import React from "react";
+import { useState } from "react";
+import { AddUserDocuments } from "../../Actions/userActions";
+import { SignedUrlAction } from "../../Actions/GetSignedUrl";
+import axios from "axios";
 
 const UploadDocument = () => {
+  const [fileObjects, setFileObjects] = useState([]);
+
+  const uploadFile = async (fileObject) => {
+    const key = Object.keys(fileObject)[0];
+    const file = fileObject[key];
+
+    try {
+      const response = await SignedUrlAction(file.type);
+      const url = response.success.url;
+
+      await axios.put(url, file, {
+        headers: {
+          "Content-Type": file?.type,
+        },
+      });
+
+      const res = await AddUserDocuments(key, url.split("?")[0]);
+      console.log(res);
+    } catch (error) {
+      console.error("Error uploading to S3:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    for (const fileObject of fileObjects) {
+      await uploadFile(fileObject);
+    }
+  };
+
+  const handleFileChange = (event) => {
+    const { name, files } = event.target;
+    if (files.length === 0) {
+      return;
+    }
+    const file = files[0];
+    const keyExists = fileObjects.some((obj) => Object.keys(obj)[0] === name);
+    setFileObjects((prevFileObjects) => {
+      if (keyExists) {
+        return prevFileObjects.map((obj) =>
+          Object.keys(obj)[0] === name ? { [name]: file } : obj
+        );
+      } else {
+        return [...prevFileObjects, { [name]: file }];
+      }
+    });
+  };
+
   return (
-    <div>
-      <div
+    <>
+      <form
         className="fixed z-10 left-20 top-0 w-full h-full flex  bg-opacity-20"
         style={{
           backgroundColor: "black", // Set the black background for the entire sidebar
@@ -15,18 +67,24 @@ const UploadDocument = () => {
           <header className="text-center text-indigo-500 pb-7 mt-3 font-bold text-[40px] text-lg">
             Upload Files
           </header>
-<div className="p-3">
+          <div className="p-3">
             <div className="mb-2">
-              <span className="text-base">please Provide a detailed business plan outlining the purpose of the financing, your company's history, and future projections.</span>
-              </div>
-              </div>
+              <span className="text-base">
+                Please Provide a detailed business plan outlining the purpose of
+                the financing, your company&apos;s history, and future
+                projections.
+              </span>
+            </div>
+          </div>
           <div className="input_field flex flex-col w-max mx-auto text-center ">
             <div className="flex flex-row items-start justify-end space-x-4">
-              <label >
-               Income Statment
+              <label>
+                incomeStatement
                 <input
+                  name="incomeStatement"
                   className="text-sm cursor-pointer w-36 hidden"
                   type="file"
+                  onChange={handleFileChange}
                   multiple
                 />
                 <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
@@ -34,96 +92,112 @@ const UploadDocument = () => {
                 </div>
               </label>
               <label>
-               Balance Sheet
+                Balance Sheet
                 <input
+                  name="balanceSheet"
                   className="text-sm cursor-pointer w-36 hidden"
                   type="file"
+                  onChange={handleFileChange}
                   multiple
                 />
                 <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                   Select
                 </div>
               </label>
+            </div>
+            <label>
+              Cash Flow Statement
+              <input
+                className="text-sm cursor-pointer w-36 hidden"
+                type="file"
+                name="cashFlow"
+                onChange={handleFileChange}
+                multiple
+              />
+              <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                Select
               </div>
-              <label>
-                Cash Flow Statement
-                <input
-                  className="text-sm cursor-pointer w-36 hidden"
-                  type="file"
-                  multiple
-                />
-                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                  Select
-                </div>
-              </label>
-              <label>
-                Supplier Details
-                <input
-                  className="text-sm cursor-pointer w-36 hidden"
-                  type="file"
-                  multiple
-                />
-                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                  Select
-                </div>
-              </label>
-              <label>
-                Past orders
-                <input
-                  className="text-sm cursor-pointer w-36 hidden"
-                  type="file"
-                  multiple
-                />
-                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                  Select
-                </div>
-              </label>
-              <label>
+            </label>
+            <label>
+              Supplier Details
+              <input
+                className="text-sm cursor-pointer w-36 hidden"
+                type="file"
+                name="supplierDetails"
+                onChange={handleFileChange}
+                multiple
+              />
+              <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                Select
+              </div>
+            </label>
+            <label>
+              Past orders
+              <input
+                name="pastOrders"
+                className="text-sm cursor-pointer w-36 hidden"
+                type="file"
+                multiple
+                onChange={handleFileChange}
+              />
+              <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                Select
+              </div>
+            </label>
+            <label>
               Yearly Sales Volume
-                <input
-                  className="text-sm cursor-pointer w-36 hidden"
-                  type="file"
-                  multiple
-                />
-                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                  Select
-                </div>
-              </label>
-              <label>
-              Bank Account Statements
-                <input
-                  className="text-sm cursor-pointer w-36 hidden"
-                  type="file"
-                  multiple
-                />
-                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                  Select
-                </div>
-              </label>
-              <label>
-              Previous Yearly Invoices
-                <input
-                  className="text-sm cursor-pointer w-36 hidden"
-                  type="file"
-                  multiple
-                />
-                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                  Select
-                </div>
-              </label>
-              <label>
-             Other Supported Documents
-                <input
-                  className="text-sm cursor-pointer w-36 hidden"
-                  type="file"
-                  multiple
-                />
-                <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                  Select
-                </div>
-              </label>
+              <input
+                name="yearlySales"
+                className="text-sm cursor-pointer w-36 hidden"
+                type="file"
+                multiple
+                onChange={handleFileChange}
+              />
+              <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                Select
               </div>
-              
+            </label>
+            <label>
+              Bank Account Statements
+              <input
+                name="bankStatement"
+                className="text-sm cursor-pointer w-36 hidden"
+                type="file"
+                multiple
+                onChange={handleFileChange}
+              />
+              <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                Select
+              </div>
+            </label>
+            <label>
+              Previous Yearly Invoices
+              <input
+                name="previousYearlyInvoices"
+                className="text-sm cursor-pointer w-36 hidden"
+                type="file"
+                multiple
+                onChange={handleFileChange}
+              />
+              <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                Select
+              </div>
+            </label>
+            <label>
+              Other Supported Documents
+              <input
+                name="other"
+                className="text-sm cursor-pointer w-36 hidden"
+                type="file"
+                multiple
+                // onChange={handleFileChange}
+              />
+              <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
+                Select
+              </div>
+            </label>
+          </div>
+
           {/* <div className="p-3">
             <div className="mb-2">
               <span className="text-base">Title</span>
@@ -172,8 +246,14 @@ const UploadDocument = () => {
             Create
           </button> */}
         </div>
-      </div>
-    </div>
+        <button
+          onClick={(e) => handleSubmit(e)}
+          className="text-red-800 text-2xl right-48 absolute top-20 bg-black w-44"
+        >
+          Sumbit
+        </button>
+      </form>
+    </>
   );
 };
 export default UploadDocument;

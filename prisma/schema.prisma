@@ -81,23 +81,22 @@ model Company {
   fileUpload  String?
   postalCode  Int
   users       User[]
-  media       media[]
+  media       Media[]
 
   @@unique([id, name])
 }
 
-model media {
+model Media {
   id                     Int      @id @default(autoincrement())
   incomeStatement        String?
   balanceSheet           String?
   cashFlow               String?
   supplierDetails        String?
-  PastOrders             String?
-  YearlySales            String?
-  BankStatement          String?
-  PreviousYearlyInvoices String?
+  pastOrders             String?
+  yearlySales            String?
+  bankStatement          String?
+  previousYearlyInvoices String?
   other                  String?
- 
   createdAt              DateTime @default(now())
   updatedAt              DateTime @default(now())
   company                Company? @relation(fields: [companyID], references: [id])
