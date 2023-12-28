@@ -4,7 +4,7 @@ import useFileUploader from "@/lib/hooks/useFileUploader";
 
 const UploadDocument = () => {
   const { fileObjects, handleFileChange } = useFileObjects();
-  const { uploadError, uploadFile } = useFileUploader();
+  const { uploadStatus, uploadFile } = useFileUploader();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

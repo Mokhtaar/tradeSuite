@@ -9,16 +9,13 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { SignedUrlAction } from "../../Actions/GetSignedUrl";
 import { AddUserFiles } from "../../Actions/userActions";
+import useFileObjects from "../../../../lib/hooks/useFileObjects";
+import useFileUploader from "../../../../lib/hooks/useFileUploader";
 
 const UserForm = ({ userAction }) => {
   const [companyID, setCompanyID] = useState();
-  const [idFile, setIdFile] = useState();
-  const [poaFile, setPoaFile] = useState();
-  const [fileType, setFileType] = useState();
-  const [signedIdFileURL, setSignedIdFileURL] = useState();
-  const [signedPoaFileURL, setSignedPoaFileURL] = useState();
-  const prevIdFile = useRef();
-  const prevPoaFile = useRef();
+  const { fileObjects, handleFileChange } = useFileObjects();
+  const { uploadStatus, uploadFile } = useFileUploader();
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -64,56 +61,15 @@ const UserForm = ({ userAction }) => {
     const userData = new FormData(event.target);
     const response = await userAction(userData, +companyID);
     const userId = response.success.response.id;
-    const result = await uploadFiles(userId);
-    result.success ? router.push("/Login") : console.log(result.error);
-  };
-
-  const getSignedURL = async (file) => {
-    if (file) {
-      const response = await SignedUrlAction(file.type);
-      if (response.success) {
-        const url = response.success.url;
-        fileType === "id" ? setSignedIdFileURL(url) : setSignedPoaFileURL(url);
-      } else {
-        console.error("Error getting signed URL", response.failure);
-      }
-    }
-  };
-
-  const uploadFiles = async (id) => {
     try {
-      await axios.put(signedIdFileURL, idFile, {
-        headers: {
-          "Content-Type": idFile?.type,
-        },
-      });
-      await axios.put(signedPoaFileURL, poaFile, {
-        headers: {
-          "Content-Type": poaFile?.type,
-        },
-      });
-      const response = await AddUserFiles(
-        id,
-        signedPoaFileURL.split("?")[0],
-        signedIdFileURL.split("?")[0]
-      );
-      return response;
+      let result;
+      for (const fileObject of fileObjects) {
+        result = await uploadFile(userId, fileObject, "Register");
+      }
+      result.success ? router.push("/Login") : console.log(result.error);
     } catch (error) {
-      return "Error uploading file", error;
+      console.log(error);
     }
-  };
-
-  useEffect(() => {
-    prevIdFile.current !== idFile && getSignedURL(idFile);
-    prevPoaFile.current !== poaFile && getSignedURL(poaFile);
-    prevIdFile.current = idFile;
-    prevPoaFile.current = poaFile;
-  }, [idFile, poaFile]);
-
-  const handleFileChange = (event, fileType) => {
-    setFileType(fileType);
-    const selectedFile = event.target.files[0];
-    fileType === "id" ? setIdFile(selectedFile) : setPoaFile(selectedFile);
   };
 
   return (
@@ -215,22 +171,20 @@ const UserForm = ({ userAction }) => {
             </label>
             <input
               type="file"
-              name="file"
+              name="proofOfIdentity"
               accept=".pdf,.doc,.docx"
-              ref={prevIdFile}
-              onChange={(e) => handleFileChange(e, "id")}
+              onChange={handleFileChange}
               required
             />
           </div>
-
           <div className="input-box">
             <label htmlFor="file-upload" className="upload-btn">
               Proof Of Address
             </label>
             <input
-              ref={prevPoaFile}
+              name="proofOfAddress"
               type="file"
-              onChange={(e) => handleFileChange(e, "poa")}
+              onChange={handleFileChange}
               accept=".pdf,.doc,.docx"
               required
             />
