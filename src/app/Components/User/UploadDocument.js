@@ -1,54 +1,16 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { AddUserDocuments } from "../../Actions/userActions";
-import { SignedUrlAction } from "../../Actions/GetSignedUrl";
-import axios from "axios";
+import { useEffect } from "react";
+import useFileObjects from "../../../../lib/hooks/useFileObjects";
+import useFileUploader from "../../../../lib/hooks/useFileUploader";
 
 const UploadDocument = () => {
-  const [fileObjects, setFileObjects] = useState([]);
-
-  const uploadFile = async (fileObject) => {
-    const key = Object.keys(fileObject)[0];
-    const file = fileObject[key];
-
-    try {
-      const response = await SignedUrlAction(file.type);
-      const url = response.success.url;
-
-      await axios.put(url, file, {
-        headers: {
-          "Content-Type": file?.type,
-        },
-      });
-
-      const res = await AddUserDocuments(key, url.split("?")[0]);
-      console.log(res);
-    } catch (error) {
-      console.error("Error uploading to S3:", error);
-    }
-  };
+  const { fileObjects, handleFileChange } = useFileObjects();
+  const { uploadError, uploadFile } = useFileUploader();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     for (const fileObject of fileObjects) {
-      await uploadFile(fileObject);
+      uploadFile(fileObject);
     }
-  };
-
-  const handleFileChange = (event) => {
-    const { name, files } = event.target;
-    if (files.length === 0) {
-      return;
-    }
-    const file = files[0];
-    const keyExists = fileObjects.some((obj) => Object.keys(obj)[0] === name);
-    setFileObjects((prevFileObjects) => {
-      return keyExists
-        ? prevFileObjects.map((obj) =>
-            Object.keys(obj)[0] === name ? { [name]: file } : obj
-          )
-        : [...prevFileObjects, { [name]: file }];
-    });
   };
 
   return (
