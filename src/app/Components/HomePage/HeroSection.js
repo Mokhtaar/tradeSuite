@@ -6,11 +6,11 @@
 
 export default function HeroSection() {
   return (
-    <div className="w-screen  " style={{
-      backgroundColor: "black", // Set the black background for the entire sidebar
+    <div className="w-screen  "style={{
+      backgroundColor: "black", 
       backgroundImage:
         "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
-    }}>
+    }} >
       <div className="relative isolate pt-14 ">
         {/* <svg
           className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
@@ -59,27 +59,24 @@ export default function HeroSection() {
                 </a>
               </div>
             </div> */}
-            <h1 className="mt-10 max-w-lg text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              XTurn Finance
+            
+            <h1 className="mt-10 max-w-lg text-4xl font-bold tracking-tight text-white sm:text-6xl">
+            Meet the Trade Suite Business Cloud
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Esse id magna consectetur fugiat non dolor in ad laboris magna
-              laborum ea consequat. Nisi irure aliquip nisi adipisicing veniam
-              voluptate id. In veniam incididunt ex veniam adipisicing sit.
+            Web3 has never been easier for the enterprise. Our suite of products delivers out-of-the-box blockchain applications with enterprise-grade security and scalability—cutting months off development timelines to deliver real business value on one.
             </p>
             <div className="mt-10 flex items-center gap-x-6">
               <a
-                href="#"
-                className="rounded-md btn px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Get started
+                className="text-sm font-semibold leading-6 w-27 h-[38px] px-6 py-2 rounded-lg shadow inline-flex items-center justify-center text-white"
+                style={{
+                  backgroundImage: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
+                  borderImage: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
+                  borderImageSlice: '1',
+                }}>
+                learn about chainspare <span aria-hidden="true">→</span>
               </a>
-              <a
-                href="#"
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
-                Learn more <span aria-hidden="true">→</span>
-              </a>
+             
             </div>
           </div>
           <div className="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0 lg:flex-grow">
