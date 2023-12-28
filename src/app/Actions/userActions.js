@@ -27,21 +27,36 @@ const addUser = async (userData, companyID, role) => {
   }
 };
 
-const AddUserFiles = async (id, signedPoaFileURL, signedIdFileURL) => {
+const AddUserFiles = async (id, key, value) => {
   try {
     const addUserFiles = await prisma.user.update({
       where: {
         id,
       },
       data: {
-        proofOfAddress: signedPoaFileURL,
-        proofOfIdentity: signedIdFileURL,
+        [key]: value,
       },
     });
-    return { success: "Files have been uploaded successfully" };
+    return { success: "File has been uploaded successfully" };
   } catch (error) {
     return { error: error.message, status: 404 };
   }
 };
 
-export { addUser, AddUserFiles };
+const AddUserDocuments = async (id, key, value) => {
+  try {
+    const addUserFiles = await prisma.media.update({
+      where: {
+        id: 1,
+      },
+      data: {
+        [key]: value,
+      },
+    });
+    return { success: "File has been uploaded successfully" };
+  } catch (error) {
+    return { error: error.message, status: 404 };
+  }
+};
+
+export { addUser, AddUserFiles, AddUserDocuments };

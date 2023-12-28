@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"] //law masahna / ya3ni khdoha mel main 3alatol
+      "@/*": ["./*"]
     }
   }
 }

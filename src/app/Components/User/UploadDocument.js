@@ -1,9 +1,22 @@
-import React from "react";
+import { useEffect } from "react";
+import useFileObjects from "@/lib/hooks/useFileObjects";
+import useFileUploader from "@/lib/hooks/useFileUploader";
 
 const UploadDocument = () => {
+  const { fileObjects, handleFileChange } = useFileObjects();
+  const { uploadStatus, uploadFile } = useFileUploader();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    for (const fileObject of fileObjects) {
+      await uploadFile(1, fileObject);
+    }
+    console.log("uploaded");
+  };
+
   return (
-    <div>
-      <div
+    <>
+      <form
         className="fixed z-10 left-20 top-0 w-full h-full flex  bg-opacity-20"
         style={{
           backgroundColor: "black", // Set the black background for the entire sidebar
@@ -15,21 +28,24 @@ const UploadDocument = () => {
           <header className="text-center text-indigo-500 pb-7 mt-3 font-bold text-[40px] text-lg">
             Upload Files
           </header>
-          <div className="p-5">
+          <div className="p-3">
             <div className="mb-2">
-              <span className="text-base ">
-              &nbsp;   please Provide a detailed business plan outlining the purpose of
-                the financing, your company's history, and future projections.
+              <span className="text-base">
+                Please Provide a detailed business plan outlining the purpose of
+                the financing, your company&apos;s history, and future
+                projections.
               </span>
             </div>
           </div>
           <div className="input_field flex flex-col w-max mx-auto text-center ">
             <div className="flex flex-row items-start justify-end space-x-4">
               <label>
-                Income Statment
+                incomeStatement
                 <input
+                  name="incomeStatement"
                   className="text-sm cursor-pointer w-36 hidden"
                   type="file"
+                  onChange={handleFileChange}
                   multiple
                 />
                 <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
@@ -39,8 +55,10 @@ const UploadDocument = () => {
               <label>
                 Balance Sheet
                 <input
+                  name="balanceSheet"
                   className="text-sm cursor-pointer w-36 hidden"
                   type="file"
+                  onChange={handleFileChange}
                   multiple
                 />
                 <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
@@ -53,6 +71,8 @@ const UploadDocument = () => {
               <input
                 className="text-sm cursor-pointer w-36 hidden"
                 type="file"
+                name="cashFlow"
+                onChange={handleFileChange}
                 multiple
               />
               <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
@@ -64,6 +84,8 @@ const UploadDocument = () => {
               <input
                 className="text-sm cursor-pointer w-36 hidden"
                 type="file"
+                name="supplierDetails"
+                onChange={handleFileChange}
                 multiple
               />
               <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
@@ -73,9 +95,11 @@ const UploadDocument = () => {
             <label>
               Past orders
               <input
+                name="pastOrders"
                 className="text-sm cursor-pointer w-36 hidden"
                 type="file"
                 multiple
+                onChange={handleFileChange}
               />
               <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                 Select
@@ -84,9 +108,11 @@ const UploadDocument = () => {
             <label>
               Yearly Sales Volume
               <input
+                name="yearlySales"
                 className="text-sm cursor-pointer w-36 hidden"
                 type="file"
                 multiple
+                onChange={handleFileChange}
               />
               <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                 Select
@@ -95,9 +121,11 @@ const UploadDocument = () => {
             <label>
               Bank Account Statements
               <input
+                name="bankStatement"
                 className="text-sm cursor-pointer w-36 hidden"
                 type="file"
                 multiple
+                onChange={handleFileChange}
               />
               <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                 Select
@@ -106,9 +134,11 @@ const UploadDocument = () => {
             <label>
               Previous Yearly Invoices
               <input
+                name="previousYearlyInvoices"
                 className="text-sm cursor-pointer w-36 hidden"
                 type="file"
                 multiple
+                onChange={handleFileChange}
               />
               <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                 Select
@@ -117,9 +147,11 @@ const UploadDocument = () => {
             <label>
               Other Supported Documents
               <input
+                name="other"
                 className="text-sm cursor-pointer w-36 hidden"
                 type="file"
                 multiple
+                // onChange={handleFileChange}
               />
               <div className="text bg-gradient-to-tr from-[#4776E6]  via-[#8E54E9]   to-[#8E54E9]  text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
                 Select
@@ -175,8 +207,14 @@ const UploadDocument = () => {
             Create
           </button> */}
         </div>
-      </div>
-    </div>
+        <button
+          onClick={(e) => handleSubmit(e)}
+          className="text-red-800 text-2xl right-48 absolute top-20 bg-black w-44"
+        >
+          Sumbit
+        </button>
+      </form>
+    </>
   );
 };
 export default UploadDocument;
