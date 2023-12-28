@@ -44,4 +44,20 @@ const AddUserFiles = async (id, signedPoaFileURL, signedIdFileURL) => {
   }
 };
 
-export { addUser, AddUserFiles };
+const AddUserDocuments = async (key, value) => {
+  try {
+    const addUserFiles = await prisma.media.update({
+      where: {
+        id: 1,
+      },
+      data: {
+        [key]: value,
+      },
+    });
+    return { success: "Files have been uploaded successfully" };
+  } catch (error) {
+    return { error: error.message, status: 404 };
+  }
+};
+
+export { addUser, AddUserFiles, AddUserDocuments };
