@@ -14,7 +14,6 @@ const FileInput = ({ handleFileChange, progress, name }) => {
           className="border rounded w-full py-2 px-3"
         />
       </div>
-
       <div className="mb-4 w-full">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Progress
