@@ -4,6 +4,7 @@ import { Fragment, useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
+import classNames from "classnames";
 import {
   Bars3Icon,
   DocumentDuplicateIcon,
@@ -40,10 +41,6 @@ const userNavigation = [
   { name: "Your profile", href: "#" },
   { name: "Sign out", href: "#" },
 ];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function UserDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
