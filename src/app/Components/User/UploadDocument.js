@@ -6,15 +6,30 @@ import FileInput from "./FileInput";
 import SubmitButton from "./SubmitButton";
 
 const inputs = [
-  { name: "incomeStatement", progress: 0, url: null },
-  { name: "balanceSheet", progress: 0, url: null },
-  { name: "cashFlow", progress: 0, url: null },
-  { name: "supplierDetails", progress: 0, url: null },
-  { name: "pastOrders", progress: 0, url: null },
-  { name: "yearlySales", progress: 0, url: null },
-  { name: "bankStatement", progress: 0, url: null },
-  { name: "previousYearlyInvoices", progress: 0, url: null },
-  { name: "other", progress: 0, url: null },
+  {
+    label: "Income Statement",
+    name: "incomeStatement",
+    progress: 0,
+    url: null,
+  },
+  { label: "Balance Sheet", name: "balanceSheet", progress: 0, url: null },
+  { label: "Cash Flow", name: "cashFlow", progress: 0, url: null },
+  {
+    label: "Supplier Details",
+    name: "supplierDetails",
+    progress: 0,
+    url: null,
+  },
+  { label: "Past Orders", name: "pastOrders", progress: 0, url: null },
+  { label: "Yearly Sales", name: "yearlySales", progress: 0, url: null },
+  { label: "Bank Statement", name: "bankStatement", progress: 0, url: null },
+  {
+    label: "Previous Yearly Invoices",
+    name: "previousYearlyInvoices",
+    progress: 0,
+    url: null,
+  },
+  { label: "Other", name: "other", progress: 0, url: null },
 ];
 
 const UploadDocument = () => {
@@ -39,18 +54,17 @@ const UploadDocument = () => {
   }, [currentObj, progress]);
 
   return (
-    <div className="container h-[70vh] overflow-y-auto max-w-3xl mx-auto mt-8 border rounded-md shadow-md">
-      <form action={handleSubmit} className="mx-auto p-6 bg-white">
+    <div className="relative max-w-4xl mx-auto sm:mt-8 border rounded-md shadow-md">
+      <form
+        action={handleSubmit}
+        className="mx-auto p-9 bg-white sm:grid sm:grid-cols-2 gap-y-5 gap-x-10"
+      >
         {files.map((input, index) => (
           <div key={index}>
-            <FileInput
-              name={input.name}
-              handleFileChange={handleFileChange}
-              progress={input.progress}
-            />
+            <FileInput input={input} handleFileChange={handleFileChange} />
           </div>
         ))}
-        <div className="flex justify-center">
+        <div className="mt-7 sm:mt-0 flex justify-center items-center">
           <SubmitButton />
         </div>
       </form>
