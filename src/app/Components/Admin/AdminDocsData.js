@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
+import { UpdateDocumentStatus , GetUserDocumentsAdmin} from "../../Actions/adminActions";
 import { GetUserDocuments } from "../../Actions/userActions";
 import { useSession } from "next-auth/react";
 
@@ -16,20 +16,20 @@ export default function AdminDocsData() {
   // };
 
   const getDocuments = async () => {
-    const documents = await GetUserDocuments();
+    const documents = await GetUserDocumentsAdmin();
     console.log(documents?.documents);
     setDocument(documents?.documents);
   };
 
-  // const handleUserAction = async (email, newStatus) => {
-  //   try {
-  //     await UpdateUserStatus(email, newStatus);
-  //     update();
-  //     getUsers();
-  //   } catch (error) {
-  //     console.error("Error updating user status:", error);
-  //   }
-  // };
+  const handleDocumentAction = async (id, newStatus) => {
+    try {
+      await UpdateDocumentStatus(id, newStatus);
+      update();
+      getDocuments();
+    } catch (error) {
+      console.error("Error updating document status:", error);
+    }
+  };
 
   useEffect(() => {
     getDocuments();
@@ -261,8 +261,9 @@ export default function AdminDocsData() {
                           <button
                             value="Approved"
                             className="text-indigo-600 hover:text-indigo-900"
-                           
-                          >
+                            onClick={(e) =>
+                              handleDocumentAction(media.id, e.target.value)
+                            }                          >
                             Approve
                             
                           </button>
@@ -270,8 +271,9 @@ export default function AdminDocsData() {
                           <button
                             value="Rejected"
                             className="text-indigo-600 hover:text-indigo-900"
-                        
-                          >
+                            onClick={(e) =>
+                              handleDocumentAction(media.id, e.target.value)
+                            }  >
                             Reject
                           </button>
                         </div>

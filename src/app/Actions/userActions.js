@@ -64,7 +64,10 @@ export async function GetUserDocuments() {
     const documents = await prisma.media.findMany({
       include: {
         company: true,
-      }
+      },
+      where: {
+        status: "Approved",
+      },
       
     });
     console.log(documents);

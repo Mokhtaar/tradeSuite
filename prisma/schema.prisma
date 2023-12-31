@@ -95,7 +95,7 @@ model Media {
   pastOrders             String?
   previousYearlyInvoices String?
   yearlySales            String?
-  status                 String?
+  status                 String? @default("Pending")
   company                Company? @relation(fields: [companyID], references: [id])
 }
 
