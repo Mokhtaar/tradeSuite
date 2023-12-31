@@ -1,6 +1,7 @@
 "use client";
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import AdminDocsData from "./AdminDocsData";
 import {
   Bars3Icon,
   DocumentDuplicateIcon,
@@ -8,8 +9,9 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { getCurrentUser } from "../../../../lib/session";
+import Link from "next/link";
 
-const navigation = [
+const tabs = [
   { name: "Registration Approval", href: "#", icon: UsersIcon, current: true },
   {
     name: "Documents Verification",
@@ -27,7 +29,18 @@ function classNames(...classes) {
 
 export default function AdminSideBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [navigation, setNavigation] = useState(tabs);
+  const [currentTab, setCurrentTab] = useState("Registration Approval");
 
+  const handleNavigation = (selectedTab) => {
+    const updatedNavigation = navigation.map((tab) => ({
+      ...tab,
+      current: tab.name === selectedTab.name,
+    }));
+    setCurrentTab(selectedTab.name);
+    setNavigation(updatedNavigation);
+  };
+  
   return (
     <>
       {/*
@@ -202,16 +215,17 @@ export default function AdminSideBar() {
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
-                    {navigation.map((item) => (
-                      <li key={item.name}>
-                        <a
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-50 text-indigo-600"
-                              : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                          )}
+                  {navigation.map((item) => (
+                        <li key={item.name}>
+                          <Link
+                            onClick={() => handleNavigation(item)}
+                            href={item.href}
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-50 text-indigo-600"
+                                : "text-gray-200 hover:text-indigo-600 hover:bg-gray-50",
+                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                            )}
                         >
                           <item.icon
                             className={classNames(
@@ -223,7 +237,7 @@ export default function AdminSideBar() {
                             aria-hidden="true"
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -278,7 +292,19 @@ export default function AdminSideBar() {
             </nav>
           </div>
         </div>
-
+        <main className="py-10">
+              <div className="px-4 sm:px-6 lg:px-8">
+                {currentTab === "Registration Approval" ? (
+                  ""
+                ) : currentTab === "Documents Verification" ? (
+                  <AdminDocsData/>
+                ) : currentTab === "Document management" ? (
+                  ""
+                ) : (
+                  ""
+                )}
+              </div>
+            </main>
         <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
           <button
             type="button"
