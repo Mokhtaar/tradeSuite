@@ -6,12 +6,12 @@
 
 export default function HeroSection() {
   return (
-    <div className="w-screen  "style={{
+    <div className="w-screen"style={{
       backgroundColor: "black", 
       backgroundImage:
-        "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+        "linear-gradient(45deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
     }} >
-      <div className="relative isolate pt-14 ">
+      <div className="relative isolate pt-14">
         {/* <svg
           className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
           aria-hidden="true"
