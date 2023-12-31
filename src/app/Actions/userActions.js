@@ -58,6 +58,7 @@ const AddUserDocuments = async (id, key, value) => {
     return { error: error.message, status: 404 };
   }
 };
+
 export async function GetUserDocuments() {
   try {
     const documents = await prisma.media.findMany({
@@ -74,4 +75,4 @@ export async function GetUserDocuments() {
   }
 }
 
-export { addUser, AddUserFiles, AddUserDocuments };
+export { addUser, AddUserFiles, AddUserDocuments  };

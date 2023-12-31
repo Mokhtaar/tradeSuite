@@ -7,7 +7,7 @@ async function Admin() {
   return (
     <>
       <AdminSideBar />
-      <AdminUsersData />
+      
   
     </>
   );

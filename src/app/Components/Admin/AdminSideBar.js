@@ -2,13 +2,14 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import AdminDocsData from "./AdminDocsData";
+
+import AdminUsersData from "./AdminUsersData";
 import {
   Bars3Icon,
   DocumentDuplicateIcon,
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { getCurrentUser } from "../../../../lib/session";
 import Link from "next/link";
 
 const tabs = [
@@ -295,7 +296,7 @@ export default function AdminSideBar() {
         <main className="py-10">
               <div className="px-4 sm:px-6 lg:px-8">
                 {currentTab === "Registration Approval" ? (
-                  ""
+                 <AdminUsersData />
                 ) : currentTab === "Documents Verification" ? (
                   <AdminDocsData/>
                 ) : currentTab === "Document management" ? (

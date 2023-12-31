@@ -1,33 +1,38 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UpdateUserStatus } from "../../Actions/AdminActions";
-import { GetAdminTableData } from "../../Actions/AdminActions";
+
+import { GetUserDocuments } from "../../Actions/userActions";
 import { useSession } from "next-auth/react";
 
-
 export default function AdminDocsData() {
-  const [users, setUsers] = useState();
+  const [documents, setDocument] = useState();
   const { data, update } = useSession();
 
-  const getUsers = async () => {
-    const users = await GetAdminTableData();
-    console.log(users?.users);
-    setUsers(users?.users);
+  // const getUsers = async () => {
+  //   const users = await GetAdminTableData();
+  //   console.log(users?.users);
+  //   setUsers(users?.users);
+  // };
+
+  const getDocuments = async () => {
+    const documents = await GetUserDocuments();
+    console.log(documents?.documents);
+    setDocument(documents?.documents);
   };
 
-  const handleUserAction = async (email, newStatus) => {
-    try {
-      await UpdateUserStatus(email, newStatus);
-      update();
-      getUsers();
-    } catch (error) {
-      console.error("Error updating user status:", error);
-    }
-  };
+  // const handleUserAction = async (email, newStatus) => {
+  //   try {
+  //     await UpdateUserStatus(email, newStatus);
+  //     update();
+  //     getUsers();
+  //   } catch (error) {
+  //     console.error("Error updating user status:", error);
+  //   }
+  // };
 
   useEffect(() => {
-    getUsers();
+    getDocuments();
   }, []);
 
   return (
@@ -54,37 +59,61 @@ export default function AdminDocsData() {
                       scope="col"
                       className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                     >
-                      Name
+                     Company Name
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Company Name
+                     Income Statement
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Email
+                      Balance Sheet
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Proof of Address
+                      Cash Flow
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Proof of identity
+                      Suppliers Details
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Tax Register
+                      Past Orders
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Yearly Sales
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Bank Statement
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Previous Yearly Invoices
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      other
                     </th>
                     <th
                       scope="col"
@@ -92,27 +121,21 @@ export default function AdminDocsData() {
                     >
                       Action
                     </th>
+                    
                   </tr>
                 </thead>
 
-                <tbody className="divide-y divide-gray-200">
-                  {users?.map((user) => (
-                    <tr key={user.id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                        {user.name}
-                      </td>
+               <tbody className="divide-y divide-gray-200">
+                  {documents?.map((media) => (
+                    <tr key={media.id}>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.company?.name}
+                        {media.company?.name}
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.email}
-                      </td>
-
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.proofOfAddress ? (
+                        {media.incomeStatement ? (
                           <a
-                            href={user.proofOfAddress}
+                            href={media.incomeStatement}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -123,9 +146,9 @@ export default function AdminDocsData() {
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.proofOfIdentity ? (
+                        {media.balanceSheet ? (
                           <a
-                            href={user.proofOfAddress}
+                            href={media.balanceSheet}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -137,9 +160,9 @@ export default function AdminDocsData() {
                       </td>
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {user.company?.fileUpload ? (
+                        {media.cashFlow ? (
                           <a
-                            href={user.company.fileUpload}
+                            href={media.cashFlow}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -149,27 +172,107 @@ export default function AdminDocsData() {
                           "No File Uploaded"
                         )}
                       </td>
+
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {media.supplierDetails ? (
+                          <a
+                            href={media.supplierDetails}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
+                      </td>
+
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {media.pastOrders ? (
+                          <a
+                            href={media.pastOrders}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
+                      </td>
+
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {media.yearlySales ? (
+                          <a
+                            href={media.yearlySales}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
+                      </td>
+
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {media.bankStatement ? (
+                          <a
+                            href={media.bankStatement}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
+                      </td>
+
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {media.previousYearlyInvoices ? (
+                          <a
+                            href={media.previousYearlyInvoices}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {media.other ? (
+                          <a
+                            href={media.other}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          "No File Uploaded"
+                        )}
+                      </td>
+                     
                       <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
                           <button
                             value="Approved"
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={(e) =>
-                              handleUserAction(user.email, e.target.value)
-                            }
+                           
                           >
                             Approve
-                            <span className="sr-only">, {user.name}</span>
+                            
                           </button>
 
                           <button
                             value="Rejected"
                             className="text-indigo-600 hover:text-indigo-900"
-                            onClick={(e) =>
-                              handleUserAction(user.email, e.target.value)
-                            }
+                        
                           >
-                            Reject<span className="sr-only">, {user.name}</span>
+                            Reject
                           </button>
                         </div>
                       </td>

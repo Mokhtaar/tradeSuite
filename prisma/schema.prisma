@@ -13,12 +13,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -33,30 +33,25 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-enum UserRole {
-  ADMIN
-  USER
-}
-
 model User {
   id              String    @id @default(cuid())
-  name            String
   email           String    @unique
-  password        String
   emailVerified   DateTime?
   image           String?
-  dob             DateTime?
-  phoneNumber     Int?
-  role            UserRole  @default(USER)
-  proofOfIdentity String?
-  proofOfAddress  String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @default(now())
-  company         Company?  @relation(fields: [companyID], references: [id])
+  name            String
   companyID       Int?
+  createdAt       DateTime  @default(now())
+  dob             DateTime?
+  password        String
+  phoneNumber     Int?
+  proofOfAddress  String?
+  proofOfIdentity String?
+  updatedAt       DateTime  @default(now())
   status          String?
+  role            UserRole  @default(USER)
   accounts        Account[]
   sessions        Session[]
+  company         Company?  @relation(fields: [companyID], references: [id])
 }
 
 model VerificationToken {
@@ -80,8 +75,8 @@ model Company {
   updatedAt   DateTime @default(now())
   fileUpload  String?
   postalCode  Int
-  users       User[]
   media       Media[]
+  users       User[]
 
   @@unique([id, name])
 }
@@ -92,24 +87,19 @@ model Media {
   balanceSheet           String?
   cashFlow               String?
   supplierDetails        String?
-  pastOrders             String?
-  yearlySales            String?
-  bankStatement          String?
-  previousYearlyInvoices String?
   other                  String?
   createdAt              DateTime @default(now())
   updatedAt              DateTime @default(now())
-  company                Company? @relation(fields: [companyID], references: [id])
   companyID              Int?
+  bankStatement          String?
+  pastOrders             String?
+  previousYearlyInvoices String?
+  yearlySales            String?
+  status                 String?
+  company                Company? @relation(fields: [companyID], references: [id])
 }
 
-// model Project {
-//   id                  Int      @id @default(autoincrement())
-//   projectName         String
-//   createdAt           DateTime @default(now())
-//   updatedAt           DateTime @default(now())
-//   projectDescription  String?
-//   otherProjectDetails String?
-//   company             Company  @relation(fields: [companyID], references: [id])
-//   companyID           Int      @unique
-// }
+enum UserRole {
+  ADMIN
+  USER
+}
