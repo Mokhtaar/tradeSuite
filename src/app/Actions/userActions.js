@@ -58,7 +58,21 @@ const AddUserDocuments = async (id, key, value) => {
     return { error: error.message, status: 404 };
   }
 };
+export async function GetUserDocuments() {
+  try {
+    const documents = await prisma.media.findMany({
+      include: {
+        company: true,
+      }
 
+    });
+    console.log(documents);
+
+    return { documents };
+  } catch (error) {
+    console.error("Error in upload documents:", error);
+  }
+}
 // const VerifyToken = async (id, ) => {
 //   try {
 //     const {
