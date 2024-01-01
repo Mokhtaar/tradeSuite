@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 
 const FileInput = ({ handleFileChange, input }) => {
-  const ref = useRef();
   return (
     <div className="mb-4 sm:mb-0 space-y-2">
       <label className="block text-gray-700 text-sm font-bold">

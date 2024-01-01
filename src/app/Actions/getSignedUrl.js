@@ -1,7 +1,7 @@
 "use server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import crypto, { randomUUID } from "crypto";
+import { randomUUID } from "crypto";
 
 const { AWS_BUCKET_REGION, AWS_ACCESS_KEY, AWS_SECRET_KEY, AWS_BUCKET_NAME } =
   process.env;
@@ -47,7 +47,6 @@ export async function SignedUrlAction(fileType) {
     Bucket: AWS_BUCKET_NAME,
     Key,
     ContentType: fileType,
-    // Key: generateFileName(),
     // ContentLength: fileSize,
     // ChecksumSHA256: checksum,
     // Metadata:{

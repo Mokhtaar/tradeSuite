@@ -56,7 +56,7 @@ const UserForm = ({ userAction }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const userData = new FormData(event.target);
-    const response = await userAction(userData, +companyID);
+    const response = await userAction(userData, companyID);
     const userId = response.success.response.id;
     try {
       let result;

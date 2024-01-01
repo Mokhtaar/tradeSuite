@@ -53,7 +53,7 @@ model User {
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now())
   company         Company?  @relation(fields: [companyID], references: [id])
-  companyID       Int?
+  companyID       String?
   status          String?
   accounts        Account[]
   sessions        Session[]
@@ -68,39 +68,41 @@ model VerificationToken {
 }
 
 model Company {
-  id          Int      @id @default(autoincrement())
-  name        String
-  email       String
-  phoneNumber Int
-  country     String
-  city        String
-  website     String
-  address     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  fileUpload  String?
-  postalCode  Int
-  users       User[]
-  media       Media[]
+  id            String    @id @default(cuid())
+  name          String
+  email         String
+  phoneNumber   Int
+  country       String
+  city          String
+  emailVerified DateTime?
+  website       String
+  address       String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now())
+  fileUpload    String?
+  postalCode    Int
+  users         User[]
+  media         Media[]
 
   @@unique([id, name])
 }
 
 model Media {
-  id                     Int      @id @default(autoincrement())
+  id                     String   @id @default(cuid())
   incomeStatement        String?
   balanceSheet           String?
   cashFlow               String?
   supplierDetails        String?
   pastOrders             String?
   yearlySales            String?
+  status                 String?  @default("Pending")
   bankStatement          String?
   previousYearlyInvoices String?
   other                  String?
   createdAt              DateTime @default(now())
   updatedAt              DateTime @default(now())
   company                Company? @relation(fields: [companyID], references: [id])
-  companyID              Int?
+  companyID              String?
 }
 
 // model Project {

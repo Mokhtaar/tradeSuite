@@ -18,7 +18,7 @@ const addUser = async (userData, companyID, role) => {
   };
 
   try {
-    const response = await prisma.User.create({
+    const response = await prisma.user.create({
       data: body,
     });
     return { success: { response } };
@@ -58,5 +58,25 @@ const AddUserDocuments = async (id, key, value) => {
     return { error: error.message, status: 404 };
   }
 };
+
+// const VerifyToken = async (id, ) => {
+//   try {
+//     const {
+//       user: { id },
+//     } = jwt.verify(req.params.token, EMAIL_SECRET);
+//     await prisma.user.update({
+//       where: {
+//         id,
+//       },
+//       data: {
+//         emailValid: value,
+//       },
+//     });
+//   } catch (e) {
+//     res.send("error");
+//   }
+
+//   return res.redirect("http://localhost:3001/login");
+// };
 
 export { addUser, AddUserFiles, AddUserDocuments };

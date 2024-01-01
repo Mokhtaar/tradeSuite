@@ -39,7 +39,7 @@ const UploadDocument = () => {
 
   const handleSubmit = async () => {
     for (const fileObject of fileObjects) {
-      await uploadFile(1, fileObject);
+      await uploadFile(localStorage.getItem("companyID"), fileObject);
     }
     setFileObjects([]);
     console.log("uploaded");

@@ -10,6 +10,11 @@ import * as Yup from "yup";
 import { SignedUrlAction } from "../../Actions/GetSignedUrl";
 import { AddCompanyFile } from "../../Actions/AddComapanyFile";
 import { useSession } from "next-auth/react";
+import {
+  VerificationToken,
+  sendVerificationEmail,
+} from "../../Actions/VerificationToken";
+import { jwtDecode } from "jwt-decode";
 
 const computeSHA256 = async (file) => {
   const buffer = await file?.arrayBuffer();
@@ -60,9 +65,10 @@ const CompanyForm = ({ onSubmit }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const response = await onSubmit(formData);
-    await uploadFile(response.id);
+    console.log(response);
+    // await uploadFile(response.id);
     if (response.status === 200) {
-      localStorage.setItem("companyID", response.id);
+      localStorage.setItem("companyID", response.response.id);
       router.push("/Signup/UserSignup");
     }
   };
