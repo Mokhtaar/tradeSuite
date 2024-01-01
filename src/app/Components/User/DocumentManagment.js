@@ -2,15 +2,19 @@
 
 import React, { useEffect, useState } from "react";
 
-import { GetUserDocuments } from "../../Actions/userActions";
+import { GetUserDocuments ,DeleteDocuments } from "../../Actions/userActions";
 import { useSession } from "next-auth/react";
+// import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Delete';
+// import { AiOutlineClose } from "react-icons/ai";
+
 
 export default function DocumentManagment() {
   const [documents, setDocument] = useState();
   const { data, update } = useSession();
 
   const getDocuments = async () => {
-    const documents = await GetUserDocuments();
+    const documents = await GetUserDocuments(companyID);
     console.log(documents?.documents);
     setDocument(documents?.documents);
   };
@@ -24,9 +28,20 @@ export default function DocumentManagment() {
   //       console.error("Error updating user status:", error);
   //     }
   //   };
+   const handleDelete= async (incomeStatement) => {
+      try {
+        await DeleteDocuments(incomeStatement);
+        // update();
+        // getUsers();
+      } catch (error) {
+        console.error("Error updating user status:", error);
+      }
+    };
 
   useEffect(() => {
     getDocuments();
+  
+    
   }, []);
 
   return (
@@ -67,6 +82,8 @@ export default function DocumentManagment() {
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Income Statement
+                      {/* <AiOutlineClose /> */}
+                    
                     </th>
                     <th
                       scope="col"
@@ -133,6 +150,7 @@ export default function DocumentManagment() {
                       </td> */}
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.incomeStatement ? (
+                        <div>
                           <a
                             href={media.incomeStatement}
                             target="_blank"
@@ -140,13 +158,17 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                          <button onClick={()=>handleDelete(media.incomeStatment)}> <DeleteIcon /> </button>
+                       
+                        </div>
                         ) : (
                           "No File Uploaded"
-                        )}
+                        )
+                      }
                       </td>
-
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.balanceSheet ? (
+                          <div>
                           <a
                             href={media.balanceSheet}
                             target="_blank"
@@ -154,6 +176,8 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                            <DeleteIcon />
+                          </div>
                         ) : (
                           "No File Uploaded"
                         )}
@@ -161,6 +185,7 @@ export default function DocumentManagment() {
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.cashFlow ? (
+                          <div>
                           <a
                             href={media.cashFlow}
                             target="_blank"
@@ -168,12 +193,15 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                            <DeleteIcon />
+                            </div>
                         ) : (
                           "No File Uploaded"
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.supplierDetails ? (
+                          <div>
                           <a
                             href={media.supplierDetails}
                             target="_blank"
@@ -181,6 +209,8 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                            <DeleteIcon />
+                          </div>
                         ) : (
                           "No File Uploaded"
                         )}
@@ -188,6 +218,7 @@ export default function DocumentManagment() {
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.pastOrders ? (
+                          <div>
                           <a
                             href={media.pastOrders}
                             target="_blank"
@@ -195,12 +226,15 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                            <DeleteIcon />
+                          </div>
                         ) : (
                           "No File Uploaded"
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.yearlySales ? (
+                          <div>
                           <a
                             href={media.yearlySales}
                             target="_blank"
@@ -208,6 +242,8 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                            <DeleteIcon />
+                          </div>
                         ) : (
                           "No File Uploaded"
                         )}
@@ -215,6 +251,7 @@ export default function DocumentManagment() {
 
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.bankStatement ? (
+                          <div>
                           <a
                             href={media.bankStatement}
                             target="_blank"
@@ -222,12 +259,15 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                            <DeleteIcon />
+                         </div>
                         ) : (
                           "No File Uploaded"
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.previousYearlyInvoices ? (
+                          <div>
                           <a
                             href={media.previousYearlyInvoices}
                             target="_blank"
@@ -235,12 +275,16 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                          <DeleteIcon />
+                         
+                          </div>
                         ) : (
                           "No File Uploaded"
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.other ? (
+                          <div>
                           <a
                             href={media.other}
                             target="_blank"
@@ -248,6 +292,8 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
+                           <button> <DeleteIcon /> </button>
+                          </div>
                         ) : (
                           "No File Uploaded"
                         )}
