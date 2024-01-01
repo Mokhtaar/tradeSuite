@@ -15,6 +15,7 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import UploadDocument from "./UploadDocument";
+import DocumentManagment from "./DocumentManagment"
 
 const tabs = [
   {
@@ -330,7 +331,7 @@ export default function UserDashboard() {
                 ) : currentTab === "Upload Documents" ? (
                   <UploadDocument />
                 ) : currentTab === "Document management" ? (
-                  ""
+                  <DocumentManagment/>
                 ) : (
                   ""
                 )}

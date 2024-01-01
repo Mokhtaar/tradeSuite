@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UpdateUserStatus } from "../../Actions/AdminActions";
-import { GetAdminTableData } from "../../Actions/AdminActions";
+import { UpdateUserStatus } from "../../Actions/adminActions";
+import { GetAdminTableData } from "../../Actions/adminActions";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 

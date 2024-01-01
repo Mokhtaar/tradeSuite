@@ -37,8 +37,16 @@ const LoginForm = ({ LoginAction }) => {
       });
 
       if (response?.error) {
-        console.log(response?.error);
-      } else {
+        // Handle error messages here
+        if (response.error === "No user found" || response.error === "Incorrect password") {
+          setIsWrongEmail(response.error === "No user found");
+          setIsWrongPassword(response.error === "Incorrect password");
+        } else {
+          // Handle other errors
+          console.error(response.error);
+        }
+      } 
+        else {
         if (data?.user.status === "Approved" && data?.user.role === "USER") {
           router.push("/Dashboard");
         } else if (
