@@ -39,7 +39,6 @@ model User {
   emailVerified   DateTime?
   image           String?
   name            String
-  companyID       Int?
   createdAt       DateTime  @default(now())
   dob             DateTime?
   password        String
@@ -47,16 +46,12 @@ model User {
   proofOfAddress  String?
   proofOfIdentity String?
   updatedAt       DateTime  @default(now())
-<<<<<<< HEAD
   company         Company?  @relation(fields: [companyID], references: [id])
   companyID       String?
-=======
->>>>>>> ab824321b8cff2a2fb7a3f8a2b43d40f9f3ad0f5
   status          String?
   role            UserRole  @default(USER)
   accounts        Account[]
   sessions        Session[]
-  company         Company?  @relation(fields: [companyID], references: [id])
 }
 
 model VerificationToken {
@@ -93,7 +88,6 @@ model Media {
   balanceSheet           String?
   cashFlow               String?
   supplierDetails        String?
-<<<<<<< HEAD
   pastOrders             String?
   yearlySales            String?
   status                 String?  @default("Pending")
@@ -104,18 +98,6 @@ model Media {
   updatedAt              DateTime @default(now())
   company                Company? @relation(fields: [companyID], references: [id])
   companyID              String?
-=======
-  other                  String?
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @default(now())
-  companyID              Int?
-  bankStatement          String?
-  pastOrders             String?
-  previousYearlyInvoices String?
-  yearlySales            String?
-  status                 String? @default("Pending")
-  company                Company? @relation(fields: [companyID], references: [id])
->>>>>>> ab824321b8cff2a2fb7a3f8a2b43d40f9f3ad0f5
 }
 
 enum UserRole {
