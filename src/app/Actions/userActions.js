@@ -27,21 +27,6 @@ const addUser = async (userData, companyID, role) => {
   }
 };
 
-export async function GetUserDocuments() {
-  try {
-    const documents = await prisma.media.findMany({
-      include: {
-        company: true,
-      },
-    });
-    console.log(documents);
-
-    return { documents };
-  } catch (error) {
-    console.error("Error in upload documents:", error);
-  }
-}
-
 const AddUserFiles = async (id, key, value) => {
   try {
     const addUserFiles = await prisma.user.update({
