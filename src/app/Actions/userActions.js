@@ -27,7 +27,10 @@ const addUser = async (userData, companyID, role) => {
   }
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dbeccca10d5faadf232c1cfafb6f5d7136ead27b
 const AddUserFiles = async (id, key, value) => {
   try {
     const addUserFiles = await prisma.user.update({

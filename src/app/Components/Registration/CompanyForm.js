@@ -66,7 +66,7 @@ const CompanyForm = ({ onSubmit }) => {
     const formData = new FormData(event.target);
     const response = await onSubmit(formData);
     console.log(response);
-    // await uploadFile(response.id);
+    await uploadFile(response.id);
     if (response.status === 200) {
       localStorage.setItem("companyID", response.response.id);
       router.push("/Signup/UserSignup");
