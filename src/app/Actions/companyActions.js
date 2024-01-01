@@ -2,7 +2,6 @@
 import prisma from "../../../lib/prisma";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
-import bcrypt from "bcrypt";
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",

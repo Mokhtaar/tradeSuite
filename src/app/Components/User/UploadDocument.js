@@ -4,6 +4,7 @@ import useFileObjects from "@/lib/hooks/useFileObjects";
 import useFileUploader from "@/lib/hooks/useFileUploader";
 import FileInput from "./FileInput";
 import SubmitButton from "./SubmitButton";
+import { useSession } from "next-auth/react";
 
 const inputs = [
   {
@@ -36,10 +37,11 @@ const UploadDocument = () => {
   const { fileObjects, setFileObjects, handleFileChange } = useFileObjects();
   const { uploadStatus, progress, uploadFile, currentObj } = useFileUploader();
   const [files, setFiles] = useState(inputs);
+  const { data } = useSession();
 
   const handleSubmit = async () => {
     for (const fileObject of fileObjects) {
-      await uploadFile(localStorage.getItem("companyID"), fileObject);
+      await uploadFile(data.user.companyID, fileObject);
     }
     setFileObjects([]);
     console.log("uploaded");

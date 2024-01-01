@@ -36,30 +36,34 @@ const LoginForm = ({ LoginAction }) => {
         redirect: false,
       });
 
-      if (response?.error) {
-        // Handle error messages here
-        if (response.error === "No user found" || response.error === "Incorrect password") {
-          setIsWrongEmail(response.error === "No user found");
-          setIsWrongPassword(response.error === "Incorrect password");
-        } else {
-          // Handle other errors
-          console.error(response.error);
-        }
-      } 
-        else {
-        if (data?.user.status === "Approved" && data?.user.role === "USER") {
-          router.push("/Dashboard");
-        } else if (
-          data?.user.status === "Approved" &&
-          data?.user.role === "ADMIN"
-        ) {
-          router.push("/Admin");
-        } else if (data?.user.status === "Rejected") {
-          alert("You are rejected. Contact admin for access.");
-        } else {
-          alert("Pending");
-        }
-      }
+      response?.error
+        ? console.log("Invalid login credentials")
+        : data?.user.status === "Approved"
+        ? data?.user.role === "USER"
+          ? router.push("/Dashboard")
+          : data?.user.role === "ADMIN"
+          ? router.push("/Admin")
+          : alert("Pending")
+        : data?.user.status === "Rejected"
+        ? alert("You are rejected. Contact admin for access.")
+        : alert("Pending");
+
+      // if (response?.error) {
+      //   console.log("Invalid login credentials");
+      // } else {
+      //   if (data?.user.status === "Approved" && data?.user.role === "USER") {
+      //     router.push("/Dashboard");
+      //   } else if (
+      //     data?.user.status === "Approved" &&
+      //     data?.user.role === "ADMIN"
+      //   ) {
+      //     router.push("/Admin");
+      //   } else if (data?.user.status === "Rejected") {
+      //     alert("You are rejected. Contact admin for access.");
+      //   } else {
+      //     alert("Pending");
+      //   }
+      // }
 
       // response?.error ? console.log(response.error) : router.push("/");
 

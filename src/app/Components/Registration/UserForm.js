@@ -62,6 +62,7 @@ const UserForm = ({ userAction }) => {
       let result;
       for (const fileObject of fileObjects) {
         result = await uploadFile(userId, fileObject, "Register");
+        console.log(result);
       }
       result.success ? router.push("/Login") : console.log(result.error);
     } catch (error) {
