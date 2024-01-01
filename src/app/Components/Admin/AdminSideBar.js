@@ -1,7 +1,8 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import AdminDocsData from "./AdminDocsData";
+import { useSession } from "next-auth/react";
 
 import AdminUsersData from "./AdminUsersData";
 import {
@@ -32,6 +33,11 @@ export default function AdminSideBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navigation, setNavigation] = useState(tabs);
   const [currentTab, setCurrentTab] = useState("Registration Approval");
+  const { data } = useSession();
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const handleNavigation = (selectedTab) => {
     const updatedNavigation = navigation.map((tab) => ({
@@ -286,7 +292,7 @@ export default function AdminSideBar() {
                       alt=""
                     />
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
+                    <span aria-hidden="true"> {data?.user.name} </span>
                   </a>
                 </li>
               </ul>

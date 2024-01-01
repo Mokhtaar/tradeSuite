@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import { GetUserDocuments } from "../../Actions/userActions";
 import { useSession } from "next-auth/react";
 
@@ -10,7 +9,7 @@ export default function DocumentManagment() {
   const { data, update } = useSession();
 
   const getDocuments = async () => {
-    const documents = await GetUserDocuments();
+    const documents = await GetUserDocuments(data?.user.companyID);
     console.log(documents?.documents);
     setDocument(documents?.documents);
   };

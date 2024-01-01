@@ -58,11 +58,13 @@ const AddUserDocuments = async (id, key, value) => {
     console.log(error);
   }
 };
-export async function GetUserDocuments() {
+export async function GetUserDocuments(companyID) {
   try {
     const documents = await prisma.media.findMany({
       include: {
         company: true,
+      }, where :{
+        companyID: companyID
       }
 
     });

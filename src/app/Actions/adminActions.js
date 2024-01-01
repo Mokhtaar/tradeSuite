@@ -35,12 +35,17 @@ export async function UpdateDocumentStatus(id, newSatus) {
 }
 
 export async function UpdateUserStatus(email, newSatus) {
+  let DeletedUser;
+  if ( newSatus === "Rejected") {
+    DeletedUser = await prisma.user.delete({
+      where: { email: email },
+    });
+  }
   try {
     const user = await prisma.user.update({
       where: { email: email },
       data: { status: newSatus },
     });
-  
     return { user };
   } catch (error) {
     console.error("Error updating user status:", error);
