@@ -127,6 +127,7 @@ export default function AdminDocsData() {
 
                <tbody className="divide-y divide-gray-200">
                   {documents?.map((media) => (
+                    (media.incomeStatement || media.balanceSheet || media.cashFlow || media.supplierDetails || media.pastOrders || media.yearlySales || media.bankStatement || media.previousYearlyInvoices || media.other) ? (
                     <tr key={media.id}>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.company?.name}
@@ -279,6 +280,8 @@ export default function AdminDocsData() {
                         </div>
                       </td>
                     </tr>
+                    ) : null // If no document is available, don't render the row
+                    
                   ))}
                 </tbody>
               </table>

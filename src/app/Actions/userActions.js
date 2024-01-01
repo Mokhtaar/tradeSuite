@@ -37,6 +37,7 @@ const AddUserFiles = async (id, key, value) => {
         [key]: value,
       },
     });
+    
     return { success: "File has been uploaded successfully" };
   } catch (error) {
     return { error: error.message, status: 404 };
@@ -64,7 +65,8 @@ export async function GetUserDocuments(companyID) {
       include: {
         company: true,
       }, where :{
-        companyID: companyID
+        companyID: companyID,
+        status: "Approved",
       }
 
     });
@@ -72,9 +74,28 @@ export async function GetUserDocuments(companyID) {
 
     return { documents };
   } catch (error) {
-    console.error("Error in upload documents:", error);
+    console.error("Error in retrieve documents:", error);
   }
 }
+export async function deleteDocument(companyID, documentType) {
+  try {
+    const deletedDocument = await prisma.media.updateMany({
+      where: {
+        companyID,
+      },
+      data: {
+        [documentType]: null, // Set the specific document type to null to delete it
+      },
+    });
+    console.log('Document deleted:', deletedDocument);
+    return { deletedDocument };
+  } catch (error) {
+    console.error("Error in deleting document:", error);
+    return { error: error.message, status: 404 };
+  }
+}
+
+
 // const VerifyToken = async (id, ) => {
 //   try {
 //     const {

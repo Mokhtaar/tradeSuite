@@ -15,7 +15,6 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import UploadDocument from "./UploadDocument";
-import DocumentManagment2 from "./DocumentManagment2"
 import DocumentManagment from "./DocumentManagment"
 
 const tabs = [
@@ -328,11 +327,11 @@ export default function UserDashboard() {
             <main className="py-10">
               <div className="px-4 sm:px-6 lg:px-8">
                 {currentTab === "Dashboard" ? (
-                  <DocumentManagment/>
+                 " "
                 ) : currentTab === "Upload Documents" ? (
                   <UploadDocument />
                 ) : currentTab === "Document management" ? (
-                  <DocumentManagment2/>
+                  <DocumentManagment/>
                 ) : (
                   ""
                 )}
