@@ -35,10 +35,6 @@ export default function AdminSideBar() {
   const [currentTab, setCurrentTab] = useState("Registration Approval");
   const { data } = useSession();
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const handleNavigation = (selectedTab) => {
     const updatedNavigation = navigation.map((tab) => ({
       ...tab,

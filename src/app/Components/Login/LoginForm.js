@@ -10,11 +10,15 @@ import { useSession } from "next-auth/react";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
-  const { data } = useSession();
+  const { data, update } = useSession();
 
   useEffect(() => {
     console.log(data);
   }, [data]);
+
+  useEffect(() => {
+    update({...data});
+  }, []);
 
   const [isWrongPassword, setIsWrongPassword] = useState(false);
   const [isWrongEmail, setIsWrongEmail] = useState(false);

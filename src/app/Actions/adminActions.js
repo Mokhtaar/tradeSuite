@@ -62,8 +62,6 @@ export async function GetAdminTableData() {
         status:"Pending"
       }
     });
-    console.log(users);
-
     return { users };
   } catch (error) {
     console.error("Error updating user status:", error);

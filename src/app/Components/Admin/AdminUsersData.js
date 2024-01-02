@@ -16,10 +16,14 @@ export default function AdminUsersData() {
     setUsers(users?.users);
   };
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   const handleUserAction = async (email, newStatus) => {
     try {
       await UpdateUserStatus(email, newStatus);
-      update();
+      update({ newStatus });
       getUsers();
     } catch (error) {
       console.error("Error updating user status:", error);
