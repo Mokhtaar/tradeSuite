@@ -1,30 +1,22 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UpdateDocumentStatus , GetUserDocumentsAdmin} from "../../Actions/adminActions";
-import { GetUserDocuments } from "../../Actions/userActions";
+import { DocumentsReviewAdmin} from "../../Actions/adminActions";
+
 import { useSession } from "next-auth/react";
 
-export default function AdminDocsData() {
+export default function DocumentsReview() {
   const [documents, setDocument] = useState();
   const { data, update } = useSession();
 
  
   const getDocuments = async () => {
-    const documents = await GetUserDocumentsAdmin();
+    const documents = await DocumentsReviewAdmin();
     console.log(documents?.documents);
     setDocument(documents?.documents);
   };
 
-  const handleDocumentAction = async (id, newStatus) => {
-    try {
-      await UpdateDocumentStatus(id, newStatus);
-      update();
-      getDocuments();
-    } catch (error) {
-      console.error("Error updating document status:", error);
-    }
-  };
+  
 
   useEffect(() => {
     getDocuments();
@@ -39,7 +31,7 @@ export default function AdminDocsData() {
             Documents
             </h1>
             <p className="mt-2 text-sm text-gray-700">
-              A list of all the Documents.
+              A list of all Approved Documents
             </p>
           </div>
        
@@ -110,12 +102,7 @@ export default function AdminDocsData() {
                     >
                       other
                     </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Action
-                    </th>
+                  
                     
                   </tr>
                 </thead>
@@ -252,28 +239,7 @@ export default function AdminDocsData() {
                         )}
                       </td>
                      
-                      <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
-                        <div className="flex gap-4">
-                          <button
-                            value="Approved"
-                            className="text-indigo-600 hover:text-indigo-900"
-                            onClick={(e) =>
-                              handleDocumentAction(media.id, e.target.value)
-                            }                          >
-                            Approve
-                            
-                          </button>
-
-                          <button
-                            value="Rejected"
-                            className="text-indigo-600 hover:text-indigo-900"
-                            onClick={(e) =>
-                              handleDocumentAction(media.id, e.target.value)
-                            }  >
-                            Reject
-                          </button>
-                        </div>
-                      </td>
+                 
                     </tr>
                     ) : null // If no document is available, don't render the row
                     
