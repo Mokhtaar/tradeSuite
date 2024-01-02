@@ -48,6 +48,10 @@ const UploadDocument = () => {
   };
 
   useEffect(() => {
+    console.log("objects", fileObjects);
+  }, [fileObjects]);
+
+  useEffect(() => {
     setFiles((prevFiles) =>
       prevFiles.map((file) =>
         file.name === currentObj ? { ...file, progress } : file

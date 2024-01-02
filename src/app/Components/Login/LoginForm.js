@@ -6,12 +6,10 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { signIn } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
-  const { data } = useSession();
-
   const [isWrongPassword, setIsWrongPassword] = useState(false);
   const [isWrongEmail, setIsWrongEmail] = useState(false);
 
@@ -25,46 +23,29 @@ const LoginForm = ({ LoginAction }) => {
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
-      // const response = await LoginAction(values);
       const response = await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
       });
 
-      response?.error
-        ? console.log("Invalid login credentials")
-        : data?.user.status === "Approved"
-        ? data?.user.role === "USER"
-          ? router.push("/Dashboard")
-          : data?.user.role === "ADMIN"
-          ? router.push("/Admin")
-          : alert("Pending")
-        : data?.user.status === "Rejected"
-        ? alert("You are rejected. Contact admin for access.")
-        : alert("Pending");
+      const session = await getSession();
 
-      // if (response?.error) {
-      //   console.log("Invalid login credentials");
-      // } else {
-      //   if (data?.user.status === "Approved" && data?.user.role === "USER") {
-      //     router.push("/Dashboard");
-      //   } else if (
-      //     data?.user.status === "Approved" &&
-      //     data?.user.role === "ADMIN"
-      //   ) {
-      //     router.push("/Admin");
-      //   } else if (data?.user.status === "Rejected") {
-      //     alert("You are rejected. Contact admin for access.");
-      //   } else {
-      //     alert("Pending");
-      //   }
-      // }
-
-      // response?.error ? console.log(response.error) : router.push("/");
-
-      // if (response.message === "wrongEmail") setIsWrongEmail(true);
-      // if (response.message === "wrongPassword") setIsWrongPassword(true);
+      if (response.error) {
+        console.log("Invalid login credentials");
+      } else if (session.user.status === "Approved") {
+        if (session.user.role === "USER") {
+          router.push("/Dashboard");
+        } else if (session.user.role === "ADMIN") {
+          router.push("/Admin");
+        } else {
+          alert("Pending");
+        }
+      } else if (session.user.status === "Rejected") {
+        alert("You are rejected. Contact admin for access.");
+      } else {
+        alert("Pending");
+      }
     },
   });
 

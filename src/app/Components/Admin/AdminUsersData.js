@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function AdminUsersData() {
   const [users, setUsers] = useState();
-  const { data, update } = useSession();
+  const { update } = useSession();
 
   const getUsers = async () => {
     const users = await GetAdminTableData();
@@ -16,14 +16,10 @@ export default function AdminUsersData() {
     setUsers(users?.users);
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const handleUserAction = async (email, newStatus) => {
     try {
       await UpdateUserStatus(email, newStatus);
-      update({ newStatus });
+      // update({ newStatus });
       getUsers();
     } catch (error) {
       console.error("Error updating user status:", error);
