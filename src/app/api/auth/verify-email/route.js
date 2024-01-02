@@ -8,7 +8,7 @@ export async function GET(req) {
     const { id, email } = jwt.verify(token, process.env.JWT_SECRET);
     await prisma.company.update({
       where: {
-        id: id,
+        id,
       },
       data: {
         emailVerified: new Date(),
@@ -20,10 +20,6 @@ export async function GET(req) {
   }
   redirect("/Login");
 }
-
-
-
-
 
 
 

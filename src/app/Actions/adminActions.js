@@ -13,8 +13,6 @@ export async function GetUserDocumentsAdmin() {
       },
       
     });
-    console.log(documents);
-
     return { documents };
   } catch (error) {
     console.error("Error in upload documents:", error);

@@ -4,24 +4,12 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
-import { jwtDecode } from "jwt-decode";
 import { signIn } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
-  const { data, update } = useSession();
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  useEffect(() => {
-    update({...data});
-  }, []);
-
-  const [isWrongPassword, setIsWrongPassword] = useState(false);
-  const [isWrongEmail, setIsWrongEmail] = useState(false);
+  const [isValidCredentials, setIsValidCredentials] = useState(true);
 
   const formik = useFormik({
     initialValues: {
@@ -33,57 +21,27 @@ const LoginForm = ({ LoginAction }) => {
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
-      // const response = await LoginAction(values);
       const response = await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
       });
 
-      response?.error
-        ? console.log("Invalid login credentials")
-        : data?.user.status === "Approved"
-        ? data?.user.role === "USER"
-          ? router.push("/Dashboard")
-          : data?.user.role === "ADMIN"
-          ? router.push("/Admin")
-          : alert("Pending")
-        : data?.user.status === "Rejected"
-        ? alert("You are rejected. Contact admin for access.")
-        : alert("Pending");
+      const session = await getSession();
+      const { status, role } = session.user;
 
-      // if (response?.error) {
-      //   console.log("Invalid login credentials");
-      // } else {
-      //   if (data?.user.status === "Approved" && data?.user.role === "USER") {
-      //     router.push("/Dashboard");
-      //   } else if (
-      //     data?.user.status === "Approved" &&
-      //     data?.user.role === "ADMIN"
-      //   ) {
-      //     router.push("/Admin");
-      //   } else if (data?.user.status === "Rejected") {
-      //     alert("You are rejected. Contact admin for access.");
-      //   } else {
-      //     alert("Pending");
-      //   }
-      // }
-
-      // response?.error ? console.log(response.error) : router.push("/");
-
-      // if (response.message === "wrongEmail") setIsWrongEmail(true);
-      // if (response.message === "wrongPassword") setIsWrongPassword(true);
+      if (response.error) {
+        console.log("Invalid login credentials");
+        setIsValidCredentials(false);
+      } else if (status === "Approved") {
+        role === "USER" ? router.push("/Dashboard") : router.push("/Admin");
+      } else if (status === "Rejected") {
+        alert("You are rejected. Contact admin for access.");
+      } else {
+        alert("Pending");
+      }
     },
   });
-
-  const handleEmailChange = (e) => {
-    formik.handleChange(e);
-    setIsWrongEmail(false);
-  };
-  const handlePasswordChange = (e) => {
-    formik.handleChange(e);
-    setIsWrongPassword(false);
-  };
 
   return (
     <div className="h-[100vh]">
@@ -131,7 +89,7 @@ const LoginForm = ({ LoginAction }) => {
                         type="email"
                         autoComplete="email"
                         required
-                        onChange={handleEmailChange}
+                        onChange={formik.handleChange}
                         value={formik.values.email}
                         onBlur={formik.handleBlur}
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -140,11 +98,6 @@ const LoginForm = ({ LoginAction }) => {
                     {formik.touched.email && formik.errors.email ? (
                       <div className="text-red-600">{formik.errors.email}</div>
                     ) : null}
-                    {isWrongEmail && (
-                      <div className="text-red-600">
-                        Your email address is incorrect
-                      </div>
-                    )}
                   </div>
 
                   <div>
@@ -160,7 +113,7 @@ const LoginForm = ({ LoginAction }) => {
                         name="password"
                         type="password"
                         autoComplete="current-password"
-                        onChange={handlePasswordChange}
+                        onChange={formik.handleChange}
                         value={formik.values.password}
                         onBlur={formik.handleBlur}
                         required
@@ -172,11 +125,6 @@ const LoginForm = ({ LoginAction }) => {
                         {formik.errors.password}
                       </div>
                     ) : null}
-                    {isWrongPassword && (
-                      <div className="text-red-600">
-                        Your password address is incorrect
-                      </div>
-                    )}
                   </div>
 
                   <div className="flex items-center justify-between">
