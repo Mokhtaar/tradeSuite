@@ -34,13 +34,7 @@ const LoginForm = ({ LoginAction }) => {
         console.log("Invalid login credentials");
         setIsValidCredentials(false);
       } else if (status === "Approved") {
-        if (role === "USER") {
-          router.push("/Dashboard");
-        } else if (role === "ADMIN") {
-          router.push("/Admin");
-        } else {
-          alert("Pending");
-        }
+        role === "USER" ? router.push("/Dashboard") : router.push("/Admin");
       } else if (status === "Rejected") {
         alert("You are rejected. Contact admin for access.");
       } else {
