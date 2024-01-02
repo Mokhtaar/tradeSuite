@@ -18,6 +18,24 @@ export async function GetUserDocumentsAdmin() {
     console.error("Error in upload documents:", error);
   }
 }
+export async function DocumentsReviewAdmin() {
+  try {
+    const documents = await prisma.media.findMany({
+      include: {
+        company: true,
+      },
+      where: {
+        status: "Approved",
+      },
+      
+    });
+    console.log(documents);
+
+    return { documents };
+  } catch (error) {
+    console.error("Error in upload documents:", error);
+  }
+}
 
 export async function UpdateDocumentStatus(id, newSatus) {
   try {
