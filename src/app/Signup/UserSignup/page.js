@@ -1,4 +1,5 @@
 import UserForm from "../../Components/Registration/UserForm";
+import AddUsers from "../../Components/User/addUsers";
 import { addUser } from "../../Actions/userActions";
 import prisma from "../../../../lib/prisma";
 

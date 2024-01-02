@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { Fragment, useState, useEffect } from "react";
+import { addUser } from "../../Actions/userActions";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
@@ -10,12 +11,14 @@ import {
   DocumentDuplicateIcon,
   FolderIcon,
   HomeIcon,
+  UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import UploadDocument from "./UploadDocument";
 import DocumentManagment from "./DocumentManagment"
+import AddUsers from "./addUsers";
 
 const tabs = [
   {
@@ -36,6 +39,12 @@ const tabs = [
     icon: DocumentDuplicateIcon,
     current: false,
   },
+  {
+    name: "Add Users",
+    href: "#",
+    icon: UserIcon,
+    current: false,
+  },
 ];
 
 const userNavigation = [
@@ -48,6 +57,12 @@ export default function UserDashboard() {
   const [navigation, setNavigation] = useState(tabs);
   const [currentTab, setCurrentTab] = useState("Dashboard");
   const { data } = useSession();
+  const [showAddUserForm, setShowAddUserForm] = useState(false);
+
+
+  const closeAddUserForm = () => {
+    setShowAddUserForm(false);
+  };
 
   useEffect(() => {
     console.log(data);
@@ -299,24 +314,23 @@ export default function UserDashboard() {
                     >
                       <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                         {userNavigation.map((item) => (
-                          <Menu.Item key={item.name}>
-                            {({ active }) => (
-                              <a
-                                // href={item.href}
-                                onClick={
-                                  item.name === "Sign out"
-                                    ? signOut({ callbackUrl: "/" })
-                                    : undefined
-                                }
-                                className={classNames(
-                                  active ? "bg-gray-50" : "",
-                                  "block px-3 py-1 text-sm leading-6 text-gray-900"
-                                )}
-                              >
-                                {item.name}
-                              </a>
+                        <Menu.Item key={item.name}>
+                        {({ active }) => (
+                          <a
+                            onClick={() =>
+                              item.name === "Sign out" ? signOut({ callbackUrl: "/" }) : undefined
+                            }
+                            className={classNames(
+                              active ? "bg-gray-50" : "",
+                              "block px-3 py-1 text-sm leading-6 text-gray-900"
                             )}
-                          </Menu.Item>
+                          >
+                            {item.name}
+                          </a>
+                        )}
+                      </Menu.Item>
+                      
+                      
                         ))}
                       </Menu.Items>
                     </Transition>
@@ -332,7 +346,10 @@ export default function UserDashboard() {
                   <UploadDocument />
                 ) : currentTab === "Document management" ? (
                   <DocumentManagment/>
-                ) : (
+                ): currentTab === "Add Users" ? (
+                  <AddUsers userAction={addUser} closeForm={closeAddUserForm}/>
+                )
+                 : (
                   ""
                 )}
               </div>
