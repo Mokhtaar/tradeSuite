@@ -30,13 +30,17 @@ const addCompany = async (formData) => {
     // if (userExists) return { message: "User already exists" };
 
     const response = await prisma.company.create({
-      data: body,
-    });
-    await prisma.media.create({
       data: {
-        companyID: response.id,
+        ...body,
+        media: {
+          create: {},
+        },
+      },
+      include: {
+        media: true,
       },
     });
+
     const token = jwt.sign(
       { id: response.id, email: response.email },
       process.env.JWT_SECRET,
