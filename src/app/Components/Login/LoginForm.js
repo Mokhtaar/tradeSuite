@@ -28,19 +28,20 @@ const LoginForm = ({ LoginAction }) => {
       });
 
       const session = await getSession();
+      const { status, role } = session.user;
 
       if (response.error) {
         console.log("Invalid login credentials");
         setIsValidCredentials(false);
-      } else if (session.user.status === "Approved") {
-        if (session.user.role === "USER") {
+      } else if (status === "Approved") {
+        if (role === "USER") {
           router.push("/Dashboard");
-        } else if (session.user.role === "ADMIN") {
+        } else if (role === "ADMIN") {
           router.push("/Admin");
         } else {
           alert("Pending");
         }
-      } else if (session.user.status === "Rejected") {
+      } else if (status === "Rejected") {
         alert("You are rejected. Contact admin for access.");
       } else {
         alert("Pending");
