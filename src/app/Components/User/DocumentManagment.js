@@ -49,7 +49,7 @@ export default function DocumentManagment() {
   }, []);
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8" >
       <main className="py-10 ">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">

@@ -60,10 +60,11 @@ const UploadDocument = () => {
   }, [currentObj, progress]);
 
   return (
-    <div className="relative max-w-4xl mx-auto sm:mt-8 border rounded-md shadow-md">
+    <div className="relative max-w-4xl mx-auto sm:mt-8 border rounded-md shadow-md" >
       <form
         action={handleSubmit}
         className="mx-auto h-[75vh] overflow-y-auto p-9 bg-white sm:grid sm:grid-cols-2 gap-y-5 gap-x-10"
+        
       >
         {files.map((input, index) => (
           <div key={index}>

@@ -1,7 +1,6 @@
 "use server";
 import prisma from "../../../lib/prisma";
 
-
 export async function GetUserDocumentsAdmin() {
   try {
     const documents = await prisma.media.findMany({
@@ -11,7 +10,6 @@ export async function GetUserDocumentsAdmin() {
       where: {
         status: "Pending",
       },
-      
     });
     return { documents };
   } catch (error) {
@@ -27,10 +25,7 @@ export async function DocumentsReviewAdmin() {
       where: {
         status: "Approved",
       },
-      
     });
-    console.log(documents);
-
     return { documents };
   } catch (error) {
     console.error("Error in upload documents:", error);
@@ -43,7 +38,7 @@ export async function UpdateDocumentStatus(id, newSatus) {
       where: { id: id },
       data: { status: newSatus },
     });
-  
+
     return { media };
   } catch (error) {
     console.error("Error updating document status:", error);
@@ -52,7 +47,7 @@ export async function UpdateDocumentStatus(id, newSatus) {
 
 export async function UpdateUserStatus(email, newSatus) {
   let DeletedUser;
-  if ( newSatus === "Rejected") {
+  if (newSatus === "Rejected") {
     DeletedUser = await prisma.user.delete({
       where: { email: email },
     });
@@ -74,16 +69,12 @@ export async function GetAdminTableData() {
       include: {
         company: true,
       },
-      where:{
-        status:"Pending"
-      }
+      where: {
+        status: "Pending",
+      },
     });
     return { users };
   } catch (error) {
     console.error("Error updating user status:", error);
   }
 }
-
-
-
-
