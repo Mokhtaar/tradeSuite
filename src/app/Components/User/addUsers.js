@@ -8,21 +8,19 @@ import { useRouter } from "next/navigation";
 import useFileObjects from "../../../../lib/hooks/useFileObjects";
 import useFileUploader from "../../../../lib/hooks/useFileUploader";
 
-const AddUsers = ({ closeForm , userAction}) => {
- const [companyID, setCompanyID] = useState();
- const { fileObjects, handleFileChange } = useFileObjects();
- const { uploadStatus, uploadFile } = useFileUploader();
- const router = useRouter();
+const AddUsers = ({ closeForm, userAction }) => {
+  const [companyID, setCompanyID] = useState();
+  const { fileObjects, handleFileChange } = useFileObjects();
+  const { uploadStatus, uploadFile } = useFileUploader();
+  const router = useRouter();
 
- const [email, setEmail] = useState('');
-const [name, setName] = useState('');
-const [password, setPassword] = useState('');
+ // const [email, setEmail] = useState("");
+  //const [name, setName] = useState("");
+  //const [password, setPassword] = useState("");
 
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
   }, []);
-
- 
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +33,7 @@ const [password, setPassword] = useState('');
         result = await uploadFile(userId, fileObject, "Register");
         console.log(result);
       }
-      result.success ? router.push("/Dashboard") : console.log(result.error);
+      result.success ?    window.location.reload() : console.log(result.error);
     } catch (error) {
       console.log(error);
     }
@@ -48,15 +46,18 @@ const [password, setPassword] = useState('');
     // setPassword('');
     // // Close the form
     // closeForm();
-    router.push("/Dashboard");
+    window.location.reload();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-md" style={{
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-md"
+      style={{
         backgroundImage:
           "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
-      }}>
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full md:max-w-md">
+      }}
+    >
+      <div className="bg-white p-8 rounded-lg shadow-lg  w-full max-w-2xl mx-auto">
         <h2 className="text-xl font-semibold mb-6 text-center">Add Users</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="mb-4">
@@ -64,10 +65,10 @@ const [password, setPassword] = useState('');
               Email:
             </label>
             <input
-             type="email"
-             placeholder="Enter email address"
-             name="email"
-           //   onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="Enter email address"
+              name="email"
+              //   onChange={(e) => setEmail(e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
               required
             />
@@ -97,16 +98,48 @@ const [password, setPassword] = useState('');
               required
             />
           </div>
+          <div className="flex">
+      <div className="mb-4 mr-4">
+        <label htmlFor="firstFile" className="block mb-1 text-sm font-semibold">
+        Proof Of Identity
+            </label>
+            <input
+              type="file"
+              name="proofOfIdentity"
+              accept=".pdf,.doc,.docx"
+              onChange={handleFileChange}
+            
+          className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="secondFile" className="block mb-1 text-sm font-semibold">
+        Proof Of Address
+            </label>
+            <input
+              name="proofOfAddress"
+              type="file"
+              onChange={handleFileChange}
+              accept=".pdf,.doc,.docx"
+          className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+          required
+        />
+      </div>
+    </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block mb-1 text-sm font-semibold">
+            <label
+              htmlFor="password"
+              className="block mb-1 text-sm font-semibold"
+            >
               Password:
             </label>
             <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            required
-           className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+              className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
             />
           </div>
           <div className="flex justify-end">
