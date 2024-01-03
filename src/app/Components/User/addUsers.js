@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+//import Image from "next/image";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -10,9 +10,13 @@ import useFileUploader from "../../../../lib/hooks/useFileUploader";
 
 const AddUsers = ({ closeForm , userAction}) => {
  const [companyID, setCompanyID] = useState();
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+ const { fileObjects, handleFileChange } = useFileObjects();
+ const { uploadStatus, uploadFile } = useFileUploader();
+ const router = useRouter();
+
+ const [email, setEmail] = useState('');
+const [name, setName] = useState('');
+const [password, setPassword] = useState('');
 
   useEffect(() => {
     setCompanyID(localStorage.getItem("companyID"));
@@ -38,12 +42,13 @@ const AddUsers = ({ closeForm , userAction}) => {
   };
 
   const handleCancel = () => {
-    // Clear form fields
-    setEmail('');
-    setName('');
-    setPassword('');
-    // Close the form
-    closeForm();
+    // // Clear form fields
+    // setEmail('');
+    // setName('');
+    // setPassword('');
+    // // Close the form
+    // closeForm();
+    router.push("/Dashboard");
   };
 
   return (
@@ -59,10 +64,10 @@ const AddUsers = ({ closeForm , userAction}) => {
               Email:
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+             type="email"
+             placeholder="Enter email address"
+             name="email"
+           //   onChange={(e) => setEmail(e.target.value)}
               className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
               required
             />
