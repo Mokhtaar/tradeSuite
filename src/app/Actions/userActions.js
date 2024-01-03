@@ -93,6 +93,20 @@ export async function deleteDocument(companyID, documentType) {
   }
 }
 
+export async function DeleteAllDocument(companyID) {
+  try {
+    const deletedDocument = await prisma.media.delete({
+      where: {
+        companyID,
+      }
+    });
+    console.log("Document deleted:", deletedDocument);
+    return { deletedDocument };
+  } catch (error) {
+    console.error("Error in deleting document:", error);
+    return { error: error.message, status: 404 };
+  }
+}
 // const VerifyToken = async (id, ) => {
 //   try {
 //     const {

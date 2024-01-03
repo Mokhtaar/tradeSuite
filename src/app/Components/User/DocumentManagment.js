@@ -2,11 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 
-import { GetUserDocuments ,deleteDocument } from "../../Actions/userActions";
+import { GetUserDocuments ,deleteDocument ,DeleteAllDocument } from "../../Actions/userActions";
 import { useSession } from "next-auth/react";
-// import DeleteIcon from '@mui/icons-material/Delete';
+import { indigo } from '@mui/material/colors';
 import DeleteIcon from '@mui/icons-material/Delete';
-// import { AiOutlineClose } from "react-icons/ai";
+
+
 
 
 export default function DocumentManagment() {
@@ -31,6 +32,17 @@ export default function DocumentManagment() {
     }
   };
 
+  const handleDeleteAll = async (companyId) => {
+    try {
+      await DeleteAllDocument(companyId);
+      update();
+      getDocuments();
+     
+    } catch (error) {
+      console.error("Error deleting documents:", error);
+    }
+  };
+
   useEffect(() => {
     update();
     getDocuments();
@@ -45,17 +57,10 @@ export default function DocumentManagment() {
               Documents Managment
             </h1>
             <p className="mt-2 text-sm text-gray-700">
-              A list of your Approved Documents{" "}
+              A list of your Approved Documents
             </p>
           </div>
-          {/* <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <Link
-              href="../Admin/AddAdmin"
-              className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Add Admin <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </div> */}
+       
         </div>
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -74,7 +79,7 @@ export default function DocumentManagment() {
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Income Statement
-                      {/* <AiOutlineClose /> */}
+           
                     
                     </th>
                     <th
@@ -129,7 +134,7 @@ export default function DocumentManagment() {
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                     
+                     Action
                     </th>
                   </tr>
                 </thead>
@@ -150,7 +155,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'incomeStatement')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'incomeStatement')}> <DeleteIcon  color="secondary"/> </button>
                        
                         </div>
                         ) : (
@@ -168,7 +173,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'balanceSheet')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'balanceSheet')}> <DeleteIcon  color="secondary" /> </button>
                           </div>
                         ) : (
                           "No File Uploaded"
@@ -185,7 +190,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'cashFlow')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'cashFlow')}> <DeleteIcon  sx={{ color: indigo[300] }}/> </button>
                             </div>
                         ) : (
                           "No File Uploaded"
@@ -201,7 +206,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'supplierDetails')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'supplierDetails')}> <DeleteIcon  color="secondary"/> </button>
                           </div>
                         ) : (
                           "No File Uploaded"
@@ -218,7 +223,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'pastOrders')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'pastOrders')}> <DeleteIcon  color="secondary"/> </button>
                           </div>
                         ) : (
                           "No File Uploaded"
@@ -234,7 +239,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'yearlySales')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'yearlySales')}> <DeleteIcon  color="secondary" /> </button>
                           </div>
                         ) : (
                           "No File Uploaded"
@@ -251,7 +256,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'bankStatement')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'bankStatement')}> <DeleteIcon  color="secondary"/> </button>
                          </div>
                         ) : (
                           "No File Uploaded"
@@ -267,7 +272,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'previousYearlyInvoices')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'previousYearlyInvoices')}> <DeleteIcon  color="secondary" /> </button>
                          
                           </div>
                         ) : (
@@ -284,7 +289,7 @@ export default function DocumentManagment() {
                           >
                             View File
                           </a>
-                          <button onClick={() => handleDelete(media.companyID, 'other')}> <DeleteIcon /> </button>
+                          <button onClick={() => handleDelete(media.companyID, 'other')}> <DeleteIcon  color="secondary"/> </button>
 
                           </div>
                         ) : (
@@ -315,7 +320,13 @@ export default function DocumentManagment() {
                           </button>
                         </div>
                       </td> */}
+                      <td  className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
+                        <button className="text-indigo-600 hover:text-indigo-900"   onClick={(e) =>
+                             handleDeleteAll (media.companyID)
+                            }>Delete All</button>
+                        </td>
                     </tr>
+
                   ))}
                 </tbody>
               </table>
