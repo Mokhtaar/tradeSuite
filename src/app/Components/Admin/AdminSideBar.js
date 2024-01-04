@@ -1,9 +1,9 @@
 "use client";
 import { Fragment, useState, useEffect } from "react";
-import { Dialog, Transition , } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import AdminDocsData from "./AdminDocsData";
 import { useSession } from "next-auth/react";
-import DocumentsReview from "./DocumentsReview"
+import DocumentsReview from "./DocumentsReview";
 import AdminUsersData from "./AdminUsersData";
 import {
   Bars3Icon,
@@ -12,7 +12,6 @@ import {
   UsersIcon,
   XMarkIcon,
   DocumentArrowDownIcon,
-  
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -24,10 +23,13 @@ const tabs = [
     icon: DocumentDuplicateIcon,
     current: false,
   },
-  { name: "Documents Review ", href: "#", icon: DocumentMagnifyingGlassIcon , current: false },
+  {
+    name: "Documents Review ",
+    href: "#",
+    icon: DocumentMagnifyingGlassIcon,
+    current: false,
+  },
 ];
-
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -47,7 +49,7 @@ export default function AdminSideBar() {
     setCurrentTab(selectedTab.name);
     setNavigation(updatedNavigation);
   };
-  
+
   return (
     <>
       {/*
@@ -157,7 +159,6 @@ export default function AdminSideBar() {
                             ))}
                           </ul>
                         </li>
-                     
                       </ul>
                     </nav>
                   </div>
@@ -191,17 +192,17 @@ export default function AdminSideBar() {
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
-                  {navigation.map((item) => (
-                        <li key={item.name}>
-                          <Link
-                            onClick={() => handleNavigation(item)}
-                            href={item.href}
-                            className={classNames(
-                              item.current
-                                ? "bg-gray-50 text-indigo-600"
-                                : "text-gray-200 hover:text-indigo-600 hover:bg-gray-50",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                            )}
+                    {navigation.map((item) => (
+                      <li key={item.name}>
+                        <Link
+                          onClick={() => handleNavigation(item)}
+                          href={item.href}
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-50 text-indigo-600"
+                              : "text-gray-200 hover:text-indigo-600 hover:bg-gray-50",
+                            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                          )}
                         >
                           <item.icon
                             className={classNames(
@@ -218,7 +219,7 @@ export default function AdminSideBar() {
                     ))}
                   </ul>
                 </li>
-             
+
                 <li className="-mx-6 mt-auto">
                   <a
                     href="#"
@@ -238,18 +239,18 @@ export default function AdminSideBar() {
           </div>
         </div>
         <main className="py-10">
-              <div className="px-4 sm:px-6 lg:px-8">
-                {currentTab === "Registration Approval" ? (
-                 <AdminUsersData />
-                ) : currentTab === "Documents Verification" ? (
-                  <AdminDocsData/>
-                ) : currentTab === "Documents Review " ? (
-                  <DocumentsReview/>
-                ) : (
-                  ""
-                )}
-              </div>
-            </main>
+          <div className="px-4 sm:px-6 lg:px-8">
+            {currentTab === "Registration Approval" ? (
+              <AdminUsersData />
+            ) : currentTab === "Documents Verification" ? (
+              <AdminDocsData />
+            ) : currentTab === "Documents Review " ? (
+              <DocumentsReview />
+            ) : (
+              ""
+            )}
+          </div>
+        </main>
         <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
           <button
             type="button"

@@ -40,9 +40,11 @@ const UploadDocument = () => {
   const { data } = useSession();
 
   const handleSubmit = async () => {
+
     for (const fileObject of fileObjects) {
       await uploadFile(data.user.companyID, fileObject);
     }
+    
     setFileObjects([]);
     console.log("uploaded");
   };

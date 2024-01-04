@@ -63,7 +63,7 @@ model VerificationToken {
 }
 
 model Company {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String
   email         String
   phoneNumber   Int
@@ -72,28 +72,27 @@ model Company {
   emailVerified DateTime?
   website       String
   address       String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now())
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @default(now())
   fileUpload    String?
   postalCode    Int
   users         User[]
-  media         Media[]
+  Document      Document[]
 
   @@unique([id, name])
 }
 
-model Media {
+model Document {
   id                     String   @id @default(cuid())
-  incomeStatement        String?
-  balanceSheet           String?
-  cashFlow               String?
-  supplierDetails        String?
-  pastOrders             String?
-  yearlySales            String?
-  status                 String?  @default("Pending")
-  bankStatement          String?
-  previousYearlyInvoices String?
-  other                  String?
+  incomeStatement        Json?
+  balanceSheet           Json?
+  cashFlow               Json?
+  supplierDetails        Json?
+  pastOrders             Json?
+  yearlySales            Json?
+  bankStatement          Json?
+  previousYearlyInvoices Json?
+  other                  Json?
   createdAt              DateTime @default(now())
   updatedAt              DateTime @default(now())
   company                Company? @relation(fields: [companyID], references: [id])
