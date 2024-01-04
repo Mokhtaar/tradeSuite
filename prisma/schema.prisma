@@ -91,6 +91,7 @@ model Media {
   pastOrders             String?
   yearlySales            String?
   status                 String?  @default("Pending")
+  userStatus             Boolean? @default(true)
   bankStatement          String?
   previousYearlyInvoices String?
   other                  String?

@@ -68,6 +68,7 @@ export async function GetUserDocuments(companyID) {
       where: {
         companyID: companyID,
         status: "Approved",
+        userStatus: true,
       },
     });
     return { documents };
@@ -95,10 +96,14 @@ export async function deleteDocument(companyID, documentType) {
 
 export async function DeleteAllDocument(companyID) {
   try {
-    const deletedDocument = await prisma.media.delete({
+    const deletedDocument = await prisma.media.update({
       where: {
         companyID,
-      }
+      },
+      data: {
+       userStatus: false, 
+       status : "Pending"
+      },
     });
     console.log("Document deleted:", deletedDocument);
     return { deletedDocument };

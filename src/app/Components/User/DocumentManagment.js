@@ -49,7 +49,7 @@ export default function DocumentManagment() {
   }, []);
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8" >
+    <div className="px-4 sm:px-6 lg:px-8">
       <main className="py-10 ">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
@@ -82,54 +82,72 @@ export default function DocumentManagment() {
            
                     
                     </th>
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Balance Sheet
                     </th>
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Cash Flow
                     </th>
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Supplier Details
                     </th>
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Past Orders
                     </th>
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Yearly Sales
                     </th>{" "}
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Bank Statement
                     </th>{" "}
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Previous Yearly Invoices
                     </th>
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       other
                     </th>
+                    </tr>
+                    <tr>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -139,9 +157,9 @@ export default function DocumentManagment() {
                   </tr>
                 </thead>
 
-                <tbody className="divide-y divide-gray-200">
                   {documents?.map((media) => (
-                    <tr key={media.id}>
+                <tbody className="divide-y divide-gray-200"key={media.id}>
+                    <tr >
                       {/* <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                         {media.company?.name}
                       </td> */}
@@ -163,6 +181,8 @@ export default function DocumentManagment() {
                         )
                       }
                       </td>
+                      </tr>
+                      <tr>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.balanceSheet ? (
                           <div>
@@ -179,7 +199,8 @@ export default function DocumentManagment() {
                           "No File Uploaded"
                         )}
                       </td>
-
+</tr>
+<tr>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.cashFlow ? (
                           <div>
@@ -196,6 +217,8 @@ export default function DocumentManagment() {
                           "No File Uploaded"
                         )}
                       </td>
+                      </tr>
+                      <tr>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.supplierDetails ? (
                           <div>
@@ -212,7 +235,8 @@ export default function DocumentManagment() {
                           "No File Uploaded"
                         )}
                       </td>
-
+</tr>
+<tr>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.pastOrders ? (
                           <div>
@@ -229,6 +253,8 @@ export default function DocumentManagment() {
                           "No File Uploaded"
                         )}
                       </td>
+                      </tr>
+                      <tr>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.yearlySales ? (
                           <div>
@@ -245,7 +271,8 @@ export default function DocumentManagment() {
                           "No File Uploaded"
                         )}
                       </td>
-
+</tr>
+<tr>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.bankStatement ? (
                           <div>
@@ -262,6 +289,8 @@ export default function DocumentManagment() {
                           "No File Uploaded"
                         )}
                       </td>
+                      </tr>
+                      <tr>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.previousYearlyInvoices ? (
                           <div>
@@ -279,6 +308,8 @@ export default function DocumentManagment() {
                           "No File Uploaded"
                         )}
                       </td>
+                      </tr>
+                      <tr>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {media.other ? (
                           <div>
@@ -296,6 +327,8 @@ export default function DocumentManagment() {
                           "No File Uploaded"
                         )}
                       </td>
+                      </tr>
+                      <tr>
                       {/* <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <div className="flex gap-4">
                           <button
@@ -327,8 +360,8 @@ export default function DocumentManagment() {
                         </td>
                     </tr>
 
-                  ))}
                 </tbody>
+                  ))}
               </table>
             </div>
           </div>

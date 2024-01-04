@@ -9,6 +9,7 @@ export async function GetUserDocumentsAdmin() {
       },
       where: {
         status: "Pending",
+    
       },
     });
     return { documents };
@@ -33,9 +34,12 @@ export async function DocumentsReviewAdmin() {
 }
 
 export async function UpdateDocumentStatus(id, newSatus) {
+  
+  
   try {
     const media = await prisma.media.update({
-      where: { id: id },
+      
+      where: { id: id , },
       data: { status: newSatus },
     });
 

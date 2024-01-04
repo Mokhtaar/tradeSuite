@@ -19,6 +19,7 @@ import Link from "next/link";
 import UploadDocument from "./UploadDocument";
 import DocumentManagment from "./DocumentManagment"
 import AddUsers from "./addUsers";
+import EditProfile from "./EditProfile"
 
 const tabs = [
   {
@@ -48,7 +49,7 @@ const tabs = [
 ];
 
 const userNavigation = [
-  { name: "Your profile", href: "#" },
+  { name: "Your profile", href: "/Dashboard/EditProfile" },
   { name: "Sign out", href: "#" },
 ];
 
@@ -318,7 +319,10 @@ export default function UserDashboard() {
                         {({ active }) => (
                           <a
                             onClick={() =>
-                              item.name === "Sign out" ? signOut({ callbackUrl: "/" }) : undefined
+                              item.name === "Sign out" ? signOut({ callbackUrl: "/" }) 
+                              : undefined
+                            
+
                             }
                             className={classNames(
                               active ? "bg-gray-50" : "",
