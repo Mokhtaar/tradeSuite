@@ -12,7 +12,7 @@ const addUser = async (userData, companyID, role) => {
     email: userData.get("email"),
     phoneNumber: parseInt(userData.get("phoneNumber")),
     dob: new Date(userData.get("dob")).toISOString(),
-    companyID: role === "ADMIN" ? "MERCATURA" : companyID,
+    companyID,
     status: role === "ADMIN" ? "Approved" : "Pending",
     role,
   };

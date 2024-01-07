@@ -44,7 +44,6 @@ const UploadDocument = () => {
     for (const fileObject of fileObjects) {
       await uploadFile(data.user.companyID, fileObject);
     }
-    
     setFileObjects([]);
     console.log("uploaded");
   };
