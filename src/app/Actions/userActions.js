@@ -27,6 +27,22 @@ const addUser = async (userData, companyID, role) => {
     return { error: err.message };
   }
 };
+export async function EditProfile(companyID) {
+  try {
+    const users = await prisma.user.update({
+      include: {
+        company: true,
+      },
+      where:{
+        companyID:companyID, 
+      }
+
+    });
+    return { users };
+  } catch (error) {
+    console.error("Error Edit profile", error);
+  }
+}
 
 const AddUserFiles = async (id, key, value) => {
   try {
@@ -99,6 +115,24 @@ export async function deleteDocument(companyID, documentType) {
   }
 }
 
+export async function DeleteAllDocument(companyID) {
+  try {
+    const deletedDocument = await prisma.media.update({
+      where: {
+        companyID,
+      },
+      data: {
+       userStatus: false, 
+       status : "Pending"
+      },
+    });
+    console.log("Document deleted:", deletedDocument);
+    return { deletedDocument };
+  } catch (error) {
+    console.error("Error in deleting document:", error);
+    return { error: error.message, status: 404 };
+  }
+}
 // const VerifyToken = async (id, ) => {
 //   try {
 //     const {
