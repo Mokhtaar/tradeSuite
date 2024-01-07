@@ -7,7 +7,7 @@
 export default function HeroSection() {
   return (
     <div
-      className="w-screen"
+      className="w-screen "
       style={{
         backgroundColor: "black",
        backgroundImage:

@@ -14,7 +14,7 @@ async function Home() {
     <>
   
       <Navbar />
-      <main className="flex min-h-screen flex-col items-center justify-between" >
+      <main className="flex min-h-screen flex-col items-center justify-between overflow-x-hidden" >
       <HeroSection2/>
         <HeroSection />
         <Testmonials />
