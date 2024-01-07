@@ -10,8 +10,8 @@ export default function HeroSection() {
       className="w-screen"
       style={{
         backgroundColor: "black",
-        backgroundImage:
-          "linear-gradient(45deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+       backgroundImage:
+          "linear-gradient(0deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
       }}
     >
       <div className="relative isolate pt-14">

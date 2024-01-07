@@ -1,7 +1,7 @@
 "use server";
 import prisma from "../../../lib/prisma";
 
-export async function GetUserDocumentsAdmin(key) {
+export async function GetCompaniesDocsAdmin() {
   try {
     const documents = await prisma.document.findMany({
       include: {
@@ -10,33 +10,18 @@ export async function GetUserDocumentsAdmin(key) {
     });
     return { documents };
   } catch (error) {
-    console.error("Error in upload documents:", error);
+    console.error("Error in getting documents:", error);
   }
 }
 
-export async function DocumentsReviewAdmin() {
-  try {
-    const documents = await prisma.document.findMany({
-      include: {
-        company: true,
-      },
-      where: {
-        status: "Approved",
-      },
-    });
-    return { documents };
-  } catch (error) {
-    console.error("Error in upload documents:", error);
-  }
-}
-
-export async function UpdateDocumentStatus(id, newSatus) {
-  let json = { status: newSatus, url: "" };
-  let key = "supplierDetails";
+export async function UpdateDocumentStatus(companyID, document, newStatus) {
+  
+  const key = Object.keys(document)[0];
+  const json = { ...document[key], status: newStatus };
 
   try {
     const media = await prisma.document.update({
-      where: { companyID: "clqz6h0cx00007b7f9ar0i65p" },
+      where: { companyID },
       data: { [key]: json },
     });
     return { media };

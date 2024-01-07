@@ -5,7 +5,7 @@ export default function HeroSection2() {
       style={{
         backgroundColor: "black",
         backgroundImage:
-          "linear-gradient(170deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
+        "linear-gradient(180deg, rgba(140.25, 12.27, 96.74, 0.5) 1.76%, rgba(73.68, 97.25, 112.62, 0.46) 49.27%, rgba(36.35, 16.49, 158.31, 0) 100%)",
       }}
     >
       <div className="inline-flex flex-col sm:flex-row  gap-4 sm:gap-8 px-4 sm:px-8 py-32 sm:py-4 relative  ">
