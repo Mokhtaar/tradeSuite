@@ -47,7 +47,7 @@ model User {
   proofOfIdentity String?
   updatedAt       DateTime  @default(now())
   company         Company?  @relation(fields: [companyID], references: [id])
-  companyID       String?
+  companyID       String
   status          String?
   role            UserRole  @default(USER)
   accounts        Account[]
@@ -65,7 +65,7 @@ model VerificationToken {
 model Company {
   id            String     @id @default(cuid())
   name          String
-  email         String
+  email         String     @unique
   phoneNumber   Int
   country       String
   city          String
