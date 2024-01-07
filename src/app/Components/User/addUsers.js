@@ -7,33 +7,31 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import useFileObjects from "../../../../lib/hooks/useFileObjects";
 import useFileUploader from "../../../../lib/hooks/useFileUploader";
+import { useSession } from "next-auth/react";
 
 const AddUsers = ({ closeForm, userAction }) => {
   const [companyID, setCompanyID] = useState();
   const { fileObjects, handleFileChange } = useFileObjects();
   const { uploadStatus, uploadFile } = useFileUploader();
   const router = useRouter();
-
- // const [email, setEmail] = useState("");
-  //const [name, setName] = useState("");
-  //const [password, setPassword] = useState("");
+  const { data } = useSession();
 
   useEffect(() => {
-    setCompanyID(localStorage.getItem("companyID"));
-  }, []);
+    setCompanyID(data.user.companyID);
+  }, [data]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const userData = new FormData(event.target);
     const response = await userAction(userData, companyID);
-    const userId = response.success.response.id;
+    const userId = response.success.id;
     try {
       let result;
       for (const fileObject of fileObjects) {
         result = await uploadFile(userId, fileObject, "Register");
         console.log(result);
       }
-      result.success ?    window.location.reload() : console.log(result.error);
+      result.success ? window.location.reload() : console.log(result.error);
     } catch (error) {
       console.log(error);
     }
@@ -99,34 +97,39 @@ const AddUsers = ({ closeForm, userAction }) => {
             />
           </div>
           <div className="flex">
-      <div className="mb-4 mr-4">
-        <label htmlFor="firstFile" className="block mb-1 text-sm font-semibold">
-        Proof Of Identity
-            </label>
-            <input
-              type="file"
-              name="proofOfIdentity"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-            
-          className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="secondFile" className="block mb-1 text-sm font-semibold">
-        Proof Of Address
-            </label>
-            <input
-              name="proofOfAddress"
-              type="file"
-              onChange={handleFileChange}
-              accept=".pdf,.doc,.docx"
-          className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-          required
-        />
-      </div>
-    </div>
+            <div className="mb-4 mr-4">
+              <label
+                htmlFor="firstFile"
+                className="block mb-1 text-sm font-semibold"
+              >
+                Proof Of Identity
+              </label>
+              <input
+                type="file"
+                name="proofOfIdentity"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="secondFile"
+                className="block mb-1 text-sm font-semibold"
+              >
+                Proof Of Address
+              </label>
+              <input
+                name="proofOfAddress"
+                type="file"
+                onChange={handleFileChange}
+                accept=".pdf,.doc,.docx"
+                className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                required
+              />
+            </div>
+          </div>
           <div className="mb-4">
             <label
               htmlFor="password"
