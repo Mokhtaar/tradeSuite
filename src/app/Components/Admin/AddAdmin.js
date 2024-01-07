@@ -34,7 +34,7 @@ export default function AddAdmin({ userAction }) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const userData = new FormData(event.target);
-    const response = await userAction(userData, null, "ADMIN");
+    const response = await userAction(userData, "MERCATURA", "ADMIN");
     console.log(response);
   //  router.push("/login");
   };
