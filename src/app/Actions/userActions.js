@@ -12,7 +12,7 @@ const addUser = async (userData, companyID, role) => {
     email: userData.get("email"),
     phoneNumber: parseInt(userData.get("phoneNumber")),
     dob: new Date(userData.get("dob")).toISOString(),
-    companyID,
+    companyID: role === "ADMIN" ? "MERCATURA" : companyID,
     status: role === "ADMIN" ? "Approved" : "Pending",
     role,
   };
@@ -27,15 +27,16 @@ const addUser = async (userData, companyID, role) => {
     return { error: err.message };
   }
 };
-export async function getUsers() {
+export async function EditProfile(companyID) {
   try {
-    const users = await prisma.user.findMany({
+    const users = await prisma.user.update({
       include: {
         company: true,
       },
-    where:{
-      companyID,
-    }
+      where:{
+        companyID:companyID, 
+      }
+
     });
     return { users };
   } catch (error) {

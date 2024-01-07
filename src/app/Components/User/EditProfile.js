@@ -6,17 +6,23 @@ import { useSession } from "next-auth/react";
 import "../../styles/edit.css"
 export default function EditProfile() {
 
-    const [users, setUsers] = useState();
-    const { update } = useSession();
+    // const [users, setUsers] = useState();
+    const { data, update } = useSession();
   
     const EditUsers = async () => {
-      const users = await getUsers();
-      console.log(users?.users);
-      setUsers(users?.users);
+      const result = await EditProfile(data?.user.companyID);
+      setUsers(result?.users);
+      
     };
     useEffect(() => {
+      console.log(data);
+    }, [data]);
+
+
+    const handleFormSubmit = async (e) => {
+      e.preventDefault();
       EditUsers();
-    }, []);
+    }  
   
     return(
       <div>
@@ -45,27 +51,17 @@ export default function EditProfile() {
         
         <form class="form-horizontal" role="form">
           <div class="form-group">
-            <label class="col-lg-3 control-label">First name:</label>
+            <label class="col-lg-3 control-label">user name </label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="dey-dey"/>
+              <input class="form-control" type="text" placeholder={data?.user.name} />
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Last name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" value="bootdey"/>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Company:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" value=""/>
-            </div>
-          </div>
+        
+      
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="janesemail@gmail.com"/>
+              <input class="form-control" type="text" placeholder={data?.user.email}/>
             </div>
           </div>
           <div class="form-group">

@@ -4,12 +4,13 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { getSession } from "next-auth/react";
 
 const LoginForm = ({ LoginAction }) => {
   const router = useRouter();
   const [isValidCredentials, setIsValidCredentials] = useState(true);
+  const [session, setSession] = useState();
 
   const formik = useFormik({
     initialValues: {
@@ -28,6 +29,7 @@ const LoginForm = ({ LoginAction }) => {
       });
 
       const session = await getSession();
+      setSession(session);
       const { status, role } = session.user;
 
       if (response.error) {
@@ -36,12 +38,18 @@ const LoginForm = ({ LoginAction }) => {
       } else if (status === "Approved") {
         role === "USER" ? router.push("/Dashboard") : router.push("/Admin");
       } else if (status === "Rejected") {
+        signOut();
         alert("You are rejected. Contact admin for access.");
       } else {
+        signOut();
         alert("Pending");
       }
     },
   });
+
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
 
   return (
     <div className="h-[100vh]">
