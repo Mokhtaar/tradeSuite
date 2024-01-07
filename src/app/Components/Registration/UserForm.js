@@ -57,17 +57,18 @@ const UserForm = ({ userAction }) => {
     event.preventDefault();
     const userData = new FormData(event.target);
     const response = await userAction(userData, companyID);
-    const userId = response.success.response.id;
+    const userId = response.success.id;
     try {
       let result;
       for (const fileObject of fileObjects) {
         result = await uploadFile(userId, fileObject, "Register");
         console.log(result);
       }
-      result.success ? router.push("/Login") : console.log(result.error);
+      // result.success ? router.push("/Login") : console.log(result.error);
     } catch (error) {
       console.log(error);
     }
+    localStorage.removeItem("companyID");
   };
 
   return (
