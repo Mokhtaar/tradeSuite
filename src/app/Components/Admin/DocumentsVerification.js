@@ -16,10 +16,6 @@ export default function DocumentsVerification() {
     setFilteredDocuments(pendingDocuments);
   };
 
-  useEffect(() => {
-    console.log(filteredDocuments);
-  }, [filteredDocuments]);
-
   const handleDocumentStatus = async (companyID, document, newStatus) => {
     try {
       await UpdateDocumentStatus(companyID, document, newStatus);
