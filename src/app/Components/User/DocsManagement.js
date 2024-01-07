@@ -3,6 +3,9 @@ import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { formatObject, titleToCamel } from "@/lib/helpers";
 import { GetUserDocuments, deleteDocument } from "../../Actions/userActions";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
+
 import { useSession } from "next-auth/react";
 
 const statuses = {
@@ -115,16 +118,22 @@ export default function DocsManagement() {
                           {value ? value?.status : ""}
                         </span>
                       </td>
-                      <td className="relative whitespace-nowrap space-x-2 sm:space-x-3 text-center py-4 pl-3 pr-4 text-sm font-medium sm:pr-3">
-                        <button
-                          value="Approved"
-                          className="text-indigo-600 hover:text-indigo-900"
-                          onClick={(e) =>
-                            handleDelete(data?.user.companyID, key)
-                          }
-                        >
-                          Delete
-                        </button>
+                      <td className="relative flex whitespace-nowrap space-x-2 sm:space-x-3 text-right py-4 pl-3 text-sm font-medium">
+                        {value ? (
+                          <RiDeleteBin6Line
+                            role="button"
+                            onClick={(e) =>
+                              handleDelete(data?.user.companyID, key)
+                            }
+                            className="text-gray-900 hover:text-gray-600 w-4 h-4"
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {/* <FaRegEdit
+                          role="button"
+                          className="text-gray-900 hover:text-gray-600 w-4 h-4"
+                        /> */}
                       </td>
                     </tr>
                   </>
