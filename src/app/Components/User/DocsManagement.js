@@ -120,20 +120,22 @@ export default function DocsManagement() {
                       </td>
                       <td className="relative flex whitespace-nowrap space-x-2 sm:space-x-3 text-right py-4 pl-3 text-sm font-medium">
                         {value ? (
-                          <RiDeleteBin6Line
-                            role="button"
-                            onClick={(e) =>
-                              handleDelete(data?.user.companyID, key)
-                            }
-                            className="text-gray-900 hover:text-gray-600 w-4 h-4"
-                          />
+                          <>
+                            <RiDeleteBin6Line
+                              role="button"
+                              onClick={(e) =>
+                                handleDelete(data?.user.companyID, key)
+                              }
+                              className="text-gray-900 hover:text-gray-600 w-4 h-4"
+                            />
+                            {/* <FaRegEdit
+                              role="button"
+                              className="text-gray-900 hover:text-gray-600 w-4 h-4"
+                            /> */}
+                          </>
                         ) : (
                           ""
                         )}
-                        {/* <FaRegEdit
-                          role="button"
-                          className="text-gray-900 hover:text-gray-600 w-4 h-4"
-                        /> */}
                       </td>
                     </tr>
                   </>
