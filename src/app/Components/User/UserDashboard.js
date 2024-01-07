@@ -17,7 +17,7 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import UploadDocument from "./UploadDocument";
-import DocumentManagment from "./DocumentManagment"
+import DocsManagement from "./DocsManagement";
 import AddUsers from "./addUsers";
 
 const tabs = [
@@ -58,7 +58,6 @@ export default function UserDashboard() {
   const [currentTab, setCurrentTab] = useState("Dashboard");
   const { data } = useSession();
   const [showAddUserForm, setShowAddUserForm] = useState(false);
-
 
   const closeAddUserForm = () => {
     setShowAddUserForm(false);
@@ -314,23 +313,23 @@ export default function UserDashboard() {
                     >
                       <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                         {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                        {({ active }) => (
-                          <a
-                            onClick={() =>
-                              item.name === "Sign out" ? signOut({ callbackUrl: "/" }) : undefined
-                            }
-                            className={classNames(
-                              active ? "bg-gray-50" : "",
-                              "block px-3 py-1 text-sm leading-6 text-gray-900"
+                          <Menu.Item key={item.name}>
+                            {({ active }) => (
+                              <a
+                                onClick={() =>
+                                  item.name === "Sign out"
+                                    ? signOut({ callbackUrl: "/" })
+                                    : undefined
+                                }
+                                className={classNames(
+                                  active ? "bg-gray-50" : "",
+                                  "block px-3 py-1 text-sm leading-6 text-gray-900"
+                                )}
+                              >
+                                {item.name}
+                              </a>
                             )}
-                          >
-                            {item.name}
-                          </a>
-                        )}
-                      </Menu.Item>
-                      
-                      
+                          </Menu.Item>
                         ))}
                       </Menu.Items>
                     </Transition>
@@ -341,15 +340,14 @@ export default function UserDashboard() {
             <main className="py-10">
               <div className="px-4 sm:px-6 lg:px-8">
                 {currentTab === "Dashboard" ? (
-                 " "
+                  " "
                 ) : currentTab === "Upload Documents" ? (
                   <UploadDocument />
                 ) : currentTab === "Document management" ? (
-                  <DocumentManagment/>
-                ): currentTab === "Add Users" ? (
-                  <AddUsers userAction={addUser} closeForm={closeAddUserForm}/>
-                )
-                 : (
+                  <DocsManagement />
+                ) : currentTab === "Add Users" ? (
+                  <AddUsers userAction={addUser} closeForm={closeAddUserForm} />
+                ) : (
                   ""
                 )}
               </div>

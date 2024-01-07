@@ -73,8 +73,7 @@ export async function GetUserDocuments(companyID) {
         company: true,
       },
       where: {
-        companyID: companyID,
-        status: "Approved",
+        companyID,
       },
     });
     return { documents };
@@ -82,9 +81,10 @@ export async function GetUserDocuments(companyID) {
     console.error("Error in retrieve documents:", error);
   }
 }
+
 export async function deleteDocument(companyID, documentType) {
   try {
-    const deletedDocument = await prisma.document.updateMany({
+    const deletedDocument = await prisma.document.update({
       where: {
         companyID,
       },
