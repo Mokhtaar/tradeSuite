@@ -92,7 +92,6 @@ export async function deleteDocument(companyID, documentType) {
         [documentType]: null, // Set the specific document type to null to delete it
       },
     });
-    console.log("Document deleted:", deletedDocument);
     return { deletedDocument };
   } catch (error) {
     console.error("Error in deleting document:", error);
