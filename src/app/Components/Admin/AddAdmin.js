@@ -2,8 +2,10 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/navigation";
 
 export default function AddAdmin({ userAction }) {
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -34,7 +36,7 @@ export default function AddAdmin({ userAction }) {
     const userData = new FormData(event.target);
     const response = await userAction(userData, "MERCATURA", "ADMIN");
     console.log(response);
-    //  router.push("/Login");
+  //  router.push("/login");
   };
   return (
     <>
