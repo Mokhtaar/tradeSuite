@@ -24,12 +24,12 @@ const addCompany = async (formData) => {
     const response = await prisma.company.create({
       data: {
         ...body,
-        media: {
+        Document: {
           create: {},
         },
       },
       include: {
-        media: true,
+        Document: true,
       },
     });
     const token = jwt.sign(

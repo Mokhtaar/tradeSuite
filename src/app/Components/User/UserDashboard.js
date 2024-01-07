@@ -19,7 +19,7 @@ import Link from "next/link";
 import UploadDocument from "./UploadDocument";
 import DocumentManagment from "./DocumentManagment"
 import AddUsers from "./addUsers";
-import EditProfile from "./EditProfile"
+//import  EditProfile2 from "../../Dashboard/EditProfile"
 
 const tabs = [
   {
@@ -49,7 +49,7 @@ const tabs = [
 ];
 
 const userNavigation = [
-  { name: "Your profile", href: "/Dashboard/EditProfile" },
+  { name: "Your profile", href: "/EditProfile2" },
   { name: "Sign out", href: "#" },
 ];
 

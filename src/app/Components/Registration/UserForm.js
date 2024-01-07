@@ -58,6 +58,7 @@ const UserForm = ({ userAction }) => {
     const userData = new FormData(event.target);
     const response = await userAction(userData, companyID);
     const userId = response.success.response.id;
+    console.log(userId);
     try {
       let result;
       for (const fileObject of fileObjects) {

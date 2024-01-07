@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { UpdateUserStatus } from "../../Actions/adminActions";
-import { GetAdminTableData } from "../../Actions/adminActions";
+import { UserRegistrationReview } from "../../Actions/adminActions";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default function AdminUsersData() {
   const { update } = useSession();
 
   const getUsers = async () => {
-    const users = await GetAdminTableData();
+    const users = await UserRegistrationReview();
     console.log(users?.users);
     setUsers(users?.users);
   };

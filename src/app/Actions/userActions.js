@@ -21,11 +21,27 @@ const addUser = async (userData, companyID, role) => {
     const response = await prisma.user.create({
       data: body,
     });
-    return { success: { response } };
-  } catch (error) {
-    return { message: error.message };
+    return { success: response };
+  } catch (err) {
+    console.log(err.message);
+    return { error: err.message };
   }
 };
+export async function getUsers() {
+  try {
+    const users = await prisma.user.findMany({
+      include: {
+        company: true,
+      },
+    where:{
+      companyID,
+    }
+    });
+    return { users };
+  } catch (error) {
+    console.error("Error Edit profile", error);
+  }
+}
 
 const AddUserFiles = async (id, key, value) => {
   try {
@@ -45,13 +61,18 @@ const AddUserFiles = async (id, key, value) => {
 };
 
 const AddUserDocuments = async (id, key, value) => {
+  const json = {
+    url: value,
+    status: "Pending",
+  };
+
   try {
-    const addUserFiles = await prisma.media.update({
+    const addUserFiles = await prisma.document.update({
       where: {
         companyID: id,
       },
       data: {
-        [key]: value,
+        [key]: json,
       },
     });
     return { success: "File has been uploaded successfully" };
@@ -59,9 +80,10 @@ const AddUserDocuments = async (id, key, value) => {
     console.log(error);
   }
 };
+
 export async function GetUserDocuments(companyID) {
   try {
-    const documents = await prisma.media.findMany({
+    const documents = await prisma.document.findMany({
       include: {
         company: true,
       },
@@ -78,7 +100,7 @@ export async function GetUserDocuments(companyID) {
 }
 export async function deleteDocument(companyID, documentType) {
   try {
-    const deletedDocument = await prisma.media.updateMany({
+    const deletedDocument = await prisma.document.updateMany({
       where: {
         companyID,
       },
