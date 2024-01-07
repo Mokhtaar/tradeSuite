@@ -89,9 +89,7 @@ export async function GetUserDocuments(companyID) {
         company: true,
       },
       where: {
-        companyID: companyID,
-        status: "Approved",
-        userStatus: true,
+        companyID,
       },
     });
     return { documents };
@@ -99,9 +97,10 @@ export async function GetUserDocuments(companyID) {
     console.error("Error in retrieve documents:", error);
   }
 }
+
 export async function deleteDocument(companyID, documentType) {
   try {
-    const deletedDocument = await prisma.document.updateMany({
+    const deletedDocument = await prisma.document.update({
       where: {
         companyID,
       },
@@ -109,7 +108,6 @@ export async function deleteDocument(companyID, documentType) {
         [documentType]: null, // Set the specific document type to null to delete it
       },
     });
-    console.log("Document deleted:", deletedDocument);
     return { deletedDocument };
   } catch (error) {
     console.error("Error in deleting document:", error);

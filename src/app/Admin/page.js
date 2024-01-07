@@ -1,5 +1,4 @@
-// import AdminSideBar from "../Components/Admin/CancelledAdminSideBar";
-import AdminSidebar from "../Components/Admin/AdminSidebar";
+import AdminSidebar from "../Components/Admin/Adminsidebar";
 import { getCurrentUser } from "@/lib/session";
 import AccessMessage from "../Components/Login/AccessMessage";
 import React from "react";

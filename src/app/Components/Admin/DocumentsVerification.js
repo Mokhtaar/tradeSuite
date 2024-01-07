@@ -5,7 +5,7 @@ import {
   GetCompaniesDocsAdmin,
 } from "../../Actions/adminActions";
 import { filterDocuments } from "@/lib/filterDocuments";
-import { formatKey } from "@/lib/formatKey";
+import { camelToTitle } from "@/lib/helpers";
 
 export default function DocumentsVerification() {
   const [filteredDocuments, setFilteredDocuments] = useState();
@@ -97,7 +97,7 @@ export default function DocumentsVerification() {
                             >
                               <td className="invisible whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"></td>
                               <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
-                                {formatKey(key)}
+                                {camelToTitle(key)}
                               </td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 <a

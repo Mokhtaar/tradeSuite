@@ -329,30 +329,7 @@ export default function DocumentManagment() {
                       </td>
                       </tr>
                       <tr>
-                      {/* <td className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
-                        <div className="flex gap-4">
-                          <button
-                            value="Approved"
-                            className="text-indigo-600 hover:text-indigo-900"
-                            onClick={(e) =>
-                              handleUserAction(user.email, e.target.value)
-                            }
-                          >
-                            Approve
-                            <span className="sr-only">, {user.name}</span>
-                          </button>
-
-                          <button
-                            value="Rejected"
-                            className="text-indigo-600 hover:text-indigo-900"
-                            onClick={(e) =>
-                              handleUserAction(user.email, e.target.value)
-                            }
-                          >
-                            Reject<span className="sr-only">, {user.name}</span>
-                          </button>
-                        </div>
-                      </td> */}
+                
                       <td  className="relative whitespace-nowrap  py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                         <button className="text-indigo-600 hover:text-indigo-900"   onClick={(e) =>
                              handleDeleteAll (media.companyID)
