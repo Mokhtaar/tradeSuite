@@ -196,7 +196,7 @@ const LoginForm = ({ LoginAction }) => {
         </div>
         <div className="relative hidden w-0 flex-1 lg:block">
           <img
-            className="absolute inset-0 h-full w-full object-cover "
+            className="absolute inset-0 h-full w-full  p-10 "
             src="./heroImage.jpg"
             alt="login photo"
           />
