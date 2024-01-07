@@ -16,6 +16,10 @@ export default function DocumentsVerification() {
     setFilteredDocuments(pendingDocuments);
   };
 
+  useEffect(() => {
+    console.log(filteredDocuments);
+  }, [filteredDocuments]);
+
   const handleDocumentStatus = async (companyID, document, newStatus) => {
     try {
       await UpdateDocumentStatus(companyID, document, newStatus);
@@ -72,16 +76,16 @@ export default function DocumentsVerification() {
               </thead>
               <tbody className="bg-white">
                 {filteredDocuments?.map(
-                  (company) =>
+                  (company, index) =>
                     company.docs.length > 0 && (
-                      <Fragment key={company.company}>
+                      <Fragment key={index}>
                         <tr className="border-t border-gray-200">
                           <th
                             colSpan={5}
                             scope="colgroup"
                             className="bg-gray-50 whitespace-nowrap py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3"
                           >
-                            {company.company}
+                            {company.name}
                           </th>
                         </tr>
                         {company.docs.map((document, index) =>
