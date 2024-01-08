@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { formatObject, titleToCamel } from "@/lib/helpers";
 import { GetUserDocuments, deleteDocument } from "../../Actions/userActions";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { FaRegEdit } from "react-icons/fa";
-
 import { useSession } from "next-auth/react";
 
 const statuses = {
@@ -24,9 +24,14 @@ export default function DocsManagement() {
       company: { name },
     } = documents.documents[0];
     setCopmany(name);
+    console.log(object);
     const formattedDocs = formatObject(documents?.documents[0]);
     setDocs(formattedDocs);
   };
+
+  useEffect(() => {
+    console.log(docs);
+  }, [docs]);
 
   const handleDelete = async (companyId, documentType) => {
     try {
@@ -128,13 +133,16 @@ export default function DocsManagement() {
                               }
                               className="text-gray-900 hover:text-gray-600 w-4 h-4"
                             />
-                            {/* <FaRegEdit
+                            <FaRegEdit
                               role="button"
                               className="text-gray-900 hover:text-gray-600 w-4 h-4"
-                            /> */}
+                            />
                           </>
                         ) : (
-                          ""
+                          <IoMdAddCircleOutline
+                            role="button"
+                            className="text-gray-900 hover:text-gray-600 w-4 h-4"
+                          />
                         )}
                       </td>
                     </tr>

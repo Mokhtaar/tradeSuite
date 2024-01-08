@@ -27,7 +27,9 @@ const AddUsers = ({ closeForm, userAction }) => {
       firstName: Yup.string().required("This field is required!"),
       lastName: Yup.string().required("This field is required!"),
 
-      email: Yup.string().email("Invalid email address").required("This field is required!"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("This field is required!"),
 
       password: Yup.string()
         .required("Password is required")
@@ -44,7 +46,6 @@ const AddUsers = ({ closeForm, userAction }) => {
   useEffect(() => {
     setCompanyID(data.user.companyID);
   }, [data]);
-
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -92,15 +93,15 @@ const AddUsers = ({ closeForm, userAction }) => {
               type="email"
               placeholder="Enter email address"
               name="email"
-               onChange={formik.handleChange}
+              onChange={formik.handleChange}
               value={formik.values.email}
               onBlur={formik.handleBlur}
               className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
               required
             />
-             {formik.touched.email && formik.errors.email ? (
-                      <div className="text-red-600">{formik.errors.email}</div>
-                    ) : null}
+            {formik.touched.email && formik.errors.email ? (
+              <div className="text-red-600">{formik.errors.email}</div>
+            ) : null}
           </div>
           <div className="mb-4">
             <label className="block mb-1 text-sm font-semibold">
@@ -111,16 +112,14 @@ const AddUsers = ({ closeForm, userAction }) => {
               placeholder="Enter first name"
               name="firstName"
               onChange={formik.handleChange}
-            value={formik.values.firstName}
-            onBlur={formik.handleBlur}
+              value={formik.values.firstName}
+              onBlur={formik.handleBlur}
               className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
               required
             />
-               {formik.touched.firstName && formik.errors.firstName ? (
-                    <div className="text-red-600">
-                      {formik.errors.firstName}
-                    </div>
-                  ) : null}
+            {formik.touched.firstName && formik.errors.firstName ? (
+              <div className="text-red-600">{formik.errors.firstName}</div>
+            ) : null}
           </div>
 
           <div className="mb-4">
@@ -132,14 +131,14 @@ const AddUsers = ({ closeForm, userAction }) => {
               placeholder="Enter last name"
               name="lastName"
               onChange={formik.handleChange}
-                    value={formik.values.lastName}
-                    onBlur={formik.handleBlur}
+              value={formik.values.lastName}
+              onBlur={formik.handleBlur}
               className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
               required
             />
-             {formik.touched.lastName && formik.errors.lastName ? (
-                    <div className="text-red-600">{formik.errors.lastName}</div>
-                  ) : null}
+            {formik.touched.lastName && formik.errors.lastName ? (
+              <div className="text-red-600">{formik.errors.lastName}</div>
+            ) : null}
           </div>
           <div className="flex">
             <div className="mb-4 mr-4">
@@ -192,11 +191,9 @@ const AddUsers = ({ closeForm, userAction }) => {
               required
               className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
             />
-                {formik.touched.password && formik.errors.password ? (
-                      <div className="text-red-600">
-                        {formik.errors.password}
-                      </div>
-                    ) : null}
+            {formik.touched.password && formik.errors.password ? (
+              <div className="text-red-600">{formik.errors.password}</div>
+            ) : null}
           </div>
           <div className="flex justify-end">
             <button

@@ -6,9 +6,12 @@ import {
 } from "../../Actions/adminActions";
 import { filterDocuments } from "@/lib/filterDocuments";
 import { camelToTitle } from "@/lib/helpers";
+import { LuSendHorizonal } from "react-icons/lu";
+import CommentModal from "./CommentModal";
 
 export default function DocumentsVerification() {
   const [filteredDocuments, setFilteredDocuments] = useState();
+  const [open, setOpen] = useState(false);
 
   const getDocuments = async () => {
     const documents = await GetCompaniesDocsAdmin();
@@ -65,6 +68,12 @@ export default function DocumentsVerification() {
                   >
                     File
                   </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Comment
+                  </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
                     <span className="sr-only">Edit</span>
                   </th>
@@ -108,6 +117,29 @@ export default function DocumentsVerification() {
                                   View File
                                 </a>
                               </td>
+                              <td
+                                onClick={() => setOpen(!open)}
+                                className="whitespace-nowrap cursor-pointer py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"
+                              >
+                                Add comment
+                              </td>
+                              <CommentModal open={open} setOpen={setOpen} />
+
+                              {/* <td className="relative w-[20px] sm:w-52 rounded-md shadow-sm">
+                                <input
+                                  type="text"
+                                  name="comment"
+                                  id="comment"
+                                  className="rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                  <LuSendHorizonal
+                                    role="button"
+                                    className="h-5 w-5 cursor-pointer text-gray-400"
+                                    aria-hidden="true"
+                                  />
+                                </div>
+                              </td> */}
 
                               <td className="relative whitespace-nowrap space-x-2 sm:space-x-3 text-right py-4 pl-3 pr-4 text-sm font-medium sm:pr-3">
                                 <button

@@ -9,7 +9,7 @@ const AddCompanyFile = async (url, id) => {
         id,
       },
       data: {
-        fileUpload: url,
+        texRegister: url,
       },
     });
     return { success: "File has been uploaded successfully" };

@@ -63,21 +63,22 @@ model VerificationToken {
 }
 
 model Company {
-  id            String     @id @default(cuid())
-  name          String
-  email         String     @unique
-  phoneNumber   Int
-  country       String
-  city          String
-  emailVerified DateTime?
-  website       String
-  address       String
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @default(now())
-  fileUpload    String?
-  postalCode    Int
-  users         User[]
-  Document      Document[]
+  id                 String     @id @default(cuid())
+  name               String
+  email              String     @unique
+  phoneNumber        Int
+  country            String
+  city               String
+  emailVerified      DateTime?
+  website            String
+  address            String
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @default(now())
+  taxRegister        String?
+  commercialRegister String?
+  postalCode         Int
+  users              User[]
+  Document           Document[]
 
   @@unique([id, name])
 }
